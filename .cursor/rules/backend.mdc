@@ -1,0 +1,9 @@
+---
+description: 
+globs: src/db/*.ts,src/middleware/*.ts,src/lib/*.ts
+alwaysApply: false
+---
+### Backend and Database
+
+- Use Firebase for backend services, including authentication and database interactions.
+- Follow Firebase guidelines for security and performance.

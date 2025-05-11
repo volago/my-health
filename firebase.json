@@ -1,0 +1,60 @@
+{
+  "database": {
+    "rules": "apps/my-health-firebase-app/database.rules.json"
+  },
+  "firestore": {
+    "rules": "apps/my-health-firebase-app/firestore.rules",
+    "indexes": "apps/my-health-firebase-app/firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "apps/my-health-firebase-app/public",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "storage": {
+    "rules": "apps/my-health-firebase-app/storage.rules"
+  },
+  "functions": [
+    {
+      "codebase": "my-health-firebase-functions",
+      "source": "dist/apps/my-health-firebase-functions",
+      "runtime": "nodejs16",
+      "ignore": ["*.local"]
+    }
+  ],
+  "emulators": {
+    "auth": {
+      "port": 9099
+    },
+    "functions": {
+      "port": 5001
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "database": {
+      "port": 9000
+    },
+    "hosting": {
+      "port": 5000
+    },
+    "pubsub": {
+      "port": 8085
+    },
+    "storage": {
+      "port": 9199
+    },
+    "eventarc": {
+      "port": 9299
+    },
+    "ui": {
+      "enabled": true
+    },
+    "singleProjectMode": true
+  }
+}

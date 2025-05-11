@@ -1,0 +1,52 @@
+{
+  "name": "my-health-firebase-functions",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/my-health-firebase-functions/src",
+  "projectType": "application",
+  "tags": [
+    "firebase:function",
+    "firebase:name:my-health-firebase-functions",
+    "firebase:dep:my-health-firebase-app"
+  ],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/my-health-firebase-functions",
+        "main": "apps/my-health-firebase-functions/src/main.ts",
+        "tsConfig": "apps/my-health-firebase-functions/tsconfig.app.json",
+        "assets": [
+          "apps/my-health-firebase-functions/src/assets",
+          {
+            "glob": "**/*",
+            "input": "apps/my-health-firebase-app/environment",
+            "output": "."
+          }
+        ],
+        "generatePackageJson": true,
+        "platform": "node",
+        "bundle": true,
+        "thirdParty": false,
+        "dependenciesFieldType": "dependencies",
+        "target": "node16",
+        "format": ["esm"],
+        "esbuildOptions": {
+          "logLevel": "info"
+        }
+      }
+    },
+    "test": {
+      "options": {
+        "passWithNoTests": true
+      }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nx run my-health-firebase-app:deploy --only functions:my-health-firebase-functions"
+      },
+      "dependsOn": ["build"]
+    }
+  }
+}

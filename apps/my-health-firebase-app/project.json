@@ -1,0 +1,82 @@
+{
+  "name": "my-health-firebase-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "tags": ["firebase:app", "firebase:name:my-health-firebase-app"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo Build succeeded."
+      }
+    },
+    "watch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nx run-many --targets=build --projects=tag:firebase:dep:my-health-firebase-app --parallel=100 --watch"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nx run-many --targets=lint --projects=tag:firebase:dep:my-health-firebase-app --parallel=100"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nx run-many --targets=test --projects=tag:firebase:dep:my-health-firebase-app --parallel=100"
+      }
+    },
+    "firebase": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "firebase --config=firebase.json --project=my-health"
+      },
+      "configurations": {
+        "production": {
+          "command": "firebase --config=firebase.json --project=my-health"
+        }
+      }
+    },
+    "killports": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "kill-port --port 9099,5001,8080,9000,5000,8085,9199,9299,4000,4400,4500"
+      }
+    },
+    "getconfig": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nx run my-health-firebase-app:firebase functions:config:get > apps/my-health-firebase-app/environment/.runtimeconfig.json"
+      }
+    },
+    "emulate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx run my-health-firebase-app:killports",
+          "nx run my-health-firebase-app:firebase emulators:start --import=apps/my-health-firebase-app/.emulators --export-on-exit"
+        ],
+        "parallel": false
+      }
+    },
+    "serve": {
+      "executor": "@simondotm/nx-firebase:serve",
+      "options": {
+        "commands": [
+          "nx run my-health-firebase-app:watch",
+          "nx run my-health-firebase-app:emulate"
+        ]
+      }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "options": {
+        "command": "nx run my-health-firebase-app:firebase deploy"
+      }
+    }
+  },
+  "implicitDependencies": ["my-health-firebase-functions"]
+}

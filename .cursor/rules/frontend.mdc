@@ -1,0 +1,32 @@
+---
+description: 
+globs: *.component.html,*.component.ts
+alwaysApply: false
+---
+## Frontend
+
+### General Guidelines
+
+- Use Angular components for static content and layout
+- Use lazy loaded NX libraries nd Angular router to divide application bundle
+
+### Guidelines for Styling
+
+#### Tailwind
+
+- Use responsive variants (sm:, md:, lg:, etc.) for adaptive designs
+- Leverage state variants (hover:, focus-visible:, active:, etc.) for interactive elements
+
+### Guidelines for Accessibility
+
+#### ARIA Best Practices
+
+- Use ARIA landmarks to identify regions of the page (main, navigation, search, etc.)
+- Apply appropriate ARIA roles to custom interface elements that lack semantic HTML equivalents
+- Set aria-expanded and aria-controls for expandable content like accordions and dropdowns
+- Use aria-live regions with appropriate politeness settings for dynamic content updates
+- Implement aria-hidden to hide decorative or duplicative content from screen readers
+- Apply aria-label or aria-labelledby for elements without visible text labels
+- Use aria-describedby to associate descriptive text with form inputs or complex elements
+- Implement aria-current for indicating the current item in a set, navigation, or process
+- Avoid redundant ARIA that duplicates the semantics of native HTML elements
