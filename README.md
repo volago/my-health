@@ -80,7 +80,7 @@ npm install
 Start the Angular frontend:
 ```bash
 npx nx serve my-health
-```
+``
 
 Start the Firebase emulators and hosting:
 ```bash

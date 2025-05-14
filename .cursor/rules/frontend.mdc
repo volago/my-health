@@ -9,6 +9,7 @@ alwaysApply: false
 
 - Use Angular components for static content and layout
 - Use lazy loaded NX libraries nd Angular router to divide application bundle
+- Leverage view transitions API to better UI/UX 
 
 ### Guidelines for Styling
 
