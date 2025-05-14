@@ -55,3 +55,5 @@ pubsub-debug.log
 ui-debug.log
 firebase-export*
 .secret.local
+
+vitest.config.*.timestamp*
