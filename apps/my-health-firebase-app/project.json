@@ -56,7 +56,7 @@
       "options": {
         "commands": [
           "nx run my-health-firebase-app:killports",
-          "nx run my-health-firebase-app:firebase emulators:start --import=apps/my-health-firebase-app/.emulators --export-on-exit"
+          "nx run my-health-firebase-app:firebase emulators:start --only auth,firestore,functions --import=apps/my-health-firebase-app/.emulators --export-on-exit"
         ],
         "parallel": false
       }
