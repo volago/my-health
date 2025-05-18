@@ -1,0 +1,1 @@
+export type DetailLevel = 'basic' | 'recommended' | 'detailed'; 

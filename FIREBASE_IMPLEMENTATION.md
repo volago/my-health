@@ -8,14 +8,14 @@ Plan implementacji i zadań związanych z Firebase dla projektu My Health.
 - [x] Przetestować pobieranie i dodawanie dokumentów do Firestore
 - [x] Wyłączyć niepotrzebne emulatory w konfiguracji Firebase
 - [x] Stworzyć plan API (Cloud Functions) do pobrania raportów o stanie zdrowia
+- [x] Wygenerować typy danych TypeScript na podstawie planu bazy danych
 
 ## In Progress Tasks
 
-- [ ] Wygenerować typy danych TypeScript na podstawie planu bazy danych
+- [ ] Utworzyć katalog badań oraz przypisać je do grup wiekowych
 
 ## Future Tasks
 
-- [ ] Utworzyć katalog badań oraz przypisać je do grup wiekowych
 - [ ] Dowiedzieć się jak seedować emulator danymi i dodać katalog badań na starcie emulatora
 - [ ] Zaimplementować pełne uwierzytelnianie użytkowników z Firebase Auth
 - [ ] Skonfigurować uprawnienia w regułach Firestore
