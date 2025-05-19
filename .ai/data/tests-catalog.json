@@ -1,0 +1,473 @@
+[
+  {
+    "testId": "glukoza",
+    "icdCode": "L43",
+    "name": "Glukoza na czczo",
+    "description": "Badanie określające poziom glukozy we krwi po co najmniej 8–12 godzinach postu. Wykorzystywane w diagnostyce cukrzycy, hipoglikemii oraz do monitorowania glikemii u osób z zaburzeniami metabolicznymi.",
+    "tags": ["biochemia", "metaboliczne"],
+    "parametersTemplate": [
+      {
+        "unit": "mg/dL",
+        "valueType": "number",
+        "validation": { "min": 70, "max": 99 }
+      }
+    ]
+  },
+  {
+    "testId": "badmocz",
+    "icdCode": "A01",
+    "name": "Badanie ogólne moczu",
+    "description": "Badanie ogólne moczu to podstawowe badanie diagnostyczne oceniające przejrzystość, barwę, pH, ciężar właściwy oraz obecność kluczowych składników takich jak glukoza, ketony czy leukocyty. Pozwala na wykrycie infekcji, chorób nerek i zaburzeń metabolicznych.",
+    "tags": ["moczowe", "zapalne"],
+    "parametersTemplate": [
+      {
+        "id": "przejrzystosc",
+        "description": "Ocena przejrzystości moczu; norma: przejrzysty. Inne wartości: lekko mętny, mętny, krwisty.",
+        "paramName": "Przejrzystość",
+        "icdCode": "",
+        "unit": "",
+        "valueType": "string",
+        "validation": { "allowedValues": ["przejrzysty", "lekko mętny", "mętny", "krwisty"] }
+      },
+      {
+        "id": "barwa",
+        "description": "Ocena barwy moczu; norma: jasnożółty. Inne wartości: słomkowożółty, ciemnożółty, bezbarwny.",
+        "paramName": "Barwa",
+        "icdCode": "",
+        "unit": "",
+        "valueType": "string",
+        "validation": { "allowedValues": ["jasnożółty", "słomkowożółty", "ciemnożółty", "bezbarwny"] }
+      },
+      {
+        "id": "ciezar_wlasciwy",
+        "description": "Ciężar właściwy moczu; norma 1,005–1,030 kg/L. Wartości poza normą mogą wskazywać na zaburzenia funkcji nerek.",
+        "paramName": "Ciężar właściwy",
+        "icdCode": "",
+        "unit": "kg/L",
+        "valueType": "number",
+        "validation": { "min": 1.005, "max": 1.030 }
+      },
+      {
+        "id": "ph",
+        "description": "Poziom pH moczu; norma 5,0–7,0. Odchylenia mogą wskazywać na zaburzenia kwasowo-zasadowe.",
+        "paramName": "PH",
+        "icdCode": "",
+        "unit": "",
+        "valueType": "number",
+        "validation": { "min": 5.0, "max": 7.0 }
+      },
+      {
+        "id": "glukoza",
+        "description": "Obecność glukozy w moczu; norma: nieobecna. Inne możliwe wyniki: śladowe, 1+, 2+, 3+, 4+.",
+        "paramName": "Glukoza",
+        "icdCode": "",
+        "unit": "mg/dL",
+        "valueType": "string",
+        "validation": { "allowedValues": ["nieobecna", "śladowe", "1+", "2+", "3+", "4+"] }
+      },
+      {
+        "id": "ketony",
+        "description": "Obecność ketonów w moczu; norma: nieobecne. Inne możliwe wyniki: śladowe, 1+, 2+, 3+.",
+        "paramName": "Ketony",
+        "icdCode": "",
+        "unit": "mg/dL",
+        "valueType": "string",
+        "validation": { "allowedValues": ["nieobecne", "śladowe", "1+", "2+", "3+"] }
+      },
+      {
+        "id": "urobilinogen",
+        "description": "Stężenie urobilinogenu w moczu; norma: 0,0–1,0 mg/dL. Podwyższone może wskazywać na choroby wątroby lub hemolizę.",
+        "paramName": "Urobilinogen",
+        "icdCode": "",
+        "unit": "mg/dL",
+        "valueType": "number",
+        "validation": { "min": 0.0, "max": 1.0 }
+      },
+      {
+        "id": "bilirubina",
+        "description": "Obecność bilirubiny w moczu; norma: nieobecna. Inne możliwe wyniki: śladowe, 1+, 2+.",
+        "paramName": "Bilirubina",
+        "icdCode": "",
+        "unit": "",
+        "valueType": "string",
+        "validation": { "allowedValues": ["nieobecna", "śladowe", "1+", "2+"] }
+      },
+      {
+        "id": "bialko",
+        "description": "Obecność białka w moczu; norma: nieobecne. Inne możliwe wyniki: śladowe, 1+, 2+, 3+.",
+        "paramName": "Białko",
+        "icdCode": "",
+        "unit": "mg/dL",
+        "valueType": "string",
+        "validation": { "allowedValues": ["nieobecne", "śladowe", "1+", "2+", "3+"] }
+      },
+      {
+        "id": "azotyny",
+        "description": "Obecność azotynów w moczu; norma: nieobecne. Pozytywny wynik może wskazywać na zakażenie bakteryjne.",
+        "paramName": "Azotyny",
+        "icdCode": "",
+        "unit": "",
+        "valueType": "string",
+        "validation": { "allowedValues": ["nieobecne", "pozytywne"] }
+      },
+      {
+        "id": "ery_hb",
+        "description": "Obecność erytrocytów i hemoglobiny w moczu; norma: nie wykryto. Obecność może sugerować krwinkomocz lub hemoglobinurię.",
+        "paramName": "Ery/Hb",
+        "icdCode": "",
+        "unit": "",
+        "valueType": "string",
+        "validation": { "allowedValues": ["nie wykryto", "wykryto"] }
+      },
+      {
+        "id": "leukocyty",
+        "description": "Obecność leukocytów w moczu; norma: nie wykryto. Śladowe lub większe ilości mogą wskazywać na stan zapalny dróg moczowych.",
+        "paramName": "Leukocyty",
+        "icdCode": "",
+        "unit": "",
+        "valueType": "string",
+        "validation": { "allowedValues": ["nie wykryto", "śladowe", "1+", "2+"] }
+      }
+    ]
+  },
+  {
+    "testId": "morfkrwi",
+    "icdCode": "",
+    "name": "Morfologia krwi (pełna)",
+    "description": "Kompleksowe badanie morfologii krwi obejmujące liczbę i parametry erytrocytów, leukocytów oraz stężenie hemoglobiny. Pomaga w diagnostyce anemii, infekcji i innych zaburzeń hematologicznych.",
+    "tags": ["hematologia"],
+    "parametersTemplate": [
+      {
+        "id": "erytrocyty",
+        "paramName": "Erytrocyty",
+        "description": "Liczba erytrocytów; norma: 3.8–5.9 mln/µL. Obniżony poziom może wskazywać na anemię.",
+        "icdCode": "",
+        "unit": "mln/µL",
+        "valueType": "number",
+        "validation": { "min": 3.8, "max": 5.9 }
+      },
+      {
+        "id": "leukocyty",
+        "paramName": "Leukocyty",
+        "description": "Liczba leukocytów; norma: 4.0–10.0 tys./µL. Podwyższony może wskazywać na infekcję lub stan zapalny.",
+        "icdCode": "",
+        "unit": "tys./µL",
+        "valueType": "number",
+        "validation": { "min": 4.0, "max": 10.0 }
+      },
+      {
+        "id": "hemoglobina",
+        "paramName": "Hemoglobina",
+        "description": "Stężenie hemoglobiny; norma: 12.0–17.5 g/dL. Odchylenia mogą sugerować zaburzenia krwi.",
+        "icdCode": "",
+        "unit": "g/dL",
+        "valueType": "number",
+        "validation": { "min": 12.0, "max": 17.5 }
+      }
+    ]
+  },
+  {
+    "testId": "lipidogram",
+    "icdCode": "",
+    "name": "Lipidogram",
+    "description": "Badanie profilu lipidowego obejmujące cholesterol całkowity, LDL, HDL, non-HDL i trójglicerydy. Umożliwia ocenę ryzyka miażdżycy i chorób sercowo-naczyniowych.",
+    "tags": ["biochemia", "metaboliczne"],
+    "parametersTemplate": [
+      {
+        "id": "cholcal",
+        "paramName": "Cholesterol całkowity",
+        "description": "Całkowite stężenie cholesterolu; norma: <200 mg/dL. Podwyższony poziom zwiększa ryzyko chorób serca.",
+        "icdCode": "",
+        "unit": "mg/dL",
+        "valueType": "number",
+        "validation": { "min": 0, "max": 200 }
+      },
+      {
+        "id": "ldl",
+        "paramName": "LDL",
+        "description": "Stężenie lipoprotein LDL; norma: <100 mg/dL. \"zły\" cholesterol sprzyja miażdżycy.",
+        "icdCode": "",
+        "unit": "mg/dL",
+        "valueType": "number",
+        "validation": { "min": 0, "max": 100 }
+      },
+      {
+        "id": "hdl",
+        "paramName": "HDL",
+        "description": "Stężenie lipoprotein HDL; norma: >40 mg/dL. \"dobry\" cholesterol chroni przed miażdżycą.",
+        "icdCode": "",
+        "unit": "mg/dL",
+        "valueType": "number",
+        "validation": { "min": 40, "max": 60 }
+      },
+      {
+        "id": "non_hdl",
+        "paramName": "non-HDL",
+        "description": "Cholesterol nie-HDL (cholesterol całkowity minus HDL); norma: <130 mg/dL. Podwyższony poziom wskazuje na zwiększone ryzyko chorób sercowo-naczyniowych.",
+        "icdCode": "",
+        "unit": "mg/dL",
+        "valueType": "number",
+        "validation": { "min": 0, "max": 130 }
+      },
+      {
+        "id": "trig",
+        "paramName": "Trójglicerydy",
+        "description": "Stężenie trójglicerydów; norma: <150 mg/dL. Podwyższony poziom powiązany z ryzykiem sercowo-naczyniowym.",
+        "icdCode": "",
+        "unit": "mg/dL",
+        "valueType": "number",
+        "validation": { "min": 0, "max": 150 }
+      }
+    ]
+  },
+  {
+    "testId": "hba1c",
+    "icdCode": "",
+    "name": "Hemoglobina glikowana (HbA1c)",
+    "description": "Parametr odzwierciedlający średni poziom glukozy we krwi w ciągu ostatnich 2–3 miesięcy, wyrażony w procentach (DCCT). Wykorzystywany w monitorowaniu cukrzycy.",
+    "tags": ["biochemia", "metaboliczne"],
+    "parametersTemplate": [
+      {
+        "unit": "%",
+        "valueType": "number",
+        "validation": { "min": 4.0, "max": 6.0 }
+      }
+    ]
+  },
+  {
+    "testId": "watrowe",
+    "icdCode": "",
+    "name": "Próby wątrobowe",
+    "description": "Zestaw testów wątrobowych (ALT, AST, ALP, bilirubina) służący do oceny funkcji i uszkodzeń wątroby.",
+    "tags": ["wątrobowe", "biochemia"],
+    "parametersTemplate": [
+      {
+        "id": "alt",
+        "paramName": "ALT",
+        "description": "Alanina aminotransferaza; norma: 7–56 U/L. Podwyższony poziom wskazuje na uszkodzenie komórek wątroby.",
+        "icdCode": "",
+        "unit": "U/L",
+        "valueType": "number",
+        "validation": { "min": 7, "max": 56 }
+      },
+      {
+        "id": "ast",
+        "paramName": "AST",
+        "description": "Aspartat aminotransferaza; norma: 10–40 U/L. Podwyższony poziom może wskazywać na uszkodzenie wątroby.",
+        "icdCode": "",
+        "unit": "U/L",
+        "valueType": "number",
+        "validation": { "min": 10, "max": 40 }
+      },
+      {
+        "id": "alp",
+        "paramName": "ALP",
+        "description": "Fosfataza alkaliczna; norma: 44–147 U/L. Zbyt wysoki poziom może wskazywać na cholestazę.",
+        "icdCode": "",
+        "unit": "U/L",
+        "valueType": "number",
+        "validation": { "min": 44, "max": 147 }
+      },
+      {
+        "id": "bili",
+        "paramName": "Bilirubina",
+        "description": "Bilirubina całkowita; norma: 0.1–1.2 mg/dL. Podwyższony poziom sugeruje zaburzenia drożności dróg żółciowych.",
+        "icdCode": "",
+        "unit": "mg/dL",
+        "valueType": "number",
+        "validation": { "min": 0.1, "max": 1.2 }
+      },
+      {
+        "id": "ggtp",
+        "paramName": "GGTP",
+        "description": "Gamma-glutamylotranspeptydaza (GGTP); norma: 9–48 U/L. Podwyższony poziom może wskazywać na cholestazę lub uszkodzenie dróg żółciowych.",
+        "icdCode": "",
+        "unit": "U/L",
+        "valueType": "number",
+        "validation": { "min": 9, "max": 48 }
+      }
+    ]
+  },
+  {
+    "testId": "kreatynina",
+    "icdCode": "",
+    "name": "Kreatynina",
+    "description": "Stężenie kreatyniny we krwi; norma: 0.6–1.3 mg/dL. Podwyższony poziom może wskazywać na pogorszenie filtracji nerek.",
+    "tags": ["nerkowe", "biochemia"],
+    "parametersTemplate": [
+      {
+        "unit": "mg/dL",
+        "valueType": "number",
+        "validation": { "min": 0.6, "max": 1.3 }
+      }
+    ]
+  },
+  {
+    "testId": "egfr",
+    "icdCode": "",
+    "name": "eGFR",
+    "description": "Wskaźnik filtracji kłębuszkowej (eGFR); norma: >=60 mL/min/1.73m². Niższe wartości wskazują na dysfunkcję nerek.",
+    "tags": ["nerkowe", "biochemia"],
+    "parametersTemplate": [
+      {
+        "unit": "mL/min/1.73m²",
+        "valueType": "number",
+        "validation": { "min": 0, "max": 60 }
+      }
+    ]
+  },
+  {
+    "testId": "sod",
+    "icdCode": "",
+    "name": "Sód",
+    "description": "Stężenie sodu we krwi; norma: 135–145 mmol/L. Odchylenia mogą wskazywać na zaburzenia wodno-elektrolitowe.",
+    "tags": ["biochemia", "metaboliczne"],
+    "parametersTemplate": [
+      {
+        "unit": "mmol/L",
+        "valueType": "number",
+        "validation": { "min": 135, "max": 145 }
+      }
+    ]
+  },
+  {
+    "testId": "potas",
+    "icdCode": "",
+    "name": "Potas",
+    "description": "Stężenie potasu we krwi; norma: 3.5–5.1 mmol/L. Hiperkaliemia lub hipokaliemia może zaburzać funkcję serca.",
+    "tags": ["biochemia", "metaboliczne"],
+    "parametersTemplate": [
+      {
+        "unit": "mmol/L",
+        "valueType": "number",
+        "validation": { "min": 3.5, "max": 5.1 }
+      }
+    ]
+  },
+  {
+    "testId": "chlorki",
+    "icdCode": "",
+    "name": "Chlorki",
+    "description": "Stężenie chlorków we krwi; norma: 98–107 mmol/L. Odchylenia wskazują na zaburzenia równowagi kwasowo-zasadowej.",
+    "tags": ["biochemia", "metaboliczne"],
+    "parametersTemplate": [
+      {
+        "unit": "mmol/L",
+        "valueType": "number",
+        "validation": { "min": 98, "max": 107 }
+      }
+    ]
+  },
+  {
+    "testId": "tsh",
+    "icdCode": "",
+    "name": "TSH",
+    "description": "Hormon tyreotropowy; norma: 0.4–4.0 µIU/mL. Odchylenia wskazują na nadczynność lub niedoczynność tarczycy.",
+    "tags": ["hormonalne"],
+    "parametersTemplate": [
+      {
+        "unit": "µIU/mL",
+        "valueType": "number",
+        "validation": { "min": 0.4, "max": 4.0 }
+      }
+    ]
+  },
+  {
+    "testId": "ft3",
+    "icdCode": "",
+    "name": "FT₃",
+    "description": "Wolna trijodotyronina; norma: 2.0–4.4 pg/mL. Pomaga w ocenie funkcji tarczycy.",
+    "tags": ["hormonalne"],
+    "parametersTemplate": [
+      {
+        "unit": "pg/mL",
+        "valueType": "number",
+        "validation": { "min": 2.0, "max": 4.4 }
+      }
+    ]
+  },
+  {
+    "testId": "ft4",
+    "icdCode": "",
+    "name": "FT₄",
+    "description": "Wolna tyroksyna; norma: 0.9–1.7 ng/dL. Istotna do pełnej oceny funkcji tarczycy.",
+    "tags": ["hormonalne"],
+    "parametersTemplate": [
+      {
+        "unit": "ng/dL",
+        "valueType": "number",
+        "validation": { "min": 0.9, "max": 1.7 }
+      }
+    ]
+  },
+  {
+    "testId": "witd3",
+    "icdCode": "",
+    "name": "Witamina D (25-OH D₃)",
+    "description": "Pomiar stężenia 25-hydroksywitaminy D we krwi; norma: 20–50 ng/mL. Ważne dla zdrowia kości i układu odpornościowego.",
+    "tags": ["biochemia", "metaboliczne"],
+    "parametersTemplate": [
+      {
+        "unit": "ng/mL",
+        "valueType": "number",
+        "validation": { "min": 20, "max": 50 }
+      }
+    ]
+  },
+  {
+    "testId": "crp",
+    "icdCode": "",
+    "name": "C-reaktywne białko (CRP)",
+    "description": "Pomiar CRP we krwi jako wskaźnika stanu zapalnego; norma: <5 mg/L. Wysokie wartości świadczą o aktywnym stanie zapalnym.",
+    "tags": ["zapalne", "biochemia"],
+    "parametersTemplate": [
+      {
+        "unit": "mg/L",
+        "valueType": "number",
+        "validation": { "min": 0, "max": 5 }
+      }
+    ]
+  },
+  {
+    "testId": "ekg",
+    "icdCode": "",
+    "name": "Elektrokardiogram (EKG)",
+    "description": "Wizualna ocena rytmu serca i przewodzenia impulsu elektrycznego; wynik opisowy wskazujący na prawidłowy lub nieprawidłowy zapis.",
+    "tags": ["kardiologiczne"],
+    "parametersTemplate": [
+      {
+        "unit": "",
+        "valueType": "string",
+        "validation": { "allowedValues": ["prawidłowy", "nieprawidłowy"] }
+      }
+    ]
+  },
+  {
+    "testId": "psa",
+    "icdCode": "",
+    "name": "PSA – antygen specyficzny dla prostaty",
+    "description": "Pomiar PSA we krwi; norma: 0–4 ng/mL. Podwyższone poziomy mogą sugerować choroby prostaty, w tym łagodne przerośnięcie lub nowotwory.",
+    "tags": ["biochemia", "hormonalne"],
+    "parametersTemplate": [
+      {
+        "unit": "ng/mL",
+        "valueType": "number",
+        "validation": { "min": 0, "max": 4 }
+      }
+    ]
+  },
+  {
+    "testId": "esr",
+    "icdCode": "",
+    "name": "Odczyn Biernackiego (OB/ESR)",
+    "description": "Pomiar szybkości opadania erytrocytów; norma: 0–20 mm/h. Wysokie wartości mogą wskazywać na stan zapalny lub choroby autoimmunologiczne.",
+    "tags": ["zapalne", "hematologia"],
+    "parametersTemplate": [
+      {
+        "unit": "mm/h",
+        "valueType": "number",
+        "validation": { "min": 0, "max": 20 }
+      }
+    ]
+  }
+]
