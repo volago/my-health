@@ -2,22 +2,16 @@ const admin = require('firebase-admin');
 const fs = require('fs');
 const path = require('path');
 
-// Initialize Firebase Admin SDK
-// Make sure to use a service account key or other credentials if running outside an emulated environment
-// For emulators, initializing without arguments often works if GOOGLE_APPLICATION_CREDENTIALS is not set.
-// However, to be explicit for emulator usage and avoid potential conflicts:
+// Ensure FIRESTORE_EMULATOR_HOST is set for firebase-admin to auto-detect and connect
+process.env.FIRESTORE_EMULATOR_HOST = 'localhost:8080';
+
+// Initialize Firebase Admin SDK with the SAME Project ID as the Angular app
 admin.initializeApp({
-  projectId: 'demo-my-health-emulator', // Using a common placeholder for emulators
+  projectId: 'my-health' // Matching Angular environment.ts
 });
 
 const db = admin.firestore();
-
-// Explicitly point the Firestore client to the emulator
-// This is more reliable than relying solely on the environment variable
-db.settings({
-  host: 'localhost:8080',
-  ssl: false
-});
+// No need for db.settings() if FIRESTORE_EMULATOR_HOST is set and projectId matches
 
 const dataFilePath = path.join(__dirname, '../.ai/data/tests-catalog.json');
 const collectionName = 'tests-catalog';
@@ -52,6 +46,20 @@ async function seedDatabase() {
     if (operationCount > 0) {
       await batch.commit();
       console.log(`Successfully seeded ${operationCount} documents into '${collectionName}'.`);
+
+      // Verify by fetching the first document
+      try {
+        console.log(`Verifying data in '${collectionName}'...`);
+        const snapshot = await db.collection(collectionName).limit(1).get();
+        if (snapshot.empty) {
+          console.log('Verification failed: No documents found in collection after seeding.');
+        } else {
+          console.log('Verification successful. First document data:', snapshot.docs[0].data());
+        }
+      } catch (readError) {
+        console.error('Error trying to read data after seeding:', readError);
+      }
+
     } else {
       console.log('No documents to seed.');
     }
