@@ -1,0 +1,204 @@
+{
+  "male": {
+    "18-39": {
+      "basic": [
+        {"testId": "glukoza", "frequencyMonths": 12},
+        {"testId": "morfkrwi", "frequencyMonths": 36}
+      ],
+      "recommended": [
+        {"testId": "glukoza", "frequencyMonths": 12},
+        {"testId": "morfkrwi", "frequencyMonths": 36},
+        {"testId": "lipidogram", "frequencyMonths": 60},
+        {"testId": "hba1c", "frequencyMonths": 12},
+        {"testId": "crp", "frequencyMonths": 60}
+      ],
+      "detailed": [
+        {"testId": "glukoza", "frequencyMonths": 12},
+        {"testId": "morfkrwi", "frequencyMonths": 36},
+        {"testId": "lipidogram", "frequencyMonths": 60},
+        {"testId": "hba1c", "frequencyMonths": 12},
+        {"testId": "crp", "frequencyMonths": 60},
+        {"testId": "badmocz", "frequencyMonths": 12},
+        {"testId": "watrowe", "frequencyMonths": 60},
+        {"testId": "kreatynina", "frequencyMonths": 36},
+        {"testId": "egfr", "frequencyMonths": 36},
+        {"testId": "sod", "frequencyMonths": 36},
+        {"testId": "potas", "frequencyMonths": 36},
+        {"testId": "chlorki", "frequencyMonths": 36},
+        {"testId": "tsh", "frequencyMonths": 12},
+        {"testId": "ft3", "frequencyMonths": 12},
+        {"testId": "ft4", "frequencyMonths": 12},
+        {"testId": "witd3", "frequencyMonths": 24},
+        {"testId": "ekg", "frequencyMonths": 60},
+        {"testId": "esr", "frequencyMonths": 60}
+      ]
+    },
+    "40-59": {
+      "basic": [
+        {"testId": "glukoza", "frequencyMonths": 12},
+        {"testId": "morfkrwi", "frequencyMonths": 36}
+      ],
+      "recommended": [
+        {"testId": "glukoza", "frequencyMonths": 12},
+        {"testId": "morfkrwi", "frequencyMonths": 36},
+        {"testId": "lipidogram", "frequencyMonths": 60},
+        {"testId": "hba1c", "frequencyMonths": 12},
+        {"testId": "crp", "frequencyMonths": 60}
+      ],
+      "detailed": [
+        {"testId": "glukoza", "frequencyMonths": 12},
+        {"testId": "morfkrwi", "frequencyMonths": 36},
+        {"testId": "lipidogram", "frequencyMonths": 60},
+        {"testId": "hba1c", "frequencyMonths": 12},
+        {"testId": "crp", "frequencyMonths": 60},
+        {"testId": "badmocz", "frequencyMonths": 12},
+        {"testId": "watrowe", "frequencyMonths": 60},
+        {"testId": "kreatynina", "frequencyMonths": 36},
+        {"testId": "egfr", "frequencyMonths": 36},
+        {"testId": "sod", "frequencyMonths": 36},
+        {"testId": "potas", "frequencyMonths": 36},
+        {"testId": "chlorki", "frequencyMonths": 36},
+        {"testId": "tsh", "frequencyMonths": 12},
+        {"testId": "ft3", "frequencyMonths": 12},
+        {"testId": "ft4", "frequencyMonths": 12},
+        {"testId": "witd3", "frequencyMonths": 24},
+        {"testId": "ekg", "frequencyMonths": 60},
+        {"testId": "esr", "frequencyMonths": 60}
+      ]
+    },
+    "60+": {
+      "basic": [
+        {"testId": "glukoza", "frequencyMonths": 12},
+        {"testId": "morfkrwi", "frequencyMonths": 36}
+      ],
+      "recommended": [
+        {"testId": "glukoza", "frequencyMonths": 12},
+        {"testId": "morfkrwi", "frequencyMonths": 36},
+        {"testId": "lipidogram", "frequencyMonths": 60},
+        {"testId": "hba1c", "frequencyMonths": 12},
+        {"testId": "crp", "frequencyMonths": 60}
+      ],
+      "detailed": [
+        {"testId": "glukoza", "frequencyMonths": 12},
+        {"testId": "morfkrwi", "frequencyMonths": 36},
+        {"testId": "lipidogram", "frequencyMonths": 60},
+        {"testId": "hba1c", "frequencyMonths": 12},
+        {"testId": "crp", "frequencyMonths": 60},
+        {"testId": "badmocz", "frequencyMonths": 12},
+        {"testId": "watrowe", "frequencyMonths": 60},
+        {"testId": "kreatynina", "frequencyMonths": 36},
+        {"testId": "egfr", "frequencyMonths": 36},
+        {"testId": "sod", "frequencyMonths": 36},
+        {"testId": "potas", "frequencyMonths": 36},
+        {"testId": "chlorki", "frequencyMonths": 36},
+        {"testId": "tsh", "frequencyMonths": 12},
+        {"testId": "ft3", "frequencyMonths": 12},
+        {"testId": "ft4", "frequencyMonths": 12},
+        {"testId": "witd3", "frequencyMonths": 24},
+        {"testId": "ekg", "frequencyMonths": 60},
+        {"testId": "esr", "frequencyMonths": 60}
+      ]
+    }
+  },
+  "female": {
+    "18-39": {
+      "basic": [
+        {"testId": "glukoza", "frequencyMonths": 12},
+        {"testId": "morfkrwi", "frequencyMonths": 36}
+      ],
+      "recommended": [
+        {"testId": "glukoza", "frequencyMonths": 12},
+        {"testId": "morfkrwi", "frequencyMonths": 36},
+        {"testId": "lipidogram", "frequencyMonths": 60},
+        {"testId": "hba1c", "frequencyMonths": 12},
+        {"testId": "crp", "frequencyMonths": 60}
+      ],
+      "detailed": [
+        {"testId": "glukoza", "frequencyMonths": 12},
+        {"testId": "morfkrwi", "frequencyMonths": 36},
+        {"testId": "lipidogram", "frequencyMonths": 60},
+        {"testId": "hba1c", "frequencyMonths": 12},
+        {"testId": "crp", "frequencyMonths": 60},
+        {"testId": "badmocz", "frequencyMonths": 12},
+        {"testId": "watrowe", "frequencyMonths": 60},
+        {"testId": "kreatynina", "frequencyMonths": 36},
+        {"testId": "egfr", "frequencyMonths": 36},
+        {"testId": "sod", "frequencyMonths": 36},
+        {"testId": "potas", "frequencyMonths": 36},
+        {"testId": "chlorki", "frequencyMonths": 36},
+        {"testId": "tsh", "frequencyMonths": 12},
+        {"testId": "ft3", "frequencyMonths": 12},
+        {"testId": "ft4", "frequencyMonths": 12},
+        {"testId": "witd3", "frequencyMonths": 24},
+        {"testId": "ekg", "frequencyMonths": 60},
+        {"testId": "esr", "frequencyMonths": 60}
+      ]
+    },
+    "40-59": {
+      "basic": [
+        {"testId": "glukoza", "frequencyMonths": 12},
+        {"testId": "morfkrwi", "frequencyMonths": 36}
+      ],
+      "recommended": [
+        {"testId": "glukoza", "frequencyMonths": 12},
+        {"testId": "morfkrwi", "frequencyMonths": 36},
+        {"testId": "lipidogram", "frequencyMonths": 60},
+        {"testId": "hba1c", "frequencyMonths": 12},
+        {"testId": "crp", "frequencyMonths": 60}
+      ],
+      "detailed": [
+        {"testId": "glukoza", "frequencyMonths": 12},
+        {"testId": "morfkrwi", "frequencyMonths": 36},
+        {"testId": "lipidogram", "frequencyMonths": 60},
+        {"testId": "hba1c", "frequencyMonths": 12},
+        {"testId": "crp", "frequencyMonths": 60},
+        {"testId": "badmocz", "frequencyMonths": 12},
+        {"testId": "watrowe", "frequencyMonths": 60},
+        {"testId": "kreatynina", "frequencyMonths": 36},
+        {"testId": "egfr", "frequencyMonths": 36},
+        {"testId": "sod", "frequencyMonths": 36},
+        {"testId": "potas", "frequencyMonths": 36},
+        {"testId": "chlorki", "frequencyMonths": 36},
+        {"testId": "tsh", "frequencyMonths": 12},
+        {"testId": "ft3", "frequencyMonths": 12},
+        {"testId": "ft4", "frequencyMonths": 12},
+        {"testId": "witd3", "frequencyMonths": 24},
+        {"testId": "ekg", "frequencyMonths": 60},
+        {"testId": "esr", "frequencyMonths": 60}
+      ]
+    },
+    "60+": {
+      "basic": [
+        {"testId": "glukoza", "frequencyMonths": 12},
+        {"testId": "morfkrwi", "frequencyMonths": 36}
+      ],
+      "recommended": [
+        {"testId": "glukoza", "frequencyMonths": 12},
+        {"testId": "morfkrwi", "frequencyMonths": 36},
+        {"testId": "lipidogram", "frequencyMonths": 60},
+        {"testId": "hba1c", "frequencyMonths": 12},
+        {"testId": "crp", "frequencyMonths": 60}
+      ],
+      "detailed": [
+        {"testId": "glukoza", "frequencyMonths": 12},
+        {"testId": "morfkrwi", "frequencyMonths": 36},
+        {"testId": "lipidogram", "frequencyMonths": 60},
+        {"testId": "hba1c", "frequencyMonths": 12},
+        {"testId": "crp", "frequencyMonths": 60},
+        {"testId": "badmocz", "frequencyMonths": 12},
+        {"testId": "watrowe", "frequencyMonths": 60},
+        {"testId": "kreatynina", "frequencyMonths": 36},
+        {"testId": "egfr", "frequencyMonths": 36},
+        {"testId": "sod", "frequencyMonths": 36},
+        {"testId": "potas", "frequencyMonths": 36},
+        {"testId": "chlorki", "frequencyMonths": 36},
+        {"testId": "tsh", "frequencyMonths": 12},
+        {"testId": "ft3", "frequencyMonths": 12},
+        {"testId": "ft4", "frequencyMonths": 12},
+        {"testId": "witd3", "frequencyMonths": 24},
+        {"testId": "ekg", "frequencyMonths": 60},
+        {"testId": "esr", "frequencyMonths": 60}
+      ]
+    }
+  }
+} 
