@@ -2,7 +2,7 @@
   "name": "domain",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/domain/src",
-  "prefix": "lib",
+  "prefix": "my-health",
   "projectType": "library",
   "tags": [],
   "targets": {

@@ -19,6 +19,7 @@ alwaysApply: false
 - Leverage Angular CLI for schematics and code generation
 - Instead of usung @Input() use new signal-based inputs
 - Implement proper lazy loading with loadComponent and loadChildren
+- Don't create empty styles files
 
 ### ANGULAR LAZY LOADED MODULES WITH NX LIBRARIES
 
@@ -33,6 +34,7 @@ export const DASHBOARD_ROUTES: Route[] = [
   },
 ];
 ```
+NX library should encapsulate all code and exports only from `routes.ts` in `indes.ts`
 
 Then in `app.routes.ts` in APP import in this way
 ```typescript
