@@ -26,7 +26,8 @@ When introducing changes to the project, always follow the directory structure b
 - `./src/libs` - NX libraries
 - `./src/libs/domain` - NX library for domain logic, models and repository
 - `./src/libs/shared` - NX library for shared code not connected to domain
-- `./src/libs/my-health` - lazy loaded modules
+- `./src/libs/features/` - lazy loaded modules
+- `./src/libs/features/catalog` - NX library for Tests Calalog feature implementation
 
 When modifying the directory structure, always update this section.
 

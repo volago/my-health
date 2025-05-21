@@ -15,7 +15,7 @@ Plan implementacji i zadań związanych z Firebase dla projektu My Health.
 
 ## In Progress Tasks
 
-- [ ] Zaimplementować interfejs użytkownika dla katalogu badań
+- [ ] Zaimplementować interfejs użytkownika dla katalogu badań (dodać lib nx)
 
 ## Future Tasks
 
