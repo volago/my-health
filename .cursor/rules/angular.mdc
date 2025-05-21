@@ -17,8 +17,32 @@ alwaysApply: false
 - Implement OnPush change detection strategy for improved performance
 - Use TypeScript decorators with explicit visibility modifiers (public, private)
 - Leverage Angular CLI for schematics and code generation
-- Implement proper lazy loading with loadComponent and loadChildren
 - Instead of usung @Input() use new signal-based inputs
+- Implement proper lazy loading with loadComponent and loadChildren
+
+### ANGULAR LAZY LOADED MODULES WITH NX LIBRARIES
+
+If APP uses lazy-loaded routed modules, then
+in library `src/lib` directory create file `routes.ts` that exports routes from this library
+```typescript
+export const DASHBOARD_ROUTES: Route[] = [
+  {
+    path: '',
+    pathMatch: 'full',
+    component: DashboardComponent
+  },
+];
+```
+
+Then in `app.routes.ts` in APP import in this way
+```typescript
+export const appRoutes: Route[] = [  
+  {
+    path: 'dashboard',
+    loadChildren: () => import('@cpmpany/features/dashboard').then(m => m.DASHBOARD_ROUTES)
+  }, 
+];
+```
 
 
 #### ANGULAR_MATERIAL
