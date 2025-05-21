@@ -1,6 +1,7 @@
 Frontend:
 - Angular 19
 - Angular Material 19 dostarcza komponentów, które są niezbędne do tworzenia aplikacji
+- Angular Material odpowiada za theme, dark mode, itp
 - Tailwind 4 do stylowania niedostępnego w Angular Material, na przykład układ flex, grid, itp
 - TypeScript 5 dla statycznego typowania kodu i lepszego wsparcia IDE
 - Angular Fire dla dostępu do Firebase
