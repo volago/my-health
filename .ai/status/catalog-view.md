@@ -45,6 +45,12 @@
     *   Przycisk nawigacyjny (ikona ">") przeniesiono do nagłówka karty, wyrównany do prawej.
     *   Dodano odpowiednie style CSS/SCSS i zaktualizowano importy modułów Angular Material.
     *   Zrefaktoryzowano style `TestListItemComponent`, przenosząc je z pliku SCSS do klas Tailwind bezpośrednio w szablonie HTML.
+    *   Weryfikacja i dopracowanie responsywności całego widoku katalogu na różnych urządzeniach.
+        *   Zmieniono układ siatki listy badań na 1 kolumnę domyślnie i 2 kolumny na dużych ekranach (`lg:grid-cols-2`).
+        *   Zwiększono rozmiary czcionek dla tytułu, tagów i opisu w elementach listy.
+        *   Podjęto próbę rozwiązania problemu z czcionką (Times New Roman) poprzez dodanie `font-sans` do kart.
+        *   Ponownie zwiększono rozmiar czcionki opisu badania (do `text-lg`) i aktywowano chipy z tagami.
+    *   Ujednolicenie kolorystyki i typografii zgodnie z wybranym motywem Material i ewentualnymi dodatkowymi wymaganiami.
 
 7.  **Wprowadzenie motywu Angular Material:**
     *   Początkowo próbowano zaimplementować niestandardowy motyw Azure.
@@ -72,8 +78,8 @@
     *   Ujednolicenie kolorystyki i typografii zgodnie z wybranym motywem Material i ewentualnymi dodatkowymi wymaganiami.
 
 1.  **Dostępność (WCAG) (Krok 7 z planu):**
-    *   Sprawdzenie nawigacji klawiaturą.
-    *   Weryfikacja użycia atrybutów ARIA.
+    *   Sprawdzenie nawigacji klawiaturą: Rozpoczęto analizę kodu pod kątem osiągalności interaktywnych elementów.
+    *   Weryfikacja użycia atrybutów ARIA: Rozpoczęto analizę kodu, standardowe komponenty Material wydają się mieć podstawowe atrybuty.
     *   Sprawdzenie kontrastów kolorów.
 
 2.  **Refaktoryzacja i Optymalizacja (Krok 10 z planu):**

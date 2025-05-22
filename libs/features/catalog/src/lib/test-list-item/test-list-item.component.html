@@ -1,6 +1,6 @@
-<mat-card appearance="outlined" class="mb-4 flex flex-col justify-between h-full">
+<mat-card appearance="outlined" class="mb-4 flex flex-col justify-between h-full font-sans">
   <mat-card-header class="items-center pt-4 pr-4 pl-4">
-    <mat-card-title class="flex-auto text-lg font-semibold">{{ testItem().name }}</mat-card-title>
+    <mat-card-title class="flex-auto text-xl font-semibold">{{ testItem().name }}</mat-card-title>
     <button mat-icon-button aria-label="View details" class="ml-auto -mr-2 -mt-2">
       <mat-icon>chevron_right</mat-icon>
     </button>
@@ -9,10 +9,10 @@
     @if (testItem().tags && testItem().tags.length > 0) {
       <mat-chip-listbox aria-label="Test tags" class="mb-2 block">
         @for (tag of testItem().tags; track tag) {
-          <mat-chip disabled="true" class="text-xs py-1 px-2 mr-1 mb-1 h-auto min-h-0 leading-tight">{{ tag }}</mat-chip>
+          <mat-chip class="text-sm py-1 px-2 mr-1 mb-1 h-auto min-h-0 leading-tight">{{ tag }}</mat-chip>
         }
       </mat-chip-listbox>
     }
-    <p class="text-sm leading-5 mt-2 overflow-hidden h-10">{{ testItem().description }}</p>
+    <p class="text-lg leading-relaxed mt-2 overflow-hidden h-16">{{ testItem().description }}</p>
   </mat-card-content>
 </mat-card> 
