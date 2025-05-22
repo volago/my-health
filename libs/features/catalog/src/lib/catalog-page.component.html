@@ -1,7 +1,4 @@
 <my-health-search-filter-bar
-  [availableTags]="store.availableTags()"
-  (searchChange)="store.setSearchTerm($event)"
-  (tagsChange)="store.setSelectedTags($event)"
 ></my-health-search-filter-bar>
 
 @if (store.isLoading()) {
