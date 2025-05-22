@@ -46,12 +46,13 @@ export const appRoutes: Route[] = [
 ];
 ```
 
+Don't create a directory for main feature component. Put it in `src/lid/` directory
+
 
 #### ANGULAR_MATERIAL
 
 - Create a dedicated module for Angular Material imports to keep the app module clean
 - Use theme mixins to customize component styles instead of overriding CSS
-- Leverage the theme
 - Implement dark mode with the dark theme
 - Implement OnPush change detection for performance critical components
 - Leverage the CDK (Component Development Kit) for custom component behaviors
