@@ -41,6 +41,10 @@
     *   Zastosowanie `mat-card` dla każdego elementu badania.
     *   Dodanie wstępnego układu dla tytułu, opisu, zakresu referencyjnego i ikony ">".
     *   Stworzono podstawową implementację `TestListItemComponent` (`.ts`, `.html`, `.scss`) przyjmującego `TestCatalog` jako input.
+    *   Ograniczono opis badania do 2 linii z wielokropkiem.
+    *   Przycisk nawigacyjny (ikona ">") przeniesiono do nagłówka karty, wyrównany do prawej.
+    *   Dodano odpowiednie style CSS/SCSS i zaktualizowano importy modułów Angular Material.
+    *   Zrefaktoryzowano style `TestListItemComponent`, przenosząc je z pliku SCSS do klas Tailwind bezpośrednio w szablonie HTML.
 
 7.  **Wprowadzenie motywu Angular Material:**
     *   Początkowo próbowano zaimplementować niestandardowy motyw Azure.
@@ -60,18 +64,19 @@
         *   Zastosowanie `mat-card` dla każdego elementu badania.
         *   Dodanie wstępnego układu dla tytułu, opisu, zakresu referencyjnego i ikony ">".
         *   Stworzono podstawową implementację `TestListItemComponent` (`.ts`, `.html`, `.scss`) przyjmującego `TestCatalog` jako input.
-
-1.  **Dokończenie Stylowania (Krok 6 z planu):**
-    *   Dokładne ostylowanie `TestListItemComponent` (karty), aby pasowało do oczekiwanego wyglądu (zgodnie ze zrzutem ekranu referencyjnego, jeśli jest dostępny).
+        *   Ograniczono opis badania do 2 linii z wielokropkiem.
+        *   Przycisk nawigacyjny (ikona ">") przeniesiono do nagłówka karty, wyrównany do prawej.
+        *   Dodano odpowiednie style CSS/SCSS i zaktualizowano importy modułów Angular Material.
+        *   Zrefaktoryzowano style `TestListItemComponent`, przenosząc je z pliku SCSS do klas Tailwind bezpośrednio w szablonie HTML.
     *   Weryfikacja i dopracowanie responsywności całego widoku katalogu na różnych urządzeniach.
     *   Ujednolicenie kolorystyki i typografii zgodnie z wybranym motywem Material i ewentualnymi dodatkowymi wymaganiami.
 
-2.  **Dostępność (WCAG) (Krok 7 z planu):**
+1.  **Dostępność (WCAG) (Krok 7 z planu):**
     *   Sprawdzenie nawigacji klawiaturą.
     *   Weryfikacja użycia atrybutów ARIA.
     *   Sprawdzenie kontrastów kolorów.
 
-3.  **Refaktoryzacja i Optymalizacja (Krok 10 z planu):**
+2.  **Refaktoryzacja i Optymalizacja (Krok 10 z planu):**
     *   Przejrzenie kodu pod kątem czytelności i wydajności.
     *   Implementacja pełnej logiki dla trybu offline (`isOffline` w `CatalogStore`).
     *   Dopracowanie wyświetlania zakresów referencyjnych w `TestListItemComponent`.

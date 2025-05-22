@@ -1,21 +1,18 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>{{ testItem().name }}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <p>{{ testItem().description }}</p>
-    @for (param of testItem().parametersTemplate; track param.id) {
-      @if (param.validation && param.validation.min !== undefined && param.validation.max !== undefined) {
-        <p class="text-sm mt-1">
-          <strong>{{ param.paramName }}:</strong> {{ param.validation.min }} - {{ param.validation.max }} {{ param.unit }}
-        </p>
-      }
-    }
-  </mat-card-content>
-  <mat-card-actions>
-    <!-- Placeholder for actions, e.g., a details button -->
-    <button mat-icon-button aria-label="View details">
+<mat-card appearance="outlined" class="mb-4 flex flex-col justify-between h-full">
+  <mat-card-header class="items-center pt-4 pr-4 pl-4">
+    <mat-card-title class="flex-auto text-lg font-semibold">{{ testItem().name }}</mat-card-title>
+    <button mat-icon-button aria-label="View details" class="ml-auto -mr-2 -mt-2">
       <mat-icon>chevron_right</mat-icon>
     </button>
-  </mat-card-actions>
+  </mat-card-header>
+  <mat-card-content class="flex-grow pt-0 pb-4 pl-4 pr-4">
+    @if (testItem().tags && testItem().tags.length > 0) {
+      <mat-chip-listbox aria-label="Test tags" class="mb-2 block">
+        @for (tag of testItem().tags; track tag) {
+          <mat-chip disabled="true" class="text-xs py-1 px-2 mr-1 mb-1 h-auto min-h-0 leading-tight">{{ tag }}</mat-chip>
+        }
+      </mat-chip-listbox>
+    }
+    <p class="text-sm leading-5 mt-2 overflow-hidden h-10">{{ testItem().description }}</p>
+  </mat-card-content>
 </mat-card> 
