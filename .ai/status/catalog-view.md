@@ -83,7 +83,4 @@
     *   Sprawdzenie kontrastów kolorów.
 
 2.  **Refaktoryzacja i Optymalizacja (Krok 10 z planu):**
-    *   Przejrzenie kodu pod kątem czytelności i wydajności.
-    *   Implementacja pełnej logiki dla trybu offline (`isOffline` w `CatalogStore`).
-    *   Dopracowanie wyświetlania zakresów referencyjnych w `TestListItemComponent`.
-    *   Dodanie ewentualnej nawigacji lub akcji po kliknięciu na element badania (ikona ">").
+    *   Przejrzenie kodu pod kątem czytelności i wydajności: Zakończono. Upewniono się, że wszystkie główne komponenty widoku katalogu (`CatalogPageComponent`, `SearchFilterBarComponent`, `TestListComponent`, `TestListItemComponent`) używają strategii `ChangeDetectionStrategy.OnPush`.

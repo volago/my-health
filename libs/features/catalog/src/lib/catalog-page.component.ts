@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CatalogStore } from './state/catalog.store';
 import { SearchFilterBarComponent } from './search-filter-bar/search-filter-bar.component';
@@ -15,6 +15,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatProgressSpinnerModule
   ],
   templateUrl: './catalog-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CatalogPageComponent implements OnInit {
   protected readonly store = inject(CatalogStore);

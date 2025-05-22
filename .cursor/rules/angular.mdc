@@ -55,7 +55,6 @@ Don't create a directory for main feature component. Put it in `src/lid/` direct
 - Create a dedicated module for Angular Material imports to keep the app module clean
 - Use theme mixins to customize component styles instead of overriding CSS
 - Implement dark mode with the dark theme
-- Implement OnPush change detection for performance critical components
 - Leverage the CDK (Component Development Kit) for custom component behaviors
 - Use Material's form field components with reactive forms for consistent validation UX
 - Implement accessibility attributes and ARIA labels for interactive components

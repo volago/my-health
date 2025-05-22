@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -24,7 +24,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule
   ],
   templateUrl: './search-filter-bar.component.html',
-  styleUrls: ['./search-filter-bar.component.css']
+  styleUrls: ['./search-filter-bar.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchFilterBarComponent {
   private readonly store = inject(CatalogStore);
