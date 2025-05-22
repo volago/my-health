@@ -1,0 +1,37 @@
+<my-health-search-filter-bar
+  [availableTags]="store.availableTags()"
+  (searchChange)="store.setSearchTerm($event)"
+  (tagsChange)="store.setSelectedTags($event)"
+></my-health-search-filter-bar>
+
+@if (store.isLoading()) {
+  <div class="flex justify-center items-center p-4">
+    <mat-spinner></mat-spinner>
+  </div>
+} @else if (store.error()) {
+  <div class="p-4 text-red-600 bg-red-100 border border-red-400 rounded">
+    <p>Error: {{ store.error() }}</p>
+    <button (click)="store.loadAllTests()" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+      Retry
+    </button>
+  </div>
+} @else if (store.filteredTests().length === 0 && !store.isLoading()) {
+   <div class="p-4 text-gray-600 bg-gray-100 border border-gray-300 rounded">
+    @if (store.searchTerm() || store.selectedTags().length > 0) {
+      <p>Brak badań spełniających kryteria.</p>
+    } @else {
+      <p>Katalog badań jest pusty.</p>
+    }
+  </div>
+} @else {
+  <my-health-test-list 
+    [tests]="store.filteredTests()"
+    [isLoading]="store.isLoading()"
+  ></my-health-test-list>
+}
+
+@if (store.isOffline()) {
+  <div class="fixed bottom-0 left-0 right-0 bg-yellow-400 text-black text-center p-2">
+    Jesteś w trybie offline. Wyświetlane dane mogą być nieaktualne.
+  </div>
+} 

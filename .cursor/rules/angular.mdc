@@ -19,7 +19,7 @@ alwaysApply: false
 - Leverage Angular CLI for schematics and code generation
 - Instead of usung @Input() use new signal-based inputs
 - Implement proper lazy loading with loadComponent and loadChildren
-- Don't create empty styles files
+- Seaparate componet code, template and styles to dedicated files. Don't create style files if there are no styles.
 
 ### ANGULAR LAZY LOADED MODULES WITH NX LIBRARIES
 
