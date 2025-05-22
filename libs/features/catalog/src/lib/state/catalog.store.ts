@@ -1,6 +1,6 @@
-import { computed, effect, inject } from '@angular/core';
+import { computed, inject } from '@angular/core';
 import { TestCatalog, TestTag, TEST_TAGS } from '@my-health/domain';
-import { EMPTY, catchError, of, switchMap, tap } from 'rxjs';
+import { EMPTY, catchError, switchMap, tap } from 'rxjs';
 import { CatalogDataService } from '../services/catalog-data.service';
 import { signalStore, withState, withComputed, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';

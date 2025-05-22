@@ -10,19 +10,21 @@
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 
-  <mat-chip-listbox 
-    multiple
-    aria-label="Filter by tags"
-    class="w-full md:flex-1 md:max-w-md"
-    (change)="onTagSelectionChange($event)"
-    [value]="selectedTagsSignal()">
-    @for (tag of availableTags(); track tag) {
-      <mat-chip-option [value]="tag" class="capitalize">
-        {{tag}}
-      </mat-chip-option>
-    }
-    @if (availableTags().length === 0) {
-      <p class="text-sm text-gray-500 italic">No tags available for filtering.</p>
-    }
-  </mat-chip-listbox>
+  <div class="w-full md:flex-1 md:max-w-md max-h-48 md:max-h-none overflow-y-auto md:overflow-y-visible">
+    <mat-chip-listbox 
+      multiple
+      aria-label="Filter by tags"
+      class="w-full"
+      (change)="onTagSelectionChange($event)"
+      [value]="selectedTagsSignal()">
+      @for (tag of availableTags(); track tag) {
+        <mat-chip-option [value]="tag" class="capitalize">
+          {{tag}}
+        </mat-chip-option>
+      }
+      @if (availableTags().length === 0) {
+        <p class="text-sm text-gray-500 italic">No tags available for filtering.</p>
+      }
+    </mat-chip-listbox>
+  </div>
 </div> 

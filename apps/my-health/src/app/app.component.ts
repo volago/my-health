@@ -1,13 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
 import { Firestore, doc, getDoc, collection, setDoc, serverTimestamp } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
 import { JsonPipe } from '@angular/common';
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule, CommonModule, JsonPipe],
+  imports: [RouterModule, CommonModule, JsonPipe],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -26,9 +25,9 @@ export class AppComponent implements OnInit {
     console.log('Firestore instance:', this.firestore);
     try {
       const collectionRef = collection(this.firestore, 'test');
-      console.log('Collection reference created:', collectionRef);
+      // console.log('Collection reference created:', collectionRef);
     } catch (e) {
-      console.error('Error creating collection reference:', e);
+      // console.error('Error creating collection reference:', e);
     }
     
     this.fetchTestDocument();
@@ -40,34 +39,34 @@ export class AppComponent implements OnInit {
       this.error = null;
       this.debugInfo = '';
       
-      console.log('Fetching document from test collection...');
+      // console.log('Fetching document from test collection...');
       
       // Reference to the 'test' collection
       const testCollection = collection(this.firestore, 'test');
-      console.log('Collection reference:', testCollection);
+      // console.log('Collection reference:', testCollection);
       
       // Get reference to a document with ID 'first' (you may need to adjust this ID)
       const docRef = doc(testCollection, 'first');
-      console.log('Document reference:', docRef);
+      // console.log('Document reference:', docRef);
       
       // Get the document
-      console.log('Getting document...');
+      // console.log('Getting document...');
       const docSnap = await getDoc(docRef);
-      console.log('Document snapshot:', docSnap);
+      // console.log('Document snapshot:', docSnap);
       
       if (docSnap.exists()) {
         this.testDoc = docSnap.data();
-        console.log('Document data:', this.testDoc);
+        // console.log('Document data:', this.testDoc);
         this.debugInfo = `Document successfully retrieved. Path: ${docRef.path}`;
       } else {
         this.error = 'No such document! The "test" collection or "first" document might not exist.';
-        console.log('No such document!');
+        // console.log('No such document!');
         this.debugInfo = `Document not found. Path attempted: ${docRef.path}`;
       }
     } catch (error) {
       const errorMsg = error instanceof Error ? error.message : String(error);
       this.error = `Error fetching document: ${errorMsg}`;
-      console.error('Error fetching document:', error);
+      // console.error('Error fetching document:', error);
       this.debugInfo = `Error type: ${error?.constructor?.name || 'Unknown'}, Stack: ${error instanceof Error ? error.stack : 'No stack trace'}`;
     } finally {
       this.loading = false;
@@ -80,11 +79,11 @@ export class AppComponent implements OnInit {
       this.error = null;
       this.debugInfo = '';
       
-      console.log('Creating test document...');
+      // console.log('Creating test document...');
       
       // Reference to the 'test' collection and the 'first' document
       const docRef = doc(this.firestore, 'test', 'first');
-      console.log('Document reference for creation:', docRef);
+      // console.log('Document reference for creation:', docRef);
       
       // Sample data to write
       const data = {
@@ -100,12 +99,12 @@ export class AppComponent implements OnInit {
         }
       };
       
-      console.log('Data to write:', data);
+      // console.log('Data to write:', data);
       
       // Write to Firestore
-      console.log('Writing to Firestore...');
+      // console.log('Writing to Firestore...');
       await setDoc(docRef, data);
-      console.log('Document successfully written!');
+      // console.log('Document successfully written!');
       this.debugInfo = `Document successfully created at path: ${docRef.path}`;
       
       // Fetch the document again to display it
@@ -113,7 +112,7 @@ export class AppComponent implements OnInit {
     } catch (error) {
       const errorMsg = error instanceof Error ? error.message : String(error);
       this.error = `Error creating document: ${errorMsg}`;
-      console.error('Error creating document:', error);
+      // console.error('Error creating document:', error);
       this.debugInfo = `Error type: ${error?.constructor?.name || 'Unknown'}, Stack: ${error instanceof Error ? error.stack : 'No stack trace'}`;
     } finally {
       this.creatingDoc = false;

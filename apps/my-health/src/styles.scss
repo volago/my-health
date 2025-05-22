@@ -1,5 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* You can add global styles to this file, and also import other style files */
 
 html {
   color-scheme: light dark;
@@ -46,8 +54,3 @@ body {
     font-size: 16px !important;
   }
 }
-
-
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';

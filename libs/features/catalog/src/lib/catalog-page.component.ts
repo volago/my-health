@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CatalogStore } from '../state/catalog.store';
-import { SearchFilterBarComponent } from '../search-filter-bar/search-filter-bar.component';
-import { TestListComponent } from '../test-list/test-list.component';
+import { CatalogStore } from './state/catalog.store';
+import { SearchFilterBarComponent } from './search-filter-bar/search-filter-bar.component';
+import { TestListComponent } from './test-list/test-list.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
