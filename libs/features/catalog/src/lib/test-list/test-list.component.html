@@ -1,0 +1,35 @@
+@if (store.isLoading()) {
+  <!-- Optional: A more specific loading indicator for the list itself -->
+  <!-- Or rely on CatalogPageComponent's spinner -->
+  <div class="p-4 text-center">
+    <!-- <mat-spinner diameter="50"></mat-spinner> -->
+    <p class="text-gray-500">Loading test list...</p>
+  </div>
+} @else if (store.filteredTests().length > 0) {
+  <mat-list role="list">
+    @for (test of store.filteredTests(); track test.testId) {
+      <mat-list-item role="listitem" class="mb-2 border-b border-gray-200 last:border-b-0">
+        <div class="flex flex-col w-full py-2">
+          <h3 class="text-lg font-semibold text-blue-700">{{ test.name }}</h3>
+          <p class="text-sm text-gray-600 mt-1">{{ test.description }}</p>
+          @if (test.tags && test.tags.length > 0) {
+            <div class="mt-2">
+              <mat-chip-set aria-label="Test tags">
+                @for (tag of test.tags; track tag) {
+                  <mat-chip class="capitalize" disabled>{{ tag }}</mat-chip>
+                }
+              </mat-chip-set>
+            </div>
+          }
+          <!-- Future: Could expand to show parameters or add actions -->
+        </div>
+      </mat-list-item>
+    } 
+  </mat-list>
+} @else if (!store.isLoading() && store.filteredTests().length === 0) {
+   <!-- This message is also in CatalogPageComponent, so it might be redundant here -->
+   <!-- Or this component can have its own nuanced message -->
+  <div class="p-4 text-center text-gray-500">
+    <p>No tests to display based on current filters.</p>
+  </div>
+} 

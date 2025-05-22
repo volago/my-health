@@ -1,0 +1,6 @@
+/* Styles for TestListComponent */
+:host {
+  display: block;
+}
+
+/* Removed custom styling for internal Material classes */ 
