@@ -1,22 +1,11 @@
 @if (store.filteredTests().length > 0) {
-  <mat-list role="list">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
     @for (test of store.filteredTests(); track test.testId) {
-      <mat-list-item role="listitem" class="mb-2 border-b border-gray-200 last:border-b-0">
-        <div class="flex flex-col w-full py-2">
-          <h3 class="text-lg font-semibold text-blue-700">{{ test.name }}</h3>
-          <p class="text-sm text-gray-600 mt-1">{{ test.description }}</p>
-          @if (test.tags && test.tags.length > 0) {
-            <div class="mt-2">
-              <mat-chip-set aria-label="Test tags">
-                @for (tag of test.tags; track tag) {
-                  <mat-chip class="capitalize" disabled>{{ tag }}</mat-chip>
-                }
-              </mat-chip-set>
-            </div>
-          }
-          <!-- Future: Could expand to show parameters or add actions -->
-        </div>
-      </mat-list-item>
-    } 
-  </mat-list>
-} 
+      <my-health-test-list-item [testItem]="test" />
+    }
+  </div>
+} @else if (!store.isLoading() && !store.error()) {
+  <p class="text-center text-gray-500 py-8">Brak wyników do wyświetlenia.</p>
+}
+
+<!-- Loading state and error state are handled by the parent CatalogPageComponent --> 

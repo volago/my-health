@@ -1,0 +1,21 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{ testItem().name }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ testItem().description }}</p>
+    @for (param of testItem().parametersTemplate; track param.id) {
+      @if (param.validation && param.validation.min !== undefined && param.validation.max !== undefined) {
+        <p class="text-sm mt-1">
+          <strong>{{ param.paramName }}:</strong> {{ param.validation.min }} - {{ param.validation.max }} {{ param.unit }}
+        </p>
+      }
+    }
+  </mat-card-content>
+  <mat-card-actions>
+    <!-- Placeholder for actions, e.g., a details button -->
+    <button mat-icon-button aria-label="View details">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card> 

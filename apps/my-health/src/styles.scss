@@ -1,56 +1,49 @@
 @use '@angular/material' as mat;
-@use 'tailwindcss/base';
-@use 'tailwindcss/components';
 @use 'tailwindcss/utilities';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+//@use '@tailwindcss/base';
+// @use '@tailwindcss/components';
+// @use '@tailwindcss/utilities';
 
-/* You can add global styles to this file, and also import other style files */
+// @use '@angular/material' as mat;
 
 html {
   color-scheme: light dark;
-  @include mat.theme(
-    (
-      color: mat.$azure-palette,
-      typography: Roboto,
-      density: 0,
-    )
-  );
+  @include mat.theme((
+    color: mat.$azure-palette,
+    typography: Roboto,
+    density: 0
+  ));
 }
 
-body {
-  background: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-}
+// 1. Include a prebuilt theme.
+// @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
+// 2. Include Material core styles (optional if prebuilt theme includes it, but good for explicitness).
+// Prebuilt themes usually include core(), but including it explicitly doesn't hurt and ensures it if changing themes.
+// @include mat.core();
+
+// 3. Typography (ensure body has mat-typography class, which is already in index.html)
+// The prebuilt themes also define typography, but you can override specific elements if needed.
+// body {
+//   // font-family: Roboto, "Helvetica Neue", sans-serif; // Already handled by mat-typography and prebuilt theme
+//   // background: mat.get-theme-color($my-health-light-theme, surface-container-lowest); // Not needed with prebuilt
+//   // color: mat.get-theme-color($my-health-light-theme, on-surface); // Not needed with prebuilt
+// }
+
+// Your responsive font sizing (this is good and independent of Material theme choice)
 @media (min-width: 0px) {
   html {
     font-size: 12px !important;
   }
 }
+@media (min-width: 768px) { html { font-size: 12px !important; } }
+@media (min-width: 1024px) { html { font-size: 14px !important; } }
+@media (min-width: 1280px) { html { font-size: 14px !important; } }
+@media (min-width: 1536px) { html { font-size: 16px !important; } }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 12px !important;
-  }
-}
+/* You can add global styles to this file, and also import other style files */
 
-@media (min-width: 1024px) {
-  html {
-    font-size: 14px !important;
-  }
-}
-
-@media (min-width: 1280px) {
-  html {
-    font-size: 14px !important;
-  }
-}
-
-@media (min-width: 1536px) {
-  html {
-    font-size: 16px !important;
-  }
-}
+// @import 'tailwindcss/base';
+// @import 'tailwindcss/components';
+// @import 'tailwindcss/utilities';

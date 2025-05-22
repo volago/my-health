@@ -2,11 +2,10 @@ import { Component, OnInit, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Firestore, doc, getDoc, collection, setDoc, serverTimestamp } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
-import { JsonPipe } from '@angular/common';
 
 @Component({
   standalone: true,
-  imports: [RouterModule, CommonModule, JsonPipe],
+  imports: [RouterModule, CommonModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -30,7 +29,7 @@ export class AppComponent implements OnInit {
       // console.error('Error creating collection reference:', e);
     }
     
-    this.fetchTestDocument();
+    // this.fetchTestDocument();
   }
 
   async fetchTestDocument(): Promise<void> {

@@ -10,7 +10,7 @@ export class CatalogDataService {
   private readonly firestore = inject(Firestore);
 
   getTestsCatalog(): Observable<TestCatalog[]> {
-    const testsCollection = collection(this.firestore, 'testsCatalog');
+    const testsCollection = collection(this.firestore, 'tests-catalog');
     // The plan specifies using { idField: 'testId' } which maps the document ID to the 'testId' field.
     // This is appropriate if 'testId' in your model is meant to hold the Firestore document ID.
     return collectionData(testsCollection, { idField: 'testId' }) as Observable<TestCatalog[]>;

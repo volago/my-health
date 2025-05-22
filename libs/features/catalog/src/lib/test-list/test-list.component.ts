@@ -5,6 +5,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; // For potential skeleton/loading
 import { TestCatalog } from '@my-health/domain'; // For type usage in template if needed, though store provides typed signals
+import { TestListItemComponent } from '../test-list-item/test-list-item.component';
 
 @Component({
   selector: 'my-health-test-list',
@@ -13,7 +14,8 @@ import { TestCatalog } from '@my-health/domain'; // For type usage in template i
     CommonModule, 
     MatListModule,
     MatChipsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    TestListItemComponent
   ],
   templateUrl: './test-list.component.html',
   styleUrls: ['./test-list.component.css']

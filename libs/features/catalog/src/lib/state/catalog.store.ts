@@ -40,7 +40,7 @@ export const CatalogStore = signalStore(
         filtered = filtered.filter(test => test.name.toLowerCase().includes(term));
       }
       if (tags.length > 0) {
-        filtered = filtered.filter(test => tags.every(tag => test.tags.includes(tag)));
+        filtered = filtered.filter(test => tags.some(tag => test.tags.includes(tag)));
       }
       return filtered;
     }),
