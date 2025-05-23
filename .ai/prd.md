@@ -76,6 +76,10 @@ Infrastruktura, monitoring i CI/CD
   Tytuł: Logowanie użytkownika
   Opis: Jako zarejestrowany użytkownik chcę się zalogować za pomocą loginu i hasła, aby uzyskać dostęp do moich danych.
   Kryteria akceptacji:
+  - użytkownik musi być zalogowany w systemie aby zobaczyć jakąkolwiek zawartość
+  - każdy URL aplikacji przekierowuje niezalogowanego użytkownika do ekranu logowania
+  - informacja o zalogowanym użytkowniku jest widoczna w toolbarze, po prawej stronie
+  - po kliknięciu w avatar użytkownika pojawia się menu z opcją wylogowania
   - poprawne dane uwierzytelniają użytkownika
   - niepoprawne dane wyświetlają komunikat o błędzie
   - po poprawnym logowaniu przekierowanie do dashboardu

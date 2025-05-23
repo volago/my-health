@@ -38,6 +38,10 @@ Poniżej znajduje się dokumentacja aktualnego etapu wdrożenia infrastruktury d
 ```bash
 npx nx serve my-health-firebase-app
 ```
+Jeśli występuje błąd dotyczący portów, należy uruchomić komendę 
+```bash
+npx nx run my-health-firebase-app:killports
+```
 
 2. Uruchomienie aplikacji Angular:
 ```bash
@@ -47,6 +51,11 @@ npx nx serve my-health
 Po uruchomieniu:
 - Aplikacja Angular dostępna jest pod adresem `http://localhost:4200`
 - UI emulatora Firebase dostępne jest pod adresem `http://localhost:4000`
+
+3. Wypełnienie emulatorów przykładowymi danymi (opcjonalne, po uruchomieniu emulatorów):
+```bash
+node scripts/seed-firestore-emulator.js
+```
 
 ### Kolejne kroki
 

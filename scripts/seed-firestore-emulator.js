@@ -4,6 +4,7 @@ const path = require('path');
 
 // Ensure FIRESTORE_EMULATOR_HOST is set for firebase-admin to auto-detect and connect
 process.env.FIRESTORE_EMULATOR_HOST = 'localhost:8080';
+process.env.FIREBASE_AUTH_EMULATOR_HOST = 'localhost:9099'; // Added for Auth emulator
 
 // Initialize Firebase Admin SDK with the SAME Project ID as the Angular app
 admin.initializeApp({
@@ -11,6 +12,7 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
+const auth = admin.auth(); // Added auth service
 // No need for db.settings() if FIRESTORE_EMULATOR_HOST is set and projectId matches
 
 const dataFilePath = path.join(__dirname, '../.ai/data/tests-catalog.json');
@@ -21,8 +23,91 @@ const recommendationsDataFilePath = path.join(__dirname, '../.ai/data/tests-reco
 const recommendationsCollectionName = 'tests-recommendations';
 const recommendationsDocId = 'default'; // Fixed ID for the single recommendations document
 
+async function seedUser(auth, db, { email, password, displayName, birthYear, sex, detailLevel }) {
+  let userRecord;
+  try {
+    console.log(`Attempting to create user: ${email}`);
+    userRecord = await auth.createUser({
+      email: email,
+      password: password,
+      displayName: displayName,
+      emailVerified: true, // Assuming verified for simplicity in emulator
+      disabled: false,
+    });
+    console.log('Successfully created new user:', userRecord.uid);
+
+    const userProfileData = {
+      userId: userRecord.uid,
+      createdAt: new Date(), // Using Firestore Server Timestamp might be better in prod
+      lastLogin: new Date(), // Using Firestore Server Timestamp might be better in prod
+      birthYear: birthYear,
+      sex: sex, 
+      detailLevel: detailLevel,
+    };
+
+    const userProfileRef = db.collection('user-profile').doc(userRecord.uid);
+    await userProfileRef.set(userProfileData);
+    console.log(`Successfully created user profile for ${userRecord.uid} in 'user-profile' collection.`);
+
+    // Verify user profile creation
+    try {
+      console.log(`Verifying read access for 'user-profile' document: ${userRecord.uid}...`);
+      const docSnap = await db.collection('user-profile').doc(userRecord.uid).get();
+      if (docSnap.exists) {
+        console.log(`Verification for 'user-profile' read successful for user ${userRecord.uid}.`);
+      } else {
+        console.warn(`Verification for 'user-profile' read failed: Document ${userRecord.uid} not found.`);
+      }
+    } catch (readError) {
+      console.error(`Error trying to read data from 'user-profile' after seeding for user ${userRecord.uid}:`, readError);
+    }
+  } catch (error) {
+    if (error.code === 'auth/email-already-exists') {
+      console.warn(`User with email ${email} already exists. Skipping user creation. Attempting to fetch existing user.`);
+      try {
+        userRecord = await auth.getUserByEmail(email);
+        console.log('Successfully fetched existing user:', userRecord.uid);
+        const userProfileRef = db.collection('user-profile').doc(userRecord.uid);
+        const userProfileSnap = await userProfileRef.get();
+        if (!userProfileSnap.exists) {
+          console.log(`User profile for ${userRecord.uid} does not exist. Creating it now.`);
+          const userProfileData = {
+            userId: userRecord.uid,
+            createdAt: new Date(),
+            lastLogin: new Date(),
+            birthYear: birthYear,
+            sex: sex,
+            detailLevel: detailLevel,
+          };
+          await userProfileRef.set(userProfileData);
+          console.log(`Successfully created user profile for existing user ${userRecord.uid}.`);
+        } else {
+          console.log(`User profile for ${userRecord.uid} already exists. Skipping profile creation.`);
+        }
+      } catch (fetchError) {
+        console.error('Error fetching existing user by email:', fetchError);
+      }
+    } else {
+      console.error('Error creating user or user profile:', error);
+      throw error; // Re-throw error to be caught by seedDatabase if not handled here
+    }
+  }
+  return userRecord; // Return userRecord for potential further use
+}
+
 async function seedDatabase() {
   try {
+    // --- Create User and User Profile ---
+    await seedUser(auth, db, {
+      email: 'john-smith-45@example.com',
+      password: 'JohnJohnJohn3',
+      displayName: 'john-smith-45',
+      birthYear: 1980,
+      sex: 'Male', // Assuming 'Male' is a valid value for your Sex enum/type
+      detailLevel: 'Recommended' // Assuming 'Recommended' is a valid value for DetailLevel
+    });
+    // --- End Create User and User Profile ---
+
     // --- Seeding tests-catalog --- 
     const rawCatalogData = fs.readFileSync(dataFilePath, 'utf-8');
     const tests = JSON.parse(rawCatalogData);

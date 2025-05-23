@@ -26,7 +26,7 @@ CI/CD i Hosting:
 - Firebase Cloud Functions do hostowania Cloud Functions
 
 Testing:
-- Vitest  do testów jednostkowych
+- Vitest do testów jednostkowych
 - Playwright do testów end-to-end 
 
 Linting i Formatowanie:

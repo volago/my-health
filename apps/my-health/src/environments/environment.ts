@@ -2,7 +2,7 @@ export const environment = {
     production: false,
     firebase: {
       apiKey: 'your-api-key', // Replace with a mock API key or leave as is for emulators
-      authDomain: 'localhost',
+      authDomain: 'example.com',
       projectId: 'my-health', // Replace with your Firebase project ID or a mock one
       storageBucket: 'my-health.appspot.com', // Replace or use mock
       messagingSenderId: 'your-messaging-sender-id', // Replace or use mock
