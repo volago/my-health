@@ -22,7 +22,7 @@ Plan implementacji i zadań związanych z Firebase dla projektu My Health.
 ## Future Tasks
 
 - [ ] Zaimplementować dashboard użytkownika. Prosta wersja z mockami wskaźników i       
-      przyswzłych wizyt, ale pobierająca z bazy wyniki ostatnich badań
+      terminów przyszłych wizyt, ale pobierająca z bazy wyniki ostatnich badań
   - [ ] Dodać przykładowe badania do bazy
 - [ ] Zaimplementować Cloud Functions z API planu:
   - [ ] Implementacja endpointu rejestracji anonimowej `/api/auth/register`
