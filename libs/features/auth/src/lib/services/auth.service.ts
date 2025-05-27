@@ -24,21 +24,21 @@ export class AuthService {
 
   constructor() {
     this.authStateSubscription = authState(this.auth).subscribe(user => {
-      console.log('AuthService: authState emitted user:', user);
+      // console.log('AuthService: authState emitted user:', user); // Usunięty log
       this.currentUser.set(user);
-      // isLoggedIn will be updated by the effect below or authState if it guarantees immediate consistency
     });
 
     effect(() => {
-      this.isLoggedIn.set(!!this.currentUser());
-      console.log('AuthService: Effect detected loggedIn state change to:', this.isLoggedIn());
-      console.log('AuthService: Current URL:', this.router.url);
-      if (this.isLoggedIn() && this.router.url.includes('/auth')) {
-        console.log('AuthService: Navigating to / due to login on /auth page.');
-        this.router.navigate(['/']); // Redirect to home/dashboard if logged in and on auth page
+      const loggedIn = !!this.currentUser();
+      this.isLoggedIn.set(loggedIn);
+      // console.log('AuthService: Effect detected loggedIn state change to:', loggedIn); // Można zostawić do dalszej obserwacji lub usunąć
+      // console.log('AuthService: Current URL:', this.router.url); 
+      if (loggedIn && this.router.url.includes('/auth')) {
+        // console.log('AuthService: Navigating to / due to login on /auth page.');
+        this.router.navigate(['/']);
       }
     });
-    console.log('AuthService initialized and monitoring auth state');
+    // console.log('AuthService initialized and monitoring auth state');
   }
 
   private mapFirebaseError(firebaseError: FirebaseError): string {
@@ -90,10 +90,7 @@ export class AuthService {
       // Ensure all fields required by UserProfile model are present if we were to use it directly
       // For now, UserRegistrationProfileData defines the subset we collect at registration.
       await setDoc(doc(this.firestore, `users/${user.uid}`), userProfileForDb);
-      
-      // currentUser and isLoggedIn are updated by authState subscription/effect
-      // Navigation is handled by the effect in constructor upon isLoggedIn change
-      // this.router.navigate(['/']); // No longer needed here directly
+      this.router.navigate(['/']); // Nawigacja po udanej rejestracji
     } catch (error) {
       this.error.set(this.mapFirebaseError(error as FirebaseError));
       throw error; 
@@ -103,31 +100,29 @@ export class AuthService {
   }
 
   async login(credentials: AuthCredentials): Promise<void> {
-    console.log('AuthService: login called with credentials:', credentials.identifier);
+    // console.log('AuthService: login called with credentials:', credentials.identifier); // Usunięty log
     this.isLoading.set(true);
     this.error.set(null);
     const { identifier, password } = credentials;
 
     if (!password) { 
-        console.log('AuthService: Password is required for login, but not provided.');
+        // console.log('AuthService: Password is required for login, but not provided.'); // Usunięty log
         this.error.set('Hasło jest wymagane.');
         this.isLoading.set(false);
         throw new Error('Password is required for login.');
     }
 
     try {
-      console.log('AuthService: Attempting signInWithEmailAndPassword...');
+      // console.log('AuthService: Attempting signInWithEmailAndPassword...'); // Usunięty log
       await signInWithEmailAndPassword(this.auth, identifier, password);
-      console.log('AuthService: signInWithEmailAndPassword successful.');
-      // currentUser and isLoggedIn are updated by authState subscription/effect
-      // Navigation is handled by the effect in constructor
-      // this.router.navigate(['/']); // No longer needed here directly
+      // console.log('AuthService: signInWithEmailAndPassword successful.'); // Usunięty log
+      this.router.navigate(['/']); // Dodana nawigacja po udanym logowaniu
     } catch (error) {
-      console.error('AuthService: Error during signInWithEmailAndPassword:', error);
+      // console.error('AuthService: Error during signInWithEmailAndPassword:', error); // Można zostawić lub usunąć
       this.error.set(this.mapFirebaseError(error as FirebaseError));
       throw error; 
     } finally {
-      console.log('AuthService: login method finally block. isLoading set to false.');
+      // console.log('AuthService: login method finally block. isLoading set to false.'); // Usunięty log
       this.isLoading.set(false);
     }
   }
