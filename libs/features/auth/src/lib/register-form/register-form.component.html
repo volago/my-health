@@ -1,12 +1,11 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-6">
   <h2 class="text-xl font-semibold text-center text-gray-700 mb-6">Rejestracja</h2>
 
-  <!-- TODO: Display authError signal here -->
-  <!-- @if (authError(); as error) {
+  @if (authError(); as error) {
     <div class="p-3 mb-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
       {{ error }}
     </div>
-  } -->
+  }
 
   <div class="p-3 mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg">
     <p class="font-semibold">Twój unikalny identyfikator:</p>
@@ -22,34 +21,34 @@
   <mat-form-field appearance="outline" class="w-full">
     <mat-label>Hasło</mat-label>
     <input matInput formControlName="password" type="password" required>
-    <!-- @if (registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched) {
+    @if (registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched) {
       <mat-error>Hasło jest wymagane.</mat-error>
-    } -->
-    <!-- @if (registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched) {
+    }
+    @if (registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched) {
       <mat-error>Hasło musi mieć co najmniej 6 znaków.</mat-error>
-    } -->
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="w-full">
     <mat-label>Potwierdź hasło</mat-label>
     <input matInput formControlName="confirmPassword" type="password" required>
-    <!-- @if (registerForm.get('confirmPassword')?.hasError('required') && registerForm.get('confirmPassword')?.touched) {
+    @if (registerForm.get('confirmPassword')?.hasError('required') && registerForm.get('confirmPassword')?.touched) {
       <mat-error>Potwierdzenie hasła jest wymagane.</mat-error>
-    } -->
-    <!-- @if (registerForm.hasError('passwordMismatch') && registerForm.get('confirmPassword')?.touched) {
+    }
+    @if (registerForm.get('confirmPassword')?.hasError('passwordMismatch') && registerForm.get('confirmPassword')?.touched ) {
       <mat-error>Hasła nie są zgodne.</mat-error>
-    } -->
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="w-full">
     <mat-label>Rok urodzenia</mat-label>
     <input matInput formControlName="yearOfBirth" type="number" min="1900" [max]="currentYear" required>
-    <!-- @if (registerForm.get('yearOfBirth')?.hasError('required') && registerForm.get('yearOfBirth')?.touched) {
+    @if (registerForm.get('yearOfBirth')?.hasError('required') && registerForm.get('yearOfBirth')?.touched) {
       <mat-error>Rok urodzenia jest wymagany.</mat-error>
-    } -->
-    <!-- @if ((registerForm.get('yearOfBirth')?.hasError('min') || registerForm.get('yearOfBirth')?.hasError('max')) && registerForm.get('yearOfBirth')?.touched) {
+    }
+    @if ((registerForm.get('yearOfBirth')?.hasError('min') || registerForm.get('yearOfBirth')?.hasError('max')) && registerForm.get('yearOfBirth')?.touched) {
       <mat-error>Podaj poprawny rok urodzenia.</mat-error>
-    } -->
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="w-full">
@@ -59,9 +58,9 @@
         <mat-option [value]="gender.value">{{gender.viewValue}}</mat-option>
       }
     </mat-select>
-    <!-- @if (registerForm.get('gender')?.hasError('required') && registerForm.get('gender')?.touched) {
+    @if (registerForm.get('gender')?.hasError('required') && registerForm.get('gender')?.touched) {
       <mat-error>Wybór płci jest wymagany.</mat-error>
-    } -->
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="w-full">
@@ -71,9 +70,9 @@
         <mat-option [value]="pkg.value">{{pkg.viewValue}}</mat-option>
       }
     </mat-select>
-    <!-- @if (registerForm.get('detailPackage')?.hasError('required') && registerForm.get('detailPackage')?.touched) {
+    @if (registerForm.get('detailPackage')?.hasError('required') && registerForm.get('detailPackage')?.touched) {
       <mat-error>Wybór pakietu jest wymagany.</mat-error>
-    } -->
+    }
   </mat-form-field>
 
   <div class="p-3 my-4 text-xs text-gray-600 bg-gray-50 rounded-lg">
@@ -82,13 +81,13 @@
     <p class="mt-1">Twoje dane są bezpieczne i używane wyłącznie w celu świadczenia usług przez aplikację My Health.</p>
   </div>
 
-  <button mat-flat-button color="primary" type="submit" class="w-full" [disabled]="registerForm.invalid">
-    <!-- @if (isLoading()) {
-      <mat-spinner diameter="20" class="mr-2"></mat-spinner> Rejestracja...
+  <button mat-flat-button color="primary" type="submit" class="w-full flex justify-center items-center" [disabled]="registerForm.invalid || isLoading()">
+    @if (isLoading()) {
+      <mat-spinner diameter="20" class="mr-2"></mat-spinner> 
+      <span>Rejestracja...</span>
     } @else {
-      Zarejestruj się
-    } -->
-    Zarejestruj się <!-- Placeholder, loading state will be added later -->
+      <span>Zarejestruj się</span>
+    }
   </button>
 
   <div class="text-sm text-center">

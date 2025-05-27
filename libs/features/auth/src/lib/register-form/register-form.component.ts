@@ -7,26 +7,50 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router'; // For navigation to login page
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+import { AuthService } from '../services/auth.service';
+import { UserRegistrationData } from '../models/auth.models'; // UserRegistrationProfileData is implicitly used via UserRegistrationData
+import { Sex, DetailLevel } from '@my-health/domain';
 
 // import { AuthService } from '../services/auth.service'; // Will be created later
 // import { UserProfileData, UserRegistrationData } from '../models'; // Will be created later
 
+// Define the shape of the form controls for strong typing
 interface RegisterFormControls {
   password: FormControl<string>;
   confirmPassword: FormControl<string>;
   yearOfBirth: FormControl<number | null>;
-  gender: FormControl<string>;
-  detailPackage: FormControl<string>;
+  gender: FormControl<Sex | null>; // Allow null for initial empty state if needed, or ensure default value
+  detailPackage: FormControl<DetailLevel | null>; // Allow null for initial empty state
 }
 
 // Custom Validator for password match
 export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): { [key: string]: boolean } | null => {
   const password = control.get('password');
   const confirmPassword = control.get('confirmPassword');
-  if (password && confirmPassword && password.value !== confirmPassword.value) {
-    return { 'passwordMismatch': true };
+  // console.log('PasswordMatchValidator executing:', password?.value, confirmPassword?.value);
+
+  // Jeśli kontrolki nie istnieją, nie rób nic (defensywne programowanie)
+  if (!password || !confirmPassword) {
+    return null;
   }
-  return null;
+
+  // Jeśli hasła są różne
+  if (password.value !== confirmPassword.value) {
+    // console.log('PasswordMismatch: true on confirmPassword');
+    confirmPassword.setErrors({ ...(confirmPassword.errors || {}), 'passwordMismatch': true });
+    return { 'passwordMismatchGlobal': true }; // Zwracamy globalny błąd dla formy, jeśli potrzebne
+  } else {
+    // Jeśli hasła są zgodne, usuń błąd passwordMismatch z confirmPassword, jeśli istnieje
+    const errors = { ...confirmPassword.errors };
+    if (errors['passwordMismatch']) {
+      delete errors['passwordMismatch'];
+      // console.log('PasswordMismatch: false, clearing error from confirmPassword');
+      confirmPassword.setErrors(Object.keys(errors).length > 0 ? errors : null);
+    }
+    return null; // Brak globalnego błędu dla formy
+  }
 };
 
 @Component({
@@ -41,18 +65,20 @@ export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): {
     MatIconModule,
     MatSelectModule,
     RouterModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './register-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterFormComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
-  // private readonly authService = inject(AuthService); // Will be used later
+  private readonly authService = inject(AuthService);
 
   // Signal for the generated identifier
   generatedIdentifier = signal<string>('');
   readonly currentYear = new Date().getFullYear(); // Moved here
 
+  // Explicitly type the FormGroup with the interface
   registerForm: FormGroup<RegisterFormControls>;
 
   constructor() {
@@ -60,35 +86,34 @@ export class RegisterFormComponent implements OnInit {
       password: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.minLength(6)] }),
       confirmPassword: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
       yearOfBirth: new FormControl<number | null>(null, [Validators.required, Validators.min(1900), Validators.max(this.currentYear)]),
-      gender: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
-      detailPackage: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
-    }, { validators: passwordMatchValidator });
+      gender: new FormControl<Sex | null>(null, [Validators.required]), // Initialize with null, or a default Sex value
+      detailPackage: new FormControl<DetailLevel | null>(null, [Validators.required]), // Initialize with null or default
+    } as RegisterFormControls, { validators: passwordMatchValidator });
   }
 
-  // isLoading = this.authService.isLoading; // Will be used later
-  // authError = this.authService.error; // Will be used later
+  readonly isLoading = this.authService.isLoading;
+  readonly authError = this.authService.error;
 
   // TODO: Get these from a configuration or a shared place
-  readonly genders = [{value: 'female', viewValue: 'Kobieta'}, {value: 'male', viewValue: 'Mężczyzna'}];
-  readonly detailPackages = [{value: 'basic', viewValue: 'Podstawowy'}, {value: 'recommended', viewValue: 'Zalecany'}, {value: 'detailed', viewValue: 'Szczegółowy'}];
+  readonly genders: {value: Sex, viewValue: string}[] = [
+    {value: 'female' as Sex, viewValue: 'Kobieta'},
+    {value: 'male' as Sex, viewValue: 'Mężczyzna'}
+  ];
+  readonly detailPackages: {value: DetailLevel, viewValue: string}[] = [
+    {value: 'basic' as DetailLevel, viewValue: 'Podstawowy'},
+    {value: 'recommended' as DetailLevel, viewValue: 'Zalecany'},
+    {value: 'detailed' as DetailLevel, viewValue: 'Szczegółowy'}
+  ];
 
   ngOnInit(): void {
     this.generateNewIdentifier();
   }
 
   generateNewIdentifier(): void {
-    // this.generatedIdentifier.set(this.authService.generateUserIdentifier());
-    // Placeholder until AuthService is implemented:
-    const adj = ['happy', 'silly', 'lucky', 'clever', 'brave', 'fast', 'shiny', 'wise'];
-    const nouns = ['cat', 'dog', 'fox', 'bear', 'lion', 'bird', 'fish', 'wolf'];
-    const randomAdj = adj[Math.floor(Math.random() * adj.length)];
-    const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
-    const randomNumber = Math.floor(Math.random() * 1000);
-    this.generatedIdentifier.set(`${randomAdj}-${randomNoun}-${randomNumber}`);
-    console.log('New identifier generated:', this.generatedIdentifier());
+    this.generatedIdentifier.set(this.authService.generateUserIdentifier());
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched(); // Mark all fields as touched to display errors
       return;
@@ -97,16 +122,28 @@ export class RegisterFormComponent implements OnInit {
     const formValue = this.registerForm.getRawValue();
     const identifierWithDomain = `${this.generatedIdentifier()}@my-health.com`;
 
-    // const registrationData: UserRegistrationData = {
-    //   identifier: identifierWithDomain,
-    //   password_DO_USUNIECIA_PO_REFAKTORZE_TYMCZASOWE: formValue.password,
-    //   profile: {
-    //     yearOfBirth: formValue.yearOfBirth as number,
-    //     gender: formValue.gender as UserProfileData['gender'],
-    //     detailPackage: formValue.detailPackage as UserProfileData['detailPackage'],
-    //   }
-    // };
-    // this.authService.register(registrationData);
-    console.log('Register form submitted. Identifier with domain:', identifierWithDomain, 'Form value:', formValue);
+    if (formValue.yearOfBirth === null || formValue.gender === null || formValue.detailPackage === null) {
+        console.error('Form has null values where enums are expected');
+        this.authService.error.set('Proszę wypełnić wszystkie pola.');
+        return;
+    }
+
+    const registrationData: UserRegistrationData = {
+      identifier: identifierWithDomain,
+      password_DO_USUNIECIA_PO_REFAKTORZE_TYMCZASOWE: formValue.password,
+      profile: {
+        birthYear: formValue.yearOfBirth, 
+        sex: formValue.gender as Sex, 
+        detailLevel: formValue.detailPackage as DetailLevel, 
+      }
+    };
+    
+    try {
+      await this.authService.register(registrationData);
+      // Navigation is handled by AuthService
+    } catch (error) {
+      // Error is set in AuthService
+      console.error('Register component error:', error);
+    }
   }
 } 
