@@ -2,10 +2,19 @@ import { Component, OnInit, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Firestore, doc, getDoc, collection, setDoc, serverTimestamp } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { ToolbarComponent } from './shared/ui/toolbar/toolbar.component';
 
 @Component({
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [
+    RouterModule,
+    CommonModule,
+    MatSidenavModule,
+    MatListModule,
+    ToolbarComponent,
+  ],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

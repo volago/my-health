@@ -1,0 +1,26 @@
+<mat-toolbar color="primary" class="flex justify-between items-center">
+  <div class="flex items-center">
+    <button mat-icon-button (click)="onToggleSidenav()" class="md:hidden" aria-label="Toggle Sidenav">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="ml-2 text-lg font-semibold">MyHealth</span>
+    <div class="hidden md:flex ml-6 space-x-2">
+      <a mat-button routerLink="/dashboard" routerLinkActive="active-link">Dashboard</a>
+      <a mat-button routerLink="/catalog" routerLinkActive="active-link">Katalog badań</a>
+      <a mat-button routerLink="/ai-reports" routerLinkActive="active-link">Raporty AI</a>
+    </div>
+  </div>
+
+  <div class="flex items-center">
+    <!-- Założenie: implementacja logiki wylogowania i wyświetlania użytkownika później -->
+    <button mat-icon-button [matMenuTriggerFor]="userMenu" aria-label="User Menu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Wyloguj</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar> 

@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 import { redirectUnauthorizedTo, redirectLoggedInTo, AuthGuard } from '@angular/fire/auth-guard';
+import { EmptyComponent } from './shared/ui/empty/empty.component';
 
 // Funkcja pomocnicza dla przekierowania niezalogowanych
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/auth/login']);
@@ -10,6 +11,18 @@ export const appRoutes: Route[] = [
   {
     path: 'catalog',
     loadChildren: () => import('@my-health/features/catalog').then(m => m.CATALOG_ROUTES),
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
+  {
+    path: 'dashboard',
+    component: EmptyComponent,
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
+  {
+    path: 'ai-reports',
+    component: EmptyComponent,
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin }
   },

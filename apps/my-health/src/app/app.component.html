@@ -76,4 +76,19 @@
   }
 </div> -->
 
-<router-outlet></router-outlet>
+<mat-sidenav-container class="min-h-screen">
+  <mat-sidenav #sidenav mode="over" class="w-64">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/dashboard" (click)="sidenav.close()">Dashboard</a>
+      <a mat-list-item routerLink="/catalog" (click)="sidenav.close()">Katalog badań</a>
+      <a mat-list-item routerLink="/ai-reports" (click)="sidenav.close()">Raporty AI</a>
+      <!-- Możesz dodać więcej linków lub sekcji tutaj w przyszłości -->
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-toolbar (toggleSidenav)="sidenav.toggle()"></app-toolbar>
+    <main class="p-4"> <!-- Dodaj padding lub inne klasy dla treści strony -->
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
