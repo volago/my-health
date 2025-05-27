@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@my-health/domain": ["libs/domain/src/index.ts"],
+      "@my-health/features/auth": ["libs/features/auth/src/index.ts"],
       "@my-health/features/catalog": ["libs/features/catalog/src/index.ts"],
       "@my-health/shared": ["libs/shared/src/index.ts"]
     }
