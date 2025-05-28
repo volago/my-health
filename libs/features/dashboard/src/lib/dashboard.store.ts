@@ -29,11 +29,21 @@ export const DashboardStore = signalStore(
       patchState(store, { isLoadingResults: true, resultsError: null });
       try {
         const domainResults: TestResult[] = await testResultsService.fetchRecentResults(userId, 5);
-        const viewData: TestResultItemData[] = domainResults.map(r => ({
-          id: r.resultId,
-          testIdentifier: r.testId,
-          date: new Date(r.createdAt).toLocaleDateString('pl-PL'),
-        }));
+        const viewData: TestResultItemData[] = domainResults.map(r => {
+          const summary = r.parameters.map(p => {
+            if (r.parameters.length === 1 && p.paramId === r.testId) {
+              return `${p.value}`;
+            }
+            return `${p.paramId}: ${p.value}`;
+          }).join(', ');
+
+          return {
+            id: r.resultId,
+            testIdentifier: r.testId,
+            date: new Date(r.createdAt).toLocaleDateString('pl-PL'),
+            resultsSummary: summary
+          };
+        });
         patchState(store, { recentTestResults: viewData, isLoadingResults: false });
       } catch (error) {
         console.error('Błąd podczas ładowania ostatnich wyników badań:', error);

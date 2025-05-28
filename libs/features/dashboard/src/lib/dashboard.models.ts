@@ -9,6 +9,7 @@ export interface TestResultItemData {
   id: string;          // z TestResult.resultId
   testIdentifier: string; // z TestResult.testId (docelowo nazwa badania)
   date: string;        // sformatowana TestResult.createdAt
+  resultsSummary: string; // Dodane pole na podsumowanie wyników
 }
 
 export interface UpcomingTestMockData {

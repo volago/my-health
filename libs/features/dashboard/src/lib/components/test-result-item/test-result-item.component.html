@@ -2,6 +2,7 @@
   <mat-icon matListItemIcon>science</mat-icon> <!-- Przykładowa ikona -->
   <div matListItemTitle class="font-medium">{{ item().testIdentifier }}</div>
   <div matListItemLine class="text-sm text-gray-600">Data: {{ item().date }}</div>
+  <div matListItemLine class="text-sm text-gray-700 mt-1">{{ item().resultsSummary }}</div>
   <!-- Można dodać przycisk/link do szczegółów badania, jeśli będzie taka potrzeba -->
   <!-- <button matListItemMeta mat-icon-button>
     <mat-icon>info</mat-icon>
