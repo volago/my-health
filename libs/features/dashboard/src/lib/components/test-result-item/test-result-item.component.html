@@ -1,0 +1,9 @@
+<mat-list-item role="listitem" class="test-result-item hover:bg-gray-50 rounded-md my-1">
+  <mat-icon matListItemIcon>science</mat-icon> <!-- Przykładowa ikona -->
+  <div matListItemTitle class="font-medium">{{ item().testIdentifier }}</div>
+  <div matListItemLine class="text-sm text-gray-600">Data: {{ item().date }}</div>
+  <!-- Można dodać przycisk/link do szczegółów badania, jeśli będzie taka potrzeba -->
+  <!-- <button matListItemMeta mat-icon-button>
+    <mat-icon>info</mat-icon>
+  </button> -->
+</mat-list-item> 

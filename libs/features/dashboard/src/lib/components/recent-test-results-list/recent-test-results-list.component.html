@@ -1,0 +1,35 @@
+<mat-card class="recent-results-card">
+  <mat-card-header>
+    <mat-card-title class="text-xl font-semibold">Ostatnie wyniki badań</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    @if (isLoading()) {
+      <div class="loading-spinner-container flex justify-center items-center p-4">
+        <mat-spinner diameter="50"></mat-spinner>
+      </div>
+    } @else {
+      @if (error(); as err) {
+        <div class="error-message text-red-500 p-4">
+          <p>Wystąpił błąd podczas ładowania wyników.</p>
+          <!-- <p>Szczegóły: {{ err | json }}</p> -->
+        </div>
+      } @else {
+        @if (results(); as res) {
+          @if (res && res.length > 0) {
+            <mat-list role="list">
+              @for (item of res; track item.id) {
+                <lib-test-result-item [item]="item"></lib-test-result-item>
+                <!-- <mat-list-item role="listitem">{{ item.testIdentifier }} - {{ item.date }}</mat-list-item> Placeholder usunięty -->
+              }
+            </mat-list>
+          } @else {
+            <p class="no-results-message p-4">Brak ostatnich wyników badań.</p>
+          }
+        } @else {
+          <!-- results() zwróciło null/undefined, a nie było błędu -->
+          <p class="no-results-message p-4">Brak dostępnych danych o wynikach.</p>
+        }
+      }
+    }
+  </mat-card-content>
+</mat-card> 

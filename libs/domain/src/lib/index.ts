@@ -5,4 +5,5 @@ export * from './test-result.model';
 export * from './test-schedule.model';
 export * from './ai-report.model';
 export * from './schedule-recommendation.model';
-export * from './enums'; 
+export * from './enums';
+export * from './infrastructure/test-results.service'; 

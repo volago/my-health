@@ -1,0 +1,25 @@
+<mat-card class="upcoming-tests-card">
+  <mat-card-header>
+    <mat-card-title class="text-xl font-semibold">Nadchodzące badania</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    @if (upcomingTests(); as tests) {
+      @if (tests && tests.length > 0) {
+        <mat-list role="list">
+          @for (test of tests; track test.testName) {
+            <mat-list-item role="listitem" class="hover:bg-gray-50 rounded-md my-1">
+              <mat-icon matListItemIcon>event_note</mat-icon> <!-- Przykładowa ikona -->
+              <div matListItemTitle class="font-medium">{{ test.testName }}</div>
+              <div matListItemLine class="text-sm text-gray-600">Data: {{ test.date }}</div>
+            </mat-list-item>
+          }
+        </mat-list>
+      } @else {
+        <p class="no-results-message p-4">Brak zaplanowanych badań.</p>
+      }
+    } @else {
+      <!-- Ten przypadek nie powinien się zdarzyć, jeśli upcomingTests() zawsze zwraca tablicę -->
+      <p class="no-results-message p-4">Brak danych o nadchodzących badaniach.</p>
+    }
+  </mat-card-content>
+</mat-card> 

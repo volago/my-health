@@ -16,7 +16,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'dashboard',
-    component: EmptyComponent,
+    loadChildren: () => import('@my-health/features/dashboard').then(m => m.DASHBOARD_ROUTES),
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
