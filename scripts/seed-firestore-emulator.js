@@ -45,21 +45,21 @@ async function seedUser(auth, db, { email, password, displayName, birthYear, sex
       detailLevel: detailLevel,
     };
 
-    const userProfileRef = db.collection('user-profile').doc(userRecord.uid);
+    const userProfileRef = db.collection('users').doc(userRecord.uid);
     await userProfileRef.set(userProfileData);
-    console.log(`Successfully created user profile for ${userRecord.uid} in 'user-profile' collection.`);
+    console.log(`Successfully created user profile for ${userRecord.uid} in 'users' collection.`);
 
     // Verify user profile creation
     try {
-      console.log(`Verifying read access for 'user-profile' document: ${userRecord.uid}...`);
-      const docSnap = await db.collection('user-profile').doc(userRecord.uid).get();
+      console.log(`Verifying read access for 'users' document: ${userRecord.uid}...`);
+      const docSnap = await db.collection('users').doc(userRecord.uid).get();
       if (docSnap.exists) {
-        console.log(`Verification for 'user-profile' read successful for user ${userRecord.uid}.`);
+        console.log(`Verification for 'users' read successful for user ${userRecord.uid}.`);
       } else {
-        console.warn(`Verification for 'user-profile' read failed: Document ${userRecord.uid} not found.`);
+        console.warn(`Verification for 'users' read failed: Document ${userRecord.uid} not found.`);
       }
     } catch (readError) {
-      console.error(`Error trying to read data from 'user-profile' after seeding for user ${userRecord.uid}:`, readError);
+      console.error(`Error trying to read data from 'users' after seeding for user ${userRecord.uid}:`, readError);
     }
   } catch (error) {
     if (error.code === 'auth/email-already-exists') {
@@ -67,7 +67,7 @@ async function seedUser(auth, db, { email, password, displayName, birthYear, sex
       try {
         userRecord = await auth.getUserByEmail(email);
         console.log('Successfully fetched existing user:', userRecord.uid);
-        const userProfileRef = db.collection('user-profile').doc(userRecord.uid);
+        const userProfileRef = db.collection('users').doc(userRecord.uid);
         const userProfileSnap = await userProfileRef.get();
         if (!userProfileSnap.exists) {
           console.log(`User profile for ${userRecord.uid} does not exist. Creating it now.`);
@@ -95,18 +95,79 @@ async function seedUser(auth, db, { email, password, displayName, birthYear, sex
   return userRecord; // Return userRecord for potential further use
 }
 
+async function seedUserResults(db, userId, resultsData) {
+  console.log(`Starting to seed 'results' subcollection for user ${userId}...`);
+  const resultsBatch = db.batch();
+  let operationCount = 0;
+
+  for (const result of resultsData) {
+    // Ensure createdAt is a Firestore Timestamp if it's a string date
+    const resultDataWithTimestamp = {
+      ...result,
+      createdAt: admin.firestore.Timestamp.fromDate(new Date(result.createdAt)),
+    };
+    const resultRef = db.collection('users').doc(userId).collection('results').doc(); // Firestore will auto-generate ID
+    resultsBatch.set(resultRef, resultDataWithTimestamp);
+    operationCount++;
+    console.log(`Preparing to add document to 'users/${userId}/results' with testId: ${result.testId}`);
+  }
+
+  if (operationCount > 0) {
+    await resultsBatch.commit();
+    console.log(`Successfully seeded ${operationCount} documents into 'users/${userId}/results'.`);
+
+    // Verification step
+    try {
+      console.log(`Verifying read access for 'users/${userId}/results'...`);
+      const snapshot = await db.collection('users').doc(userId).collection('results').limit(1).get();
+      if (snapshot.empty) {
+        console.warn(`Verification for 'users/${userId}/results' read failed: No documents found after seeding.`);
+      } else {
+        console.log(`Verification for 'users/${userId}/results' read successful.`);
+      }
+    } catch (readError) {
+      console.error(`Error trying to read data from 'users/${userId}/results' after seeding:`, readError);
+    }
+  } else {
+    console.log(`No documents to seed into 'users/${userId}/results'.`);
+  }
+}
+
 async function seedDatabase() {
   try {
     // --- Create User and User Profile ---
-    await seedUser(auth, db, {
+    const userRecord = await seedUser(auth, db, {
       email: 'john-smith-45@example.com',
-      password: 'JohnJohnJohn3',
+      password: 'John33',
       displayName: 'john-smith-45',
       birthYear: 1980,
       sex: 'Male', // Assuming 'Male' is a valid value for your Sex enum/type
       detailLevel: 'Recommended' // Assuming 'Recommended' is a valid value for DetailLevel
     });
     // --- End Create User and User Profile ---
+
+    // --- Seed User Results (if user was created/fetched) ---
+    if (userRecord && userRecord.uid) {
+      const userResultsData = [
+        { testId: 'sod', createdAt: '2023-08-23', parameters: { value: 141 } },
+        { testId: 'potas', createdAt: '2023-08-23', parameters: { value: 4.5 } },
+        { testId: 'witd3', createdAt: '2023-08-23', parameters: { value: 34.3 } },
+        { testId: 'tsh', createdAt: '2025-05-22', parameters: { value: 1.07 } },
+        { testId: 'ft3', createdAt: '2025-05-06', parameters: { value: 3.23 } },
+        { testId: 'ft4', createdAt: '2025-05-06', parameters: { value: 1.21 } },
+        { testId: 'hba1c', createdAt: '2025-05-06', parameters: { value: 39 } },
+      ];
+      // Map testId to paramName from parametersTemplate, assuming 'value' is the generic paramName for now
+      // This might need adjustment based on actual testCatalog.parametersTemplate structure
+      const processedResultsData = userResultsData.map(result => ({
+        ...result,
+        // According to db-plan.md: parameters: Map<string, any> where key is paramName from parametersTemplate
+        // For now, we'll assume 'value' is the paramName. This needs to be aligned with testCatalog data.
+        parameters: { 'value': result.parameters.value } 
+      }));
+      await seedUserResults(db, userRecord.uid, processedResultsData);
+    }
+    // --- End Seed User Results ---
 
     // --- Seeding tests-catalog --- 
     const rawCatalogData = fs.readFileSync(dataFilePath, 'utf-8');

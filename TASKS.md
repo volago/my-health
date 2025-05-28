@@ -25,7 +25,6 @@ Plan implementacji i zadań związanych z Firebase dla projektu My Health.
 ## Future Tasks
 
 - [ ] Zaimplementować Cloud Functions z API planu:
-  - [ ] Implementacja endpointu rejestracji anonimowej `/api/auth/register`
   - [ ] Implementacja endpointów metryk zdrowotnych:
     - [ ] `/api/metrics/health-score` - obliczanie Health Score
     - [ ] `/api/metrics/compliance-score` - obliczanie Compliance Score
