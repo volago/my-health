@@ -13,14 +13,16 @@
 
   <div class="flex items-center">
     <!-- Założenie: implementacja logiki wylogowania i wyświetlania użytkownika później -->
-    <button mat-icon-button [matMenuTriggerFor]="userMenu" aria-label="User Menu">
-      <mat-icon>account_circle</mat-icon>
-    </button>
-    <mat-menu #userMenu="matMenu">
-      <button mat-menu-item (click)="logout()">
-        <mat-icon>exit_to_app</mat-icon>
-        <span>Wyloguj</span>
+    @if (isLoggedIn()) {
+      <button mat-icon-button [matMenuTriggerFor]="userMenu" aria-label="User Menu">
+        <mat-icon>account_circle</mat-icon>
       </button>
-    </mat-menu>
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Wyloguj</span>
+        </button>
+      </mat-menu>
+    }
   </div>
 </mat-toolbar> 

@@ -24,21 +24,16 @@ export class AuthService {
 
   constructor() {
     this.authStateSubscription = authState(this.auth).subscribe(user => {
-      // console.log('AuthService: authState emitted user:', user); // Usunięty log
       this.currentUser.set(user);
     });
 
     effect(() => {
       const loggedIn = !!this.currentUser();
       this.isLoggedIn.set(loggedIn);
-      // console.log('AuthService: Effect detected loggedIn state change to:', loggedIn); // Można zostawić do dalszej obserwacji lub usunąć
-      // console.log('AuthService: Current URL:', this.router.url); 
       if (loggedIn && this.router.url.includes('/auth')) {
-        // console.log('AuthService: Navigating to / due to login on /auth page.');
         this.router.navigate(['/']);
       }
     });
-    // console.log('AuthService initialized and monitoring auth state');
   }
 
   private mapFirebaseError(firebaseError: FirebaseError): string {
@@ -100,29 +95,23 @@ export class AuthService {
   }
 
   async login(credentials: AuthCredentials): Promise<void> {
-    // console.log('AuthService: login called with credentials:', credentials.identifier); // Usunięty log
     this.isLoading.set(true);
     this.error.set(null);
     const { identifier, password } = credentials;
 
     if (!password) { 
-        // console.log('AuthService: Password is required for login, but not provided.'); // Usunięty log
         this.error.set('Hasło jest wymagane.');
         this.isLoading.set(false);
         throw new Error('Password is required for login.');
     }
 
     try {
-      // console.log('AuthService: Attempting signInWithEmailAndPassword...'); // Usunięty log
       await signInWithEmailAndPassword(this.auth, identifier, password);
-      // console.log('AuthService: signInWithEmailAndPassword successful.'); // Usunięty log
       this.router.navigate(['/']); // Dodana nawigacja po udanym logowaniu
     } catch (error) {
-      // console.error('AuthService: Error during signInWithEmailAndPassword:', error); // Można zostawić lub usunąć
       this.error.set(this.mapFirebaseError(error as FirebaseError));
       throw error; 
     } finally {
-      // console.log('AuthService: login method finally block. isLoading set to false.'); // Usunięty log
       this.isLoading.set(false);
     }
   }

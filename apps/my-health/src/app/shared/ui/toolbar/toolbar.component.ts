@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 // Załóżmy, że AuthService istnieje i jest eksportowany z odpowiedniego miejsca
-// import { AuthService } from '@my-health/auth'; // Przykładowa ścieżka, dostosuj w razie potrzeby
+import { AuthService } from '@my-health/features/auth-api'; // Changed import path
 
 @Component({
   selector: 'app-toolbar',
@@ -25,11 +25,11 @@ import { MatMenuModule } from '@angular/material/menu';
 export class ToolbarComponent {
   @Output() toggleSidenav = new EventEmitter<void>();
 
-  // private authService = inject(AuthService); // Odkomentuj i dostosuj, gdy AuthService będzie gotowy
+  private authService = inject(AuthService); // Injected AuthService
   private router = inject(Router);
 
   // Dostęp do informacji o użytkowniku, np. czy jest zalogowany
-  // isLoggedIn$ = this.authService.isLoggedIn$; // Przykładowe użycie, jeśli AuthService dostarcza Observable
+  isLoggedIn = this.authService.isLoggedIn; // Using the signal directly
   // userName$ = this.authService.currentUser$.pipe(map(user => user?.displayName || 'Gość')); // Przykładowe
 
   onToggleSidenav(): void {
@@ -38,9 +38,7 @@ export class ToolbarComponent {
 
   async logout(): Promise<void> {
     try {
-      // await this.authService.logout(); // Odkomentuj, gdy AuthService będzie gotowy
-      // console.log('Wylogowano pomyślnie');
-      await this.router.navigate(['/auth/login']); // Przekierowanie po wylogowaniu
+      await this.authService.logout(); // Call AuthService.logout()
     } catch (error) {
       console.error('Błąd podczas wylogowywania:', error);
       // Można dodać obsługę błędów, np. wyświetlenie powiadomienia

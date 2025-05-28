@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     // Logowanie informacji o stanie Firestore
-    console.log('Firestore instance:', this.firestore);
+    //console.log('Firestore instance:', this.firestore);
     try {
       const collectionRef = collection(this.firestore, 'test');
       // console.log('Collection reference created:', collectionRef);

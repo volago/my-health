@@ -34,11 +34,11 @@ export const appRoutes: Route[] = [
   },
   {
     path: '',
-    redirectTo: 'catalog',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: 'catalog' // Lub można tu dać stronę 404 chronioną guardem
+    redirectTo: 'dashboard' // Lub można tu dać stronę 404 chronioną guardem
   }
 ];
