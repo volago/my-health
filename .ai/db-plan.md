@@ -27,9 +27,9 @@
   - Document ID: `resultId` (string)
   - `testId`: string (FK → testCatalog.testId)
   - `createdAt`: Timestamp
-  - `parameters`: Map<string, any>
-    - klucz: `paramName` z `parametersTemplate`
-    - wartość: number | string | boolean
+  - `parameters`: Array
+    - `paramId`: string (FK -> testCatalog.parametersTemplate.id)
+    - `value`: number | string | boolean
 
 - **users/{userId}/schedules** (subkolekcja)
   - Document ID: `scheduleId` (string)

@@ -20,7 +20,7 @@ Plan implementacji i zadań związanych z Firebase dla projektu My Health.
 
 - [ ] Zaimplementować dashboard użytkownika. Prosta wersja z mockami wskaźników i       
       terminów przyszłych wizyt, ale pobierająca z bazy wyniki ostatnich badań
-  - [ ] Dodać przykładowe badania do bazy
+  - [x] Dodać przykładowe badania do bazy
 
 ## Future Tasks
 

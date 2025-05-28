@@ -149,23 +149,16 @@ async function seedDatabase() {
     // --- Seed User Results (if user was created/fetched) ---
     if (userRecord && userRecord.uid) {
       const userResultsData = [
-        { testId: 'sod', createdAt: '2023-08-23', parameters: { value: 141 } },
-        { testId: 'potas', createdAt: '2023-08-23', parameters: { value: 4.5 } },
-        { testId: 'witd3', createdAt: '2023-08-23', parameters: { value: 34.3 } },
-        { testId: 'tsh', createdAt: '2025-05-22', parameters: { value: 1.07 } },
-        { testId: 'ft3', createdAt: '2025-05-06', parameters: { value: 3.23 } },
-        { testId: 'ft4', createdAt: '2025-05-06', parameters: { value: 1.21 } },
-        { testId: 'hba1c', createdAt: '2025-05-06', parameters: { value: 39 } },
+        // Assuming paramId can be testId for these single-parameter tests
+        { testId: 'sod', createdAt: '2023-08-23', parameters: [{ paramId: 'sod', value: 141 }] },
+        { testId: 'potas', createdAt: '2023-08-23', parameters: [{ paramId: 'potas', value: 4.5 }] },
+        { testId: 'witd3', createdAt: '2023-08-23', parameters: [{ paramId: 'witd3', value: 34.3 }] },
+        { testId: 'tsh', createdAt: '2025-05-22', parameters: [{ paramId: 'tsh', value: 1.07 }] },
+        { testId: 'ft3', createdAt: '2025-05-06', parameters: [{ paramId: 'ft3', value: 3.23 }] },
+        { testId: 'ft4', createdAt: '2025-05-06', parameters: [{ paramId: 'ft4', value: 1.21 }] },
+        { testId: 'hba1c', createdAt: '2025-05-06', parameters: [{ paramId: 'hba1c', value: 39 }] },
       ];
-      // Map testId to paramName from parametersTemplate, assuming 'value' is the generic paramName for now
-      // This might need adjustment based on actual testCatalog.parametersTemplate structure
-      const processedResultsData = userResultsData.map(result => ({
-        ...result,
-        // According to db-plan.md: parameters: Map<string, any> where key is paramName from parametersTemplate
-        // For now, we'll assume 'value' is the paramName. This needs to be aligned with testCatalog data.
-        parameters: { 'value': result.parameters.value } 
-      }));
-      await seedUserResults(db, userRecord.uid, processedResultsData);
+      await seedUserResults(db, userRecord.uid, userResultsData);
     }
     // --- End Seed User Results ---
 
