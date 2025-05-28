@@ -40,7 +40,7 @@ export const DashboardStore = signalStore(
           return {
             id: r.resultId,
             testIdentifier: r.testId,
-            date: new Date(r.createdAt).toLocaleDateString('pl-PL'),
+            date: new Date(r.createdAt).toISOString().split('T')[0],
             resultsSummary: summary
           };
         });
