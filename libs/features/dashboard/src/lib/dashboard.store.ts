@@ -29,26 +29,27 @@ export const DashboardStore = signalStore(
       patchState(store, { isLoadingResults: true, resultsError: null });
       try {
         const domainResults: TestResult[] = await testResultsService.fetchRecentResults(userId, 5);
-        const viewData: TestResultItemData[] = domainResults.map(r => {
-          const summary = r.parameters.map(p => {
-            if (r.parameters.length === 1 && p.paramId === r.testId) {
-              return `${p.value}`;
-            }
-            return `${p.paramId}: ${p.value}`;
-          }).join(', ');
-
-          return {
-            id: r.resultId,
-            testIdentifier: r.testId,
-            date: new Date(r.createdAt).toISOString().split('T')[0],
-            resultsSummary: summary
-          };
-        });
+        const viewData: TestResultItemData[] = domainResults.map(r => this._mapTestResultToView(r));
         patchState(store, { recentTestResults: viewData, isLoadingResults: false });
       } catch (error) {
         console.error('Błąd podczas ładowania ostatnich wyników badań:', error);
         patchState(store, { resultsError: error, isLoadingResults: false, recentTestResults: [] });
       }
+    },
+    _mapTestResultToView(result: TestResult): TestResultItemData {
+      const summary = result.parameters.map(p => {
+        if (result.parameters.length === 1 && p.paramId === result.testId) {
+          return `${p.value}`;
+        }
+        return `${p.paramId}: ${p.value}`;
+      }).join(', ');
+
+      return {
+        id: result.resultId,
+        testIdentifier: result.testId,
+        date: new Date(result.createdAt).toISOString().split('T')[0],
+        resultsSummary: summary
+      };
     },
     initializeMockData(): void {
       const hsMock: ScoreCardData = { title: 'Health Score', value: 85, displayValue: '85%', color: this.determineScoreColor(85) };
@@ -64,10 +65,10 @@ export const DashboardStore = signalStore(
       });
     },
     determineScoreColor(value: number): 'green' | 'yellow' | 'red' | 'grey' {
-      if (value === 0 && store.healthScoreMock().value === 0 && store.complianceScoreMock().value === 0) return 'grey';
+      if (value === 0) return 'grey';
       if (value >= 90) return 'green';
       if (value >= 70) return 'yellow';
-      if (value > 0 && value < 70) return 'red';
+      if (value < 70) return 'red';
       return 'grey';
     }
   })),
