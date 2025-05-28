@@ -44,9 +44,8 @@ export const DashboardStore = signalStore(
       const hsMock: ScoreCardData = { title: 'Health Score', value: 85, displayValue: '85%', color: this.determineScoreColor(85) };
       const csMock: ScoreCardData = { title: 'Compliance Score', value: 92, displayValue: '92%', color: this.determineScoreColor(92) };
       const upcomingMock: UpcomingTestMockData[] = [
-          { testName: 'Badanie krwi (pełna morfologia)', date: '15.08.2024'},
-          { testName: 'Kontrola dentystyczna', date: '01.09.2024'},
-          { testName: 'Badanie wzroku', date: '20.09.2024'},
+          { testName: 'Badanie krwi', date: '2026-08-15'},
+          { testName: 'Kontrola dentystyczna', date: '2026-09-01'},
       ];
       patchState(store, {
           healthScoreMock: hsMock,

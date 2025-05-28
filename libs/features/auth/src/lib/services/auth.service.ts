@@ -36,15 +36,24 @@ export class AuthService {
     });
   }
 
-  private mapFirebaseError(firebaseError: FirebaseError): string {
-    switch (firebaseError.code) {
+  private mapFirebaseError(firebaseError: FirebaseError | any): string {
+    let errorCode = typeof firebaseError.code === 'string' ? firebaseError.code : null;
+
+    if (!errorCode && firebaseError.error && typeof firebaseError.error.message === 'string') {
+      errorCode = firebaseError.error.message;
+    }
+
+    switch (errorCode) {
       case 'auth/invalid-email':
         return 'Nieprawidłowy format identyfikatora (oczekiwano formatu email).';
       case 'auth/user-disabled':
         return 'Konto użytkownika zostało zablokowane.';
       case 'auth/user-not-found':
+      case 'EMAIL_NOT_FOUND':
+        return 'Nie znaleziono konta z podanym adresem e-mail.';
       case 'auth/wrong-password':
       case 'auth/invalid-credential':
+      case 'INVALID_PASSWORD':
         return 'Nieprawidłowa nazwa użytkownika lub hasło.';
       case 'auth/email-already-in-use':
         return 'Ten identyfikator (email) jest już zajęty.';
@@ -102,15 +111,26 @@ export class AuthService {
     if (!password) { 
         this.error.set('Hasło jest wymagane.');
         this.isLoading.set(false);
-        throw new Error('Password is required for login.');
+        return;
     }
 
     try {
       await signInWithEmailAndPassword(this.auth, identifier, password);
-      this.router.navigate(['/']); // Dodana nawigacja po udanym logowaniu
-    } catch (error) {
-      this.error.set(this.mapFirebaseError(error as FirebaseError));
-      throw error; 
+      this.router.navigate(['/']);
+    } catch (err) {
+      const firebaseError = err as FirebaseError | any;
+      console.error('Login Original Error:', firebaseError);
+      
+      let mappedErrorMessage = 'Wystąpił nieoczekiwany błąd podczas logowania. Spróbuj ponownie.';
+      if (firebaseError.code) {
+        mappedErrorMessage = this.mapFirebaseError(firebaseError);
+      } else if (firebaseError.error && firebaseError.error.message) {
+        mappedErrorMessage = this.mapFirebaseError({ code: firebaseError.error.message } as FirebaseError);
+      } else if (typeof firebaseError.message === 'string' && firebaseError.message.includes('EMAIL_NOT_FOUND')) {
+         mappedErrorMessage = this.mapFirebaseError({ code: 'EMAIL_NOT_FOUND' } as FirebaseError);
+      }
+
+      this.error.set(mappedErrorMessage);
     } finally {
       this.isLoading.set(false);
     }

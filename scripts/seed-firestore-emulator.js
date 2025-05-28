@@ -137,7 +137,7 @@ async function seedDatabase() {
   try {
     // --- Create User and User Profile ---
     const userRecord = await seedUser(auth, db, {
-      email: 'john-smith-45@example.com',
+      email: 'john-smith-45@my-health.com',
       password: 'John33',
       displayName: 'john-smith-45',
       birthYear: 1980,
