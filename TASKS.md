@@ -15,12 +15,20 @@ Plan implementacji i zadań związanych z Firebase dla projektu My Health.
 - [x] Zaimplementować interfejs użytkownika dla katalogu badań (dodać lib nx)
 - [x] Zaimplementować logowanie użytkownika z Firebase Auth
   - [x] Dodać przykładowego użytkownika do emulatora
+- [x] Zaimplementować dashboard użytkownika. Prosta wersja z mockami wskaźników i       
+      terminów przyszłych wizyt, ale pobierająca z bazy wyniki ostatnich badań
+  - [x] Dodać przykładowe badania do bazy
 
 ## In Progress Tasks
 
-- [ ] Zaimplementować dashboard użytkownika. Prosta wersja z mockami wskaźników i       
-      terminów przyszłych wizyt, ale pobierająca z bazy wyniki ostatnich badań
-  - [x] Dodać przykładowe badania do bazy
+- [ ] Zaimplementować Cloud Functions z API planu:  
+  - [ ] Implementacja endpointów raportów AI:
+    - [ ] `/api/reports/generate` - generowanie raportu AI
+    - [ ] `/api/reports/{reportId}/status` - sprawdzanie statusu generowania
+    - [ ] `/api/reports/{reportId}` - pobieranie wygenerowanego raportu
+- [ ] Zaimplementować pustą listę raportów AI z FAB "Pobierz raport"
+  - [ ] 
+
 
 ## Future Tasks
 

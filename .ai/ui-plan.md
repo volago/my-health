@@ -58,7 +58,7 @@ Aplikacja MyHealth to kompleksowy system umożliwiający użytkownikom zarządza
 7. **Widok raportu AI**
    - **Ścieżka widoku:** `/reports`
    - **Główny cel:** Umożliwienie generowania oraz przeglądu raportu zdrowotnego generowanego przez AI.
-   - **Kluczowe informacje:** Status przetwarzania raportu, podgląd raportu w formacie HTML, komunikaty o błędach generacji.
+   - **Kluczowe informacje:** Lista wygenerowanych raportów, zakolejkowanie raportu do wygenerowania, Status przetwarzania raportu, podgląd raportu w formacie HTML, komunikaty o błędach generacji.
    - **Kluczowe komponenty:** Komponenty statusu, loader, obszar wyświetlania HTML, toast notifications.
    - **UX, dostępność i bezpieczeństwo:** Wyraźny feedback statusu operacji, obsługa błędów, responsywność, ochrona przez Firebase Auth.
 
