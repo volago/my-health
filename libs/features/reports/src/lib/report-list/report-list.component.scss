@@ -1,0 +1,18 @@
+/* Plik pozostawiony pusty, style zarządzane przez Tailwind CSS w szablonie HTML */
+
+.report-list-item {
+  margin-bottom: 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+
+  mat-icon[matListItemIcon] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  mat-progress-spinner {
+    // Upewnij się, że spinner jest dobrze wyśrodkowany w ikonie, jeśli to konieczne
+    // Można dostosować marginesy lub padding, jeśli ikona jest większa
+  }
+} 

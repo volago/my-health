@@ -1,0 +1,25 @@
+<mat-list>
+  @for (report of reports(); track report.reportId) {
+    <mat-list-item 
+      (click)="onReportClick(report.reportId)" 
+      class="mb-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors duration-150 ease-in-out border border-gray-200 dark:border-gray-600 shadow-sm">
+      <mat-icon matListItemIcon [color]="getIconColor(report.status)" class="flex items-center justify-center flex-shrink-0">
+        @if (report.status === 'processing') {
+          <mat-progress-spinner diameter="24" mode="indeterminate" [color]="getIconColor(report.status) || 'primary'"></mat-progress-spinner>
+        } @else {
+          {{ getReportIcon(report.status) }}
+        }
+      </mat-icon>
+      <div matListItemTitle class="font-medium text-gray-800 dark:text-gray-200 truncate pr-1">{{ report.title }}</div>
+      <div matListItemLine class="text-sm text-gray-600 dark:text-gray-400 truncate pr-1">Utworzono: {{ report.createdAtFormatted }}</div>
+      <div matListItemMeta class="flex-shrink-0 ml-2">
+        <mat-chip [color]="getChipColor(report.status)" selected>{{ report.status }}</mat-chip>
+      </div>
+    </mat-list-item>
+  } @empty {
+    <mat-list-item>
+      <p class="p-4 text-center text-gray-500 dark:text-gray-400">Brak raportów do wyświetlenia.</p>
+    </mat-list-item>
+  }
+</mat-list>
+<!-- Iteracja po raportach i wyświetlanie ich zostanie dodane później --> 

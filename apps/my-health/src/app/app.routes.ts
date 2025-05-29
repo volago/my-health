@@ -21,6 +21,12 @@ export const appRoutes: Route[] = [
     data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
+    path: 'reports',
+    loadChildren: () => import('@my-health/features/reports').then(m => m.REPORTS_ROUTES),
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
+  {
     path: 'ai-reports',
     component: EmptyComponent,
     canActivate: [AuthGuard],

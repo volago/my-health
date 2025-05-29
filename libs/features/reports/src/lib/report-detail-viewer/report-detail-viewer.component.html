@@ -1,0 +1,29 @@
+<div class="report-viewer-container p-4 h-full flex flex-col">
+  <div class="flex justify-end mb-2">
+    <button mat-icon-button (click)="onCloseClick()" aria-label="Zamknij podgląd raportu">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  @if (isLoading()) {
+    <div class="flex-grow flex items-center justify-center">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+  } @else if (error()) {
+    <div class="flex-grow flex flex-col items-center justify-center p-4 text-center">
+      <mat-icon color="warn" class="text-4xl mb-2">error_outline</mat-icon>
+      <p class="text-red-600 dark:text-red-400">Nie można załadować raportu:</p>
+      <p class="text-sm text-gray-700 dark:text-gray-300">{{ error() }}</p>
+    </div>
+  } @else if (reportHtmlContent()) {
+    <div class="report-content flex-grow overflow-auto p-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 shadow-inner">
+      <div [innerHTML]="reportHtmlContent()"></div>
+    </div>
+  } @else {
+    <div class="flex-grow flex items-center justify-center">
+      <p class="text-gray-500 dark:text-gray-400">Brak treści raportu do wyświetlenia.</p> <!-- Ten stan nie powinien być częsty jeśli logika w store jest poprawna -->
+    </div>
+  }
+</div>
+
+<!-- Wyświetlanie HTML, loader, błędy i przycisk zamknięcia zostaną dodane później --> 
