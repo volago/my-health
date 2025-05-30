@@ -14,7 +14,7 @@ export enum ReportStatus {
 export interface Report {
   id: string;
   userId: string;
-  requestDate: Timestamp | Date;
+  createdAt: Timestamp | Date;
   status: ReportStatus;
   data?: any;
   reportUrl?: string;
@@ -27,6 +27,7 @@ export interface Report {
  * @param {Storage} storage Storage admin instance.
  * @param {typeof FieldValue} fieldValueUtil Firestore FieldValue class for server timestamps etc.
  * @param {string} reportId The ID of the report document.
+ * @param {string} userId The ID of the user who owns the report.
  * @param {Report} reportData The data of the report.
  * @returns {Promise<void>}
  */
@@ -35,11 +36,12 @@ export async function processReport(
   storage: Storage,
   fieldValueUtil: typeof FieldValue,
   reportId: string,
+  userId: string,
   reportData: Report
 ): Promise<void> {
-  logger.info(`Processing report ${reportId} for user ${reportData.userId}`, { reportId, userId: reportData.userId });
+  logger.info(`Processing report ${reportId} for user ${userId}`, { reportId, userId });
 
-  const reportDocRef = db.collection('reports').doc(reportId);
+  const reportDocRef = db.collection('users').doc(userId).collection('reports').doc(reportId);
 
   try {
     // 1. Update status to PROCESSING
@@ -47,6 +49,11 @@ export async function processReport(
       status: ReportStatus.PROCESSING,
       processingDate: fieldValueUtil.serverTimestamp(), // Add a processing start timestamp
     });
+
+    // Sztuczne opóźnienie 3 sekundy
+    logger.info(`Report ${reportId} is now PROCESSING. Adding 3s delay...`);
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    logger.info(`Report ${reportId} - 3s delay finished.`);
 
     // 2. Simulate HTML generation (replace with actual HTML generation logic)
     // This should use reportData.data to create the HTML content.
@@ -68,7 +75,7 @@ export async function processReport(
         <h1>Report Details</h1>
         <p><strong>Report ID:</strong> ${reportId}</p>
         <p><strong>User ID:</strong> ${reportData.userId}</p>
-        <p><strong>Requested Date:</strong> ${new Date( (reportData.requestDate as Timestamp).toDate().toDateString() ).toISOString()}</p>
+        <p><strong>Created At:</strong> ${reportData.createdAt ? new Date( (reportData.createdAt as Timestamp).toDate().toDateString() ).toISOString() : 'N/A'}</p>
         <h2>Report Data:</h2>
         <pre>${JSON.stringify(reportData.data, null, 2)}</pre>
         <p><em>Generated on: ${new Date().toISOString()}</em></p>
