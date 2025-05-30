@@ -10,7 +10,7 @@ export interface Report {
   updatedAt?: Timestamp;   // Firestore Timestamp
   status: ReportStatus;
   title: string;
-  reportHtmlUrl?: string;
+  reportUrl?: string;
   storagePath?: string;
   errorDetails?: string;
 }

@@ -6,6 +6,7 @@ import { MatSidenavModule } from '@angular/material/sidenav'; // Dla MatDrawer
 import { MatButtonModule } from '@angular/material/button'; // Dla MatFab
 import { MatIconModule } from '@angular/material/icon'; // Dla ikony w MatFab
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; // Dodano import
+import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -17,7 +18,8 @@ import { ActivatedRoute, Router } from '@angular/router';
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
-    MatProgressSpinnerModule // Dodano do imports
+    MatProgressSpinnerModule, // Dodano do imports
+    MatCardModule
   ],
   templateUrl: './reports-page.component.html',
   styleUrl: './reports-page.component.scss',
