@@ -1,12 +1,12 @@
 import { signalStore, withState, withMethods, patchState, withComputed } from '@ngrx/signals';
-import { computed, effect, inject, Signal } from '@angular/core';
-import { Firestore, collection, query, orderBy, onSnapshot, addDoc, serverTimestamp, Timestamp, collectionData, doc } from '@angular/fire/firestore';
+import { computed, effect, inject } from '@angular/core';
+import { Firestore, collection, query, orderBy, addDoc, serverTimestamp, Timestamp, collectionData } from '@angular/fire/firestore';
 import { Storage } from '@angular/fire/storage';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Report, DisplayReport, ReportStatus } from '../models/report.models';
 import { AuthService } from '@my-health/features/auth-api';
-import { Observable, from, of } from 'rxjs';
-import { map, catchError, switchMap, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, catchError, tap } from 'rxjs/operators';
 
 type ReportsState = {
   reports: DisplayReport[];
@@ -78,7 +78,6 @@ export const ReportSignalStore = signalStore(
       async createReportRequest(title: string): Promise<string | null> {
         const userId = store.currentUserId();
         if (!userId) {
-          console.error("User not logged in");
           return null;
         }
         try {
@@ -91,21 +90,22 @@ export const ReportSignalStore = signalStore(
           });
           return newReportDoc.id;
         } catch (error: any) {
-          console.error("Error creating report request:", error);
           return null;
         }
       },
 
       selectReport(reportId: string | null): void {
-        patchState(store, { selectedReportId: reportId, selectedReportHtml: null, detailError: null });
+        patchState(store, { selectedReportId: reportId, selectedReportHtml: null, detailError: null, isLoadingDetail: false });
         if (reportId) {
           const selected = store.reports().find(r => r.reportId === reportId);
-          if (selected?.status === 'success' && selected.reportHtmlUrl) {
-            (this as any).loadReportHtml(selected.reportHtmlUrl);
+          if (selected?.status === 'success' && selected.reportUrl) {
+            this.loadReportHtml(selected.reportUrl);
+          } else if (selected?.status === 'success' && !selected.reportUrl) {
+            patchState(store, { selectedReportHtml: null, detailError: 'Brakuje adresu URL (reportUrl) do treści raportu.', isLoadingDetail: false });
           } else if (selected?.status !== 'success' && selected?.status !== 'processing' && selected?.status !== 'to-process') {
-            patchState(store, { selectedReportHtml: null, detailError: selected?.errorDetails || 'Raport zawiera błędy lub nie jest jeszcze gotowy.' });
+            patchState(store, { selectedReportHtml: null, detailError: selected?.errorDetails || 'Raport zawiera błędy lub nie jest jeszcze gotowy.', isLoadingDetail: false });
           } else {
-             patchState(store, { selectedReportHtml: null, detailError: null });
+             patchState(store, { selectedReportHtml: null, detailError: null, isLoadingDetail: selected?.status === 'processing' || selected?.status === 'to-process' });
           }
         }
       },
@@ -114,7 +114,9 @@ export const ReportSignalStore = signalStore(
         patchState(store, { isLoadingDetail: true, detailError: null, selectedReportHtml: null });
         try {
           const response = await fetch(url);
-          if (!response.ok) throw new Error(`Nie udało się pobrać raportu HTML: ${response.statusText}`);
+          if (!response.ok) {
+            throw new Error(`Nie udało się pobrać raportu HTML: ${response.status} ${response.statusText}`);
+          }
           const htmlString = await response.text();
           patchState(store, { selectedReportHtml: sanitizer.bypassSecurityTrustHtml(htmlString), isLoadingDetail: false });
         } catch (error: any) {

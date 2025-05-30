@@ -22,7 +22,7 @@ export interface DisplayReport {
   updatedAtFormatted?: string;
   status: ReportStatus;
   title: string;
-  reportHtmlUrl?: string;
+  reportUrl?: string;
   storagePath?: string;
   errorDetails?: string;
   originalReport: Report; // Przechowuje oryginalny obiekt z Firestore
