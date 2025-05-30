@@ -1,6 +1,6 @@
 <div class="flex h-full bg-gray-50 dark:bg-gray-900">
   <!-- Left Panel: Report List -->
-  <div class="w-1/2 p-2 sm:p-4 overflow-auto">
+  <div class="w-full sm:w-1/2 p-2 sm:p-4 overflow-auto">
     @if (isLoadingList()) {
       <div class="flex-grow flex items-center justify-center h-full">
         <mat-spinner diameter="50"></mat-spinner>
@@ -24,8 +24,8 @@
     }
   </div>
 
-  <!-- Right Panel: Report Detail -->
-  <div class="w-1/2 p-2 sm:p-4 h-full"> 
+  <!-- Right Panel: Report Detail (hidden on xs, block on sm and up) -->
+  <div class="hidden sm:block sm:w-1/2 p-2 sm:p-4 h-full">
     <mat-card class="h-full" appearance="outlined">
       <mat-card-content class="h-full overflow-auto p-0">
         @if (selectedReport()) {
@@ -54,6 +54,26 @@
   (click)="createNewReport()">
   <mat-icon>add</mat-icon>
 </button>
+
+<!-- Template for Mobile Dialog -->
+<ng-template #reportDetailDialogContent>
+  @if (selectedReport()) {
+    <lib-report-detail-viewer 
+      [reportHtmlContent]="selectedReportHtml()" 
+      [isLoading]="isLoadingDetail()" 
+      [error]="detailError()" 
+      (closeViewer)="handleCloseDialogAndNavigate()" />
+  } @else if (isLoadingDetail()) { 
+    <div class="flex items-center justify-center h-full w-full p-6">
+        <mat-spinner diameter="50"></mat-spinner>
+    </div>
+  } @else { 
+    <div class="p-6 text-center flex flex-col items-center justify-center h-full w-full">
+      <mat-icon class="text-5xl text-gray-400 dark:text-gray-500 mb-3">info_outline</mat-icon>
+      <p class="text-lg text-gray-500 dark:text-gray-400">Brak danych do wyświetlenia.</p>
+    </div>
+  }
+</ng-template>
 
 <!-- Komentarz: 
      - Dodano appearance="outline" do mat-card.
