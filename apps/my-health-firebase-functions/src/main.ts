@@ -34,7 +34,7 @@ const fieldValue = admin.firestore.FieldValue;
 // });
 
 /**
- * Triggered when a new report document is created with status PENDING_GENERATION.
+ * Triggered when a new report document is created with status TO_PROCESS.
  */
 export const onReportRequested = onDocumentWritten(
   { document: 'users/{userId}/reports/{reportId}' },
@@ -57,8 +57,33 @@ export const onReportRequested = onDocumentWritten(
 
     if (reportData.status === ReportStatus.TO_PROCESS) {
       logger.info(`Report ${reportId} has status TO_PROCESS. Starting processing.`);
+      
+      // Pobierz klucz OpenRouter API z environment variables
+      const openRouterApiKey = process.env.OPENROUTER_API_KEY;
+      
+      if (!openRouterApiKey) {
+        logger.error('OPENROUTER_API_KEY not configured in environment variables');
+        
+        // Update report status to ERROR
+        try {
+          await adminFirestore
+            .collection('users')
+            .doc(event.params.userId)
+            .collection('reports')
+            .doc(reportId)
+            .update({
+              status: ReportStatus.ERROR,
+              errorMessage: 'Konfiguracja OpenRouter API nie jest dostępna.',
+              errorDate: fieldValue.serverTimestamp(),
+            });
+        } catch (updateError) {
+          logger.error(`Failed to update report ${reportId} with configuration error:`, updateError);
+        }
+        return;
+      }
+      
       try {
-        await processReport(adminFirestore, adminStorage, fieldValue, reportId, event.params.userId, reportData);
+        await processReport(adminFirestore, adminStorage, fieldValue, reportId, event.params.userId, reportData, openRouterApiKey);
         logger.info(`processReport finished for report ${reportId}.`);
       } catch (error) {
         logger.error(`Error calling processReport for ${reportId} from onReportRequested:`, error);
