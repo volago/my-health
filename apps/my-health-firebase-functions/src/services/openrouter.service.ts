@@ -4,7 +4,7 @@ import { OpenRouterRequest, OpenRouterResponse, TestResultWithCatalog } from './
 
 export class OpenRouterService {
   private readonly baseUrl = 'https://openrouter.ai/api/v1';
-  private readonly defaultModel = 'anthropic/claude-3.5-sonnet';
+  private readonly defaultModel = 'google/gemini-2.5-flash-preview-05-20';
   private readonly maxRetries = 3;
   private readonly baseDelay = 1000; // 1 sekunda
 
@@ -118,7 +118,7 @@ export class OpenRouterService {
     1. Używaj profesjonalnego, ale przystępnego języka
     2. Strukturyzuj raport używając HTML
     3. Uwzględnij wszystkie przekazane wyniki badań
-    4. Dostosuj rekomendacje do wieku i płci pacjenta
+    4. BARDZO WAŻNE: Dostosuj rekomendacje do wieku i płci pacjenta - używaj właściwych form gramatycznych (pacjent/pacjentka) i odpowiednich badań profilaktycznych
     5. Zawsze zaznacz, że raport nie zastępuje konsultacji lekarskiej
 
     STRUKTURA RAPORTU:
@@ -150,12 +150,18 @@ export class OpenRouterService {
   ): string {
     const currentYear = new Date().getFullYear();
     const age = currentYear - userProfile.birthYear;
-    const sexLabel = userProfile.sex === 'male' ? 'mężczyzna' : 'kobieta';
+    
+    // Dodajemy logowanie dla debugowania płci
+    logger.info(`User profile sex value: "${userProfile.sex}" (type: ${typeof userProfile.sex})`);
+    
+    const sexLabel = userProfile.sex.toLowerCase() === 'male' ? 'mężczyzna' : 'kobieta';
 
     let prompt = `PROFIL UŻYTKOWNIKA:
 - Wiek: ${age} lat
 - Płeć: ${sexLabel}
 - Poziom szczegółowości: ${userProfile.detailLevel}
+
+WAŻNE: Pacjent to ${sexLabel}. Używaj odpowiednich form gramatycznych i rekomenduj badania właściwe dla tej płci.
 `;
 
     if (testResults.length === 0) {
