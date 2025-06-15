@@ -22,6 +22,6 @@ export default defineConfig(() => ({
     coverage: {
       reportsDirectory: '../../coverage/apps/my-health',
       provider: 'v8' as const,
-    },
+    }    
   },
 }));

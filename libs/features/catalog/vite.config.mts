@@ -23,5 +23,10 @@ export default defineConfig(() => ({
       reportsDirectory: '../../../coverage/libs/features/catalog',
       provider: 'v8' as const,
     },
+    server: {
+      deps: {
+        inline: ['rxfire', '@angular/fire']
+      }
+    }
   },
 }));
