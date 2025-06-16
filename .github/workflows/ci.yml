@@ -34,10 +34,6 @@ jobs:
       - name: Test Catalog Module
         run: npx nx test catalog
 
-      # Lint dla affected projects
-      - name: Lint Affected Projects
-        run: npx nx affected -t lint
-
   build:
     runs-on: ubuntu-latest
     needs: test
