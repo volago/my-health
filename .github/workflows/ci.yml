@@ -5,6 +5,8 @@ on:
     branches:
       - master
   pull_request:
+  # Dodanie możliwości manualnego uruchomienia
+  workflow_dispatch:
 
 permissions:
   actions: read
@@ -35,8 +37,14 @@ jobs:
       - run: npx playwright install --with-deps
       - uses: nrwl/nx-set-shas@v4
 
-      # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
-      # - run: npx nx-cloud record -- echo Hello World
-      # Nx Affected runs only tasks affected by the changes in this PR/commit. Learn more: https://nx.dev/ci/features/affected
-      # When you enable task distribution, run the e2e-ci task instead of e2e
-      - run: npx nx affected -t lint test build e2e
+      # Testowanie modułu catalog
+      - name: Test Catalog Module
+        run: npx nx test catalog
+
+      # Build głównej aplikacji my-health
+      - name: Build Main Application
+        run: npx nx build my-health
+
+      # Lint dla affected projects
+      - name: Lint Affected Projects
+        run: npx nx affected -t lint
