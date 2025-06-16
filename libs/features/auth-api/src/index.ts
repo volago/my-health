@@ -1,2 +1,1 @@
-// eslint-disable-next-line @nx/enforce-module-boundaries
-export * from '../../auth/src/lib/services/auth.service';
+export * from '@my-health/features/auth';
