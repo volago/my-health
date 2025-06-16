@@ -27,8 +27,8 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      - run: npm ci --legacy-peer-deps
-      - uses: nrwl/nx-set-shas@v4
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
 
       # Testowanie modułu catalog
       - name: Test Catalog Module
@@ -59,8 +59,8 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      - run: npm ci --legacy-peer-deps
-      - uses: nrwl/nx-set-shas@v4
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
 
       # Build głównej aplikacji my-health
       - name: Build Main Application
