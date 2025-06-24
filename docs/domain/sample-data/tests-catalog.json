@@ -17,7 +17,7 @@
     "testId": "badmocz",
     "icdCode": "A01",
     "name": "Badanie ogólne moczu",
-    "description": "Badanie ogólne moczu to podstawowe badanie diagnostyczne oceniające przejrzystość, barwę, pH, ciężar właściwy oraz obecność kluczowych składników takich jak glukoza, ketony czy leukocyty. Pozwala na wykrycie infekcji, chorób nerek i zaburzeń metabolicznych.",
+    "description": "Kompleksowe badanie ogólne moczu oceniające parametry fizyczne (przejrzystość, barwa, ciężar właściwy, pH) oraz chemiczne (glukoza, ketony, urobilinogen, bilirubina, białko, azotyny, erytrocyty/hemoglobina, leukocyty). Podstawowe badanie diagnostyczne pozwalające na wykrycie infekcji dróg moczowych, chorób nerek, zaburzeń metabolicznych i wątrobowych.",
     "tags": ["moczowe", "zapalne"],
     "parametersTemplate": [
       {
@@ -80,12 +80,13 @@
       },
       {
         "id": "urobilinogen",
-        "description": "Stężenie urobilinogenu w moczu; norma: 0,0–1,0 mg/dL. Podwyższone może wskazywać na choroby wątroby lub hemolizę.",
+        "description": "Stężenie urobilinogenu w moczu; norma: w normie. Inne możliwe wyniki: podwyższony, śladowe, 1+, 2+.",
         "paramName": "Urobilinogen",
         "icdCode": "",
         "unit": "mg/dL",
-        "valueType": "number",
-        "validation": { "min": 0.0, "max": 1.0 }
+        "valueType": "string",
+        "allowedValues": ["w normie", "podwyższony", "śladowe", "1+", "2+"],
+        "validation": { "normalValues": ["w normie"] }
       },
       {
         "id": "bilirubina",
