@@ -55,7 +55,7 @@ export const CatalogStore = signalStore(
             error: (err: Error) => {
               console.error('Error loading tests catalog:', err);
               patchState(store, { error: 'Failed to load tests catalog.', isLoading: false });
-            },
+            },            
           }),
           catchError(() => {
             // Error is handled in tap, ensure the stream completes or returns a fallback

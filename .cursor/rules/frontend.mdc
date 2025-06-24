@@ -1,7 +1,7 @@
 ---
 description: 
-globs: *.component.html,*.component.ts
-alwaysApply: false
+globs: 
+alwaysApply: true
 ---
 ## Frontend
 
@@ -11,12 +11,6 @@ alwaysApply: false
 - Use lazy loaded NX libraries nd Angular router to divide application bundle
 - Leverage view transitions API to better UI/UX 
 
-### Guidelines for Styling
-
-#### Tailwind
-
-- Use responsive variants (sm:, md:, lg:, etc.) for adaptive designs
-- Leverage state variants (hover:, focus-visible:, active:, etc.) for interactive elements
 
 ### Guidelines for Accessibility
 

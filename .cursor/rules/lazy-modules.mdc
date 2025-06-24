@@ -1,0 +1,37 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+### ANGULAR LAZY LOADED MODULES WITH NX LIBRARIES
+
+To add a new feature as lazy-loaded module, follow steps:
+
+1. Use NX tool to create new NX library in `libs/features` folder
+2. New library should be created in buildable mode
+
+
+in library `src/lib` directory create file `routes.ts` that exports routes from this library
+```typescript
+export const DASHBOARD_ROUTES: Route[] = [
+  {
+    path: '',
+    pathMatch: 'full',
+    component: DashboardComponent
+  },
+];
+```
+NX library should encapsulate all code and exports only from `routes.ts` in `indes.ts`
+
+Then in `app.routes.ts` in APP import in this way
+```typescript
+export const appRoutes: Route[] = [  
+  {
+    path: 'dashboard',
+    loadChildren: () => import('@cpmpany/features/dashboard').then(m => m.DASHBOARD_ROUTES)
+  }, 
+];
+```
+
+
+Don't create a directory for main feature component. Put it in `src/lid/` directory
