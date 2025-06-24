@@ -27,7 +27,8 @@
         "icdCode": "",
         "unit": "",
         "valueType": "string",
-        "validation": { "allowedValues": ["przejrzysty", "lekko mętny", "mętny", "krwisty"] }
+        "allowedValues": ["przejrzysty", "lekko mętny", "mętny", "krwisty"],
+        "validation": { "normalValues": ["przejrzysty"] }
       },
       {
         "id": "barwa",
@@ -36,7 +37,8 @@
         "icdCode": "",
         "unit": "",
         "valueType": "string",
-        "validation": { "allowedValues": ["jasnożółty", "słomkowożółty", "ciemnożółty", "bezbarwny"] }
+        "allowedValues": ["jasnożółty", "słomkowożółty", "ciemnożółty", "bezbarwny"],
+        "validation": { "normalValues": ["jasnożółty"] }
       },
       {
         "id": "ciezar_wlasciwy",
@@ -63,7 +65,8 @@
         "icdCode": "",
         "unit": "mg/dL",
         "valueType": "string",
-        "validation": { "allowedValues": ["nieobecna", "śladowe", "1+", "2+", "3+", "4+"] }
+        "allowedValues": ["nieobecna", "śladowe", "1+", "2+", "3+", "4+"],
+        "validation": { "normalValues": ["nieobecna"] }
       },
       {
         "id": "ketony",
@@ -72,7 +75,8 @@
         "icdCode": "",
         "unit": "mg/dL",
         "valueType": "string",
-        "validation": { "allowedValues": ["nieobecne", "śladowe", "1+", "2+", "3+"] }
+        "allowedValues": ["nieobecne", "śladowe", "1+", "2+", "3+"],
+        "validation": { "normalValues": ["nieobecne"] }
       },
       {
         "id": "urobilinogen",
@@ -90,7 +94,8 @@
         "icdCode": "",
         "unit": "",
         "valueType": "string",
-        "validation": { "allowedValues": ["nieobecna", "śladowe", "1+", "2+"] }
+        "allowedValues": ["nieobecna", "śladowe", "1+", "2+"],
+        "validation": { "normalValues": ["nieobecna"] }
       },
       {
         "id": "bialko",
@@ -99,7 +104,8 @@
         "icdCode": "",
         "unit": "mg/dL",
         "valueType": "string",
-        "validation": { "allowedValues": ["nieobecne", "śladowe", "1+", "2+", "3+"] }
+        "allowedValues": ["nieobecne", "śladowe", "1+", "2+", "3+"],
+        "validation": { "normalValues": ["nieobecne"] }
       },
       {
         "id": "azotyny",
@@ -108,7 +114,8 @@
         "icdCode": "",
         "unit": "",
         "valueType": "string",
-        "validation": { "allowedValues": ["nieobecne", "pozytywne"] }
+        "allowedValues": ["nieobecne", "pozytywne"],
+        "validation": { "normalValues": ["nieobecne"] }
       },
       {
         "id": "ery_hb",
@@ -117,7 +124,8 @@
         "icdCode": "",
         "unit": "",
         "valueType": "string",
-        "validation": { "allowedValues": ["nie wykryto", "wykryto"] }
+        "allowedValues": ["nie wykryto", "wykryto"],
+        "validation": { "normalValues": ["nie wykryto"] }
       },
       {
         "id": "leukocyty",
@@ -126,7 +134,8 @@
         "icdCode": "",
         "unit": "",
         "valueType": "string",
-        "validation": { "allowedValues": ["nie wykryto", "śladowe", "1+", "2+"] }
+        "allowedValues": ["nie wykryto", "śladowe", "1+", "2+"],
+        "validation": { "normalValues": ["nie wykryto"] }
       }
     ]
   },
@@ -438,7 +447,8 @@
       {
         "unit": "",
         "valueType": "string",
-        "validation": { "allowedValues": ["prawidłowy", "nieprawidłowy"] }
+        "allowedValues": ["prawidłowy", "nieprawidłowy"],
+        "validation": { "normalValues": ["prawidłowy"] }
       }
     ]
   },

@@ -7,9 +7,10 @@ export interface ParameterTemplate {
   icdCode: string;
   unit: string;
   valueType: ValueType;
+  allowedValues?: any[];
   validation?: {
     min?: number;
     max?: number;
-    allowedValues?: any[];
+    normalValues?: any[];
   };
 } 

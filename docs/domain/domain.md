@@ -25,9 +25,10 @@ Szablon definiujący parametr badania:
 - **icdCode**: kod ICD dla parametru (opcjonalny)
 - **unit**: jednostka miary (np. "mg/dL", "g/L", "/HPF")
 - **valueType**: typ wartości (`'number' | 'string' | 'boolean'`)
-- **validation**: reguły walidacji (opcjonalne)
-  - `min` / `max`: zakres dla wartości liczbowych
-  - `allowedValues`: lista dopuszczalnych wartości dla typów jakościowych
+- **allowedValues**: lista wszystkich możliwych wartości (dla typów jakościowych)
+- **validation**: reguły walidacji - norma referencyjna (opcjonalne)
+  - `min` / `max`: zakres prawidłowy dla wartości liczbowych
+  - `normalValues`: wartości uznawane za prawidłowe (dla typów jakościowych)
 
 ## Konwencje projektowe
 
@@ -38,7 +39,8 @@ Jeśli `parametersTemplate` zawiera dokładnie **jeden element**:
 - W obiekcie `ParameterTemplate` definiujemy tylko:
   - `unit` (jednostka miary)
   - `valueType` (typ wartości)
-  - `validation` (reguły walidacji)
+  - `allowedValues` (jeśli wartości jakościowe)
+  - `validation` (norma referencyjna)
 
 **Przykład - Glukoza na czczo:**
 ```json
@@ -75,7 +77,8 @@ Używane dla parametrów mierzalnych:
 
 ### Wartości jakościowe (`valueType: "string"`)
 Używane dla parametrów opisowych lub semi-ilościowych:
-- **Dozwolone wartości**: `{"allowedValues": ["opcja1", "opcja2", ...]}`
+- **Dozwolone wartości**: `"allowedValues": ["opcja1", "opcja2", ...]` (lista wszystkich opcji)
+- **Norma referencyjna**: `"validation": {"normalValues": ["opcja_prawidłowa"]}` (które wartości są prawidłowe)
 - **Przykłady**: obecność/nieobecność, stopnie nasilenia (1+, 2+, 3+), opisy
 
 ### Wartości logiczne (`valueType: "boolean"`)
@@ -166,8 +169,9 @@ Używane dla parametrów binarnych:
     {
       "unit": "",
       "valueType": "string",
+      "allowedValues": ["negatywny", "pozytywny", "wątpliwy"],
       "validation": { 
-        "allowedValues": ["negatywny", "pozytywny", "wątpliwy"] 
+        "normalValues": ["negatywny"] 
       }
     }
   ]
@@ -205,8 +209,9 @@ Używane dla parametrów binarnych:
       "description": "Obecność glukozy w moczu",
       "unit": "",
       "valueType": "string",
+      "allowedValues": ["nieobecna", "śladowe", "1+", "2+", "3+", "4+"],
       "validation": { 
-        "allowedValues": ["nieobecna", "śladowe", "1+", "2+", "3+", "4+"] 
+        "normalValues": ["nieobecna"] 
       }
     },
     {
@@ -215,8 +220,9 @@ Używane dla parametrów binarnych:
       "description": "Liczba leukocytów w polu widzenia",
       "unit": "/HPF",
       "valueType": "string",
+      "allowedValues": ["0-5", "6-10", "11-25", ">25"],
       "validation": { 
-        "allowedValues": ["0-5", "6-10", "11-25", ">25"] 
+        "normalValues": ["0-5"] 
       }
     }
   ]
@@ -227,9 +233,10 @@ Używane dla parametrów binarnych:
 
 ### Walidacja danych
 1. **Typ wartości** musi być zgodny z `valueType`
-2. **Wartości liczbowe** muszą mieścić się w zakresie `min`-`max` (jeśli zdefiniowany)
+2. **Wartości liczbowe** muszą mieścić się w zakresie `min`-`max` (jeśli zdefiniowany w `validation`)
 3. **Wartości tekstowe** muszą być z listy `allowedValues` (jeśli zdefiniowana)
-4. **Jednostki** powinny być standardowe i spójne w całym systemie
+4. **Norma referencyjna** w `validation` określa, które wartości są prawidłowe/normalne
+5. **Jednostki** powinny być standardowe i spójne w całym systemie
 
 ### Rozszerzalność
 - Struktura umożliwia łatwe dodawanie nowych badań
@@ -265,13 +272,14 @@ classDiagram
         +string? icdCode
         +string unit
         +ValueType valueType
+        +any[]? allowedValues
         +Validation? validation
     }
     
     class Validation {
         +number? min
         +number? max
-        +any[]? allowedValues
+        +any[]? normalValues
     }
     
     class TestTag {
@@ -290,5 +298,5 @@ classDiagram
     
     ParameterTemplate *-- Validation : validates
     note for TestCatalog "Obsługuje zarówno badania\njednoparametrowe jak i wieloparametrowe"
-    note for ParameterTemplate "Elastyczna walidacja:\n- zakresy liczbowe (min/max)\n- wartości jakościowe (allowedValues)\n- różne typy danych"
+    note for ParameterTemplate "Elastyczna struktura:\n- allowedValues: wszystkie możliwe opcje\n- validation: normy referencyjne\n- różne typy danych (number/string/boolean)"
 ``` 
