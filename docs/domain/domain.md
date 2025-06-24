@@ -1,21 +1,21 @@
 # Dokumentacja Modelu Domenowego - Katalog Badań Laboratoryjnych
 
-Poniżej opisane zostały ustalenia dotyczące modelu domenowego dla `TestCatalog` i `ParameterTemplate` służącego do reprezentacji dowolnych badań laboratoryjnych w systemie MyHealth.
+Poniżej opisane zostały ustalenia dotyczące modelu domenowego dla `Test` i `TestParameter` służącego do reprezentacji dowolnych badań laboratoryjnych w systemie MyHealth.
 
 ## Architektura modelu
 
-### TestCatalog
+### Test
 
 Główna encja reprezentująca badanie laboratoryjne:
 
-- **testId**: unikalny identyfikator testu (6–10 znaków)
+- **id**: unikalny identyfikator testu (6–10 znaków)
 - **icdCode**: kod ICD-9/10 dla całego badania
 - **name**: nazwa badania
 - **description**: szczegółowy opis badania (~200 znaków)
 - **tags**: lista tagów kategoryzujących badanie (`TestTag[]`)
-- **parametersTemplate**: tablica szablonów parametrów (`ParameterTemplate[]`)
+- **parameters**: tablica szablonów parametrów (`TestParameter[]`)
 
-### ParameterTemplate
+### TestParameter
 
 Szablon definiujący parametr badania:
 
@@ -34,9 +34,9 @@ Szablon definiujący parametr badania:
 
 ### Badania jednoparametrowe
 
-Jeśli `parametersTemplate` zawiera dokładnie **jeden element**:
-- Metadane (`id`, `paramName`, `description`, `icdCode`) przechowywane są w `TestCatalog`
-- W obiekcie `ParameterTemplate` definiujemy tylko:
+Jeśli `parameters` zawiera dokładnie **jeden element**:
+- Metadane (`id`, `paramName`, `description`, `icdCode`) przechowywane są w `Test`
+- W obiekcie `TestParameter` definiujemy tylko:
   - `unit` (jednostka miary)
   - `valueType` (typ wartości)
   - `allowedValues` (jeśli wartości jakościowe)
@@ -45,12 +45,12 @@ Jeśli `parametersTemplate` zawiera dokładnie **jeden element**:
 **Przykład - Glukoza na czczo:**
 ```json
 {
-  "testId": "glukoza",
+  "id": "glukoza",
   "icdCode": "L43",
   "name": "Glukoza na czczo",
   "description": "Badanie poziomu glukozy we krwi po 8-12h postu",
   "tags": ["biochemia", "metaboliczne"],
-  "parametersTemplate": [
+  "parameters": [
     {
       "unit": "mg/dL",
       "valueType": "number",
@@ -63,7 +63,7 @@ Jeśli `parametersTemplate` zawiera dokładnie **jeden element**:
 ### Badania wieloparametrowe
 
 Dla badań zawierających **wiele parametrów**:
-- Każdy `ParameterTemplate` zawiera pełne metadane
+- Każdy `TestParameter` zawiera pełne metadane
 - Umożliwia opisanie złożonych analiz laboratoryjnych
 - Każdy parametr może mieć inny typ wartości i walidację
 
@@ -105,12 +105,12 @@ Używane dla parametrów binarnych:
 ### Przykład 1: Badanie jednoparametrowe (Hemoglobina)
 ```json
 {
-  "testId": "hgb",
+  "id": "hgb",
   "icdCode": "L40",
   "name": "Hemoglobina",
   "description": "Oznaczenie stężenia hemoglobiny we krwi",
   "tags": ["hematologia"],
-  "parametersTemplate": [
+  "parameters": [
     {
       "unit": "g/dL",
       "valueType": "number",
@@ -123,12 +123,12 @@ Używane dla parametrów binarnych:
 ### Przykład 2: Badanie wieloparametrowe (Lipidogram)
 ```json
 {
-  "testId": "lipidogram",
+  "id": "lipidogram",
   "icdCode": "L45",
   "name": "Lipidogram",
   "description": "Profil lipidowy - cholesterol, LDL, HDL, triglicerydy",
   "tags": ["biochemia", "metaboliczne"],
-  "parametersTemplate": [
+  "parameters": [
     {
       "id": "chol_cal",
       "paramName": "Cholesterol całkowity",
@@ -160,12 +160,12 @@ Używane dla parametrów binarnych:
 ### Przykład 3: Badanie jakościowe (Test ciążowy)
 ```json
 {
-  "testId": "hcg_test",
+  "id": "hcg_test",
   "icdCode": "L50",
   "name": "Test ciążowy (hCG)",
   "description": "Jakościowy test na obecność hormonu hCG",
   "tags": ["hormonalne"],
-  "parametersTemplate": [
+  "parameters": [
     {
       "unit": "",
       "valueType": "string",
@@ -181,12 +181,12 @@ Używane dla parametrów binarnych:
 ### Przykład 4: Badanie ogólne moczu (wieloparametrowe, mieszane typy)
 ```json
 {
-  "testId": "badmocz",
+  "id": "badmocz",
   "icdCode": "A01",
   "name": "Badanie ogólne moczu",
   "description": "Kompleksowe badanie moczu - parametry fizyczne, chemiczne i mikroskopowe",
   "tags": ["moczowe", "zapalne"],
-  "parametersTemplate": [
+  "parameters": [
     {
       "id": "ciezar_wlasciwy",
       "paramName": "Ciężar właściwy",
@@ -253,19 +253,19 @@ Używane dla parametrów binarnych:
 
 ```mermaid
 classDiagram
-    TestCatalog *-- ParameterTemplate : contains
-    TestCatalog *-- TestTag : categorizes
+    Test *-- TestParameter : contains
+    Test *-- TestTag : categorizes
     
-    class TestCatalog {
-        +string testId
+    class Test {
+        +string id
         +string icdCode
         +string name
         +string description
         +TestTag[] tags
-        +ParameterTemplate[] parametersTemplate
+        +TestParameter[] parameters
     }
     
-    class ParameterTemplate {
+    class TestParameter {
         +string? id
         +string? paramName
         +string? description
@@ -296,7 +296,7 @@ classDiagram
         kostne
     }
     
-    ParameterTemplate *-- Validation : validates
-    note for TestCatalog "Obsługuje zarówno badania\njednoparametrowe jak i wieloparametrowe"
-    note for ParameterTemplate "Elastyczna struktura:\n- allowedValues: wszystkie możliwe opcje\n- validation: normy referencyjne\n- różne typy danych (number/string/boolean)"
+    TestParameter *-- Validation : validates
+    note for Test "Obsługuje zarówno badania\njednoparametrowe jak i wieloparametrowe"
+    note for TestParameter "Elastyczna struktura:\n- allowedValues: wszystkie możliwe opcje\n- validation: normy referencyjne\n- różne typy danych (number/string/boolean)"
 ``` 

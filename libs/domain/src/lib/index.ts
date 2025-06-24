@@ -1,5 +1,5 @@
-export * from './parameter-template.model';
-export * from './test-catalog.model';
+export * from './test-parameter.model';
+export * from './test.model';
 export * from './user-profile.model';
 export * from './test-result.model';
 export * from './test-schedule.model';

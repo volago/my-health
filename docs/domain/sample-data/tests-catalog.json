@@ -1,11 +1,11 @@
 [
   {
-    "testId": "glukoza",
+    "id": "glukoza",
     "icdCode": "L43",
     "name": "Glukoza na czczo",
     "description": "Badanie określające poziom glukozy we krwi po co najmniej 8–12 godzinach postu. Wykorzystywane w diagnostyce cukrzycy, hipoglikemii oraz do monitorowania glikemii u osób z zaburzeniami metabolicznymi.",
     "tags": ["biochemia", "metaboliczne"],
-    "parametersTemplate": [
+    "parameters": [
       {
         "unit": "mg/dL",
         "valueType": "number",
@@ -14,12 +14,12 @@
     ]
   },
   {
-    "testId": "badmocz",
+    "id": "badmocz",
     "icdCode": "A01",
     "name": "Badanie ogólne moczu",
     "description": "Kompleksowe badanie ogólne moczu oceniające parametry fizyczne (przejrzystość, barwa, ciężar właściwy, pH) oraz chemiczne (glukoza, ketony, urobilinogen, bilirubina, białko, azotyny, erytrocyty/hemoglobina, leukocyty). Podstawowe badanie diagnostyczne pozwalające na wykrycie infekcji dróg moczowych, chorób nerek, zaburzeń metabolicznych i wątrobowych.",
     "tags": ["moczowe", "zapalne"],
-    "parametersTemplate": [
+    "parameters": [
       {
         "id": "przejrzystosc",
         "description": "Ocena przejrzystości moczu; norma: przejrzysty. Inne wartości: lekko mętny, mętny, krwisty.",
@@ -141,12 +141,12 @@
     ]
   },
   {
-    "testId": "morfkrwi",
+    "id": "morfkrwi",
     "icdCode": "",
     "name": "Morfologia krwi (pełna)",
     "description": "Kompleksowe badanie morfologii krwi obejmujące liczbę i parametry erytrocytów, leukocytów oraz stężenie hemoglobiny. Pomaga w diagnostyce anemii, infekcji i innych zaburzeń hematologicznych.",
     "tags": ["hematologia"],
-    "parametersTemplate": [
+    "parameters": [
       {
         "id": "erytrocyty",
         "paramName": "Erytrocyty",
@@ -177,12 +177,12 @@
     ]
   },
   {
-    "testId": "lipidogram",
+    "id": "lipidogram",
     "icdCode": "",
     "name": "Lipidogram",
     "description": "Badanie profilu lipidowego obejmujące cholesterol całkowity, LDL, HDL, non-HDL i trójglicerydy. Umożliwia ocenę ryzyka miażdżycy i chorób sercowo-naczyniowych.",
     "tags": ["biochemia", "metaboliczne"],
-    "parametersTemplate": [
+    "parameters": [
       {
         "id": "cholcal",
         "paramName": "Cholesterol całkowity",
@@ -231,12 +231,12 @@
     ]
   },
   {
-    "testId": "hba1c",
+    "id": "hba1c",
     "icdCode": "",
     "name": "Hemoglobina glikowana (HbA1c)",
     "description": "Parametr odzwierciedlający średni poziom glukozy we krwi w ciągu ostatnich 2–3 miesięcy, wyrażony w procentach (DCCT). Wykorzystywany w monitorowaniu cukrzycy.",
     "tags": ["biochemia", "metaboliczne"],
-    "parametersTemplate": [
+    "parameters": [
       {
         "unit": "%",
         "valueType": "number",
@@ -245,12 +245,12 @@
     ]
   },
   {
-    "testId": "watrowe",
+    "id": "watrowe",
     "icdCode": "",
     "name": "Próby wątrobowe",
     "description": "Zestaw testów wątrobowych (ALT, AST, ALP, bilirubina) służący do oceny funkcji i uszkodzeń wątroby.",
     "tags": ["wątrobowe", "biochemia"],
-    "parametersTemplate": [
+    "parameters": [
       {
         "id": "alt",
         "paramName": "ALT",
@@ -299,12 +299,12 @@
     ]
   },
   {
-    "testId": "kreatynina",
+    "id": "kreatynina",
     "icdCode": "",
     "name": "Kreatynina",
     "description": "Stężenie kreatyniny we krwi; norma: 0.6–1.3 mg/dL. Podwyższony poziom może wskazywać na pogorszenie filtracji nerek.",
     "tags": ["nerkowe", "biochemia"],
-    "parametersTemplate": [
+    "parameters": [
       {
         "unit": "mg/dL",
         "valueType": "number",
@@ -313,12 +313,12 @@
     ]
   },
   {
-    "testId": "egfr",
+    "id": "egfr",
     "icdCode": "",
     "name": "eGFR",
     "description": "Wskaźnik filtracji kłębuszkowej (eGFR); norma: >=60 mL/min/1.73m². Niższe wartości wskazują na dysfunkcję nerek.",
     "tags": ["nerkowe", "biochemia"],
-    "parametersTemplate": [
+    "parameters": [
       {
         "unit": "mL/min/1.73m²",
         "valueType": "number",
@@ -327,12 +327,12 @@
     ]
   },
   {
-    "testId": "sod",
+    "id": "sod",
     "icdCode": "",
     "name": "Sód",
     "description": "Stężenie sodu we krwi; norma: 135–145 mmol/L. Odchylenia mogą wskazywać na zaburzenia wodno-elektrolitowe.",
     "tags": ["biochemia", "metaboliczne"],
-    "parametersTemplate": [
+    "parameters": [
       {
         "unit": "mmol/L",
         "valueType": "number",
@@ -341,12 +341,12 @@
     ]
   },
   {
-    "testId": "potas",
+    "id": "potas",
     "icdCode": "",
     "name": "Potas",
     "description": "Stężenie potasu we krwi; norma: 3.5–5.1 mmol/L. Hiperkaliemia lub hipokaliemia może zaburzać funkcję serca.",
     "tags": ["biochemia", "metaboliczne"],
-    "parametersTemplate": [
+    "parameters": [
       {
         "unit": "mmol/L",
         "valueType": "number",
@@ -355,12 +355,12 @@
     ]
   },
   {
-    "testId": "chlorki",
+    "id": "chlorki",
     "icdCode": "",
     "name": "Chlorki",
     "description": "Stężenie chlorków we krwi; norma: 98–107 mmol/L. Odchylenia wskazują na zaburzenia równowagi kwasowo-zasadowej.",
     "tags": ["biochemia", "metaboliczne"],
-    "parametersTemplate": [
+    "parameters": [
       {
         "unit": "mmol/L",
         "valueType": "number",
@@ -369,12 +369,12 @@
     ]
   },
   {
-    "testId": "tsh",
+    "id": "tsh",
     "icdCode": "",
     "name": "TSH",
     "description": "Hormon tyreotropowy; norma: 0.4–4.0 µIU/mL. Odchylenia wskazują na nadczynność lub niedoczynność tarczycy.",
     "tags": ["hormonalne"],
-    "parametersTemplate": [
+    "parameters": [
       {
         "unit": "µIU/mL",
         "valueType": "number",
@@ -383,12 +383,12 @@
     ]
   },
   {
-    "testId": "ft3",
+    "id": "ft3",
     "icdCode": "",
     "name": "FT₃",
     "description": "Wolna trijodotyronina; norma: 2.0–4.4 pg/mL. Pomaga w ocenie funkcji tarczycy.",
     "tags": ["hormonalne"],
-    "parametersTemplate": [
+    "parameters": [
       {
         "unit": "pg/mL",
         "valueType": "number",
@@ -397,12 +397,12 @@
     ]
   },
   {
-    "testId": "ft4",
+    "id": "ft4",
     "icdCode": "",
     "name": "FT₄",
     "description": "Wolna tyroksyna; norma: 0.9–1.7 ng/dL. Istotna do pełnej oceny funkcji tarczycy.",
     "tags": ["hormonalne"],
-    "parametersTemplate": [
+    "parameters": [
       {
         "unit": "ng/dL",
         "valueType": "number",
@@ -411,12 +411,12 @@
     ]
   },
   {
-    "testId": "witd3",
+    "id": "witd3",
     "icdCode": "",
     "name": "Witamina D (25-OH D₃)",
     "description": "Pomiar stężenia 25-hydroksywitaminy D we krwi; norma: 20–50 ng/mL. Ważne dla zdrowia kości i układu odpornościowego.",
     "tags": ["biochemia", "metaboliczne"],
-    "parametersTemplate": [
+    "parameters": [
       {
         "unit": "ng/mL",
         "valueType": "number",
@@ -425,12 +425,12 @@
     ]
   },
   {
-    "testId": "crp",
+    "id": "crp",
     "icdCode": "",
     "name": "C-reaktywne białko (CRP)",
     "description": "Pomiar CRP we krwi jako wskaźnika stanu zapalnego; norma: <5 mg/L. Wysokie wartości świadczą o aktywnym stanie zapalnym.",
     "tags": ["zapalne", "biochemia"],
-    "parametersTemplate": [
+    "parameters": [
       {
         "unit": "mg/L",
         "valueType": "number",
@@ -439,12 +439,12 @@
     ]
   },
   {
-    "testId": "ekg",
+    "id": "ekg",
     "icdCode": "",
     "name": "Elektrokardiogram (EKG)",
     "description": "Wizualna ocena rytmu serca i przewodzenia impulsu elektrycznego; wynik opisowy wskazujący na prawidłowy lub nieprawidłowy zapis.",
     "tags": ["kardiologiczne"],
-    "parametersTemplate": [
+    "parameters": [
       {
         "unit": "",
         "valueType": "string",
@@ -454,12 +454,12 @@
     ]
   },
   {
-    "testId": "psa",
+    "id": "psa",
     "icdCode": "",
     "name": "PSA – antygen specyficzny dla prostaty",
     "description": "Pomiar PSA we krwi; norma: 0–4 ng/mL. Podwyższone poziomy mogą sugerować choroby prostaty, w tym łagodne przerośnięcie lub nowotwory.",
     "tags": ["biochemia", "hormonalne"],
-    "parametersTemplate": [
+    "parameters": [
       {
         "unit": "ng/mL",
         "valueType": "number",
@@ -468,12 +468,12 @@
     ]
   },
   {
-    "testId": "esr",
+    "id": "esr",
     "icdCode": "",
     "name": "Odczyn Biernackiego (OB/ESR)",
     "description": "Pomiar szybkości opadania erytrocytów; norma: 0–20 mm/h. Wysokie wartości mogą wskazywać na stan zapalny lub choroby autoimmunologiczne.",
     "tags": ["zapalne", "hematologia"],
-    "parametersTemplate": [
+    "parameters": [
       {
         "unit": "mm/h",
         "valueType": "number",

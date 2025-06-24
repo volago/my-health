@@ -1,12 +1,12 @@
+import { Test, TestTag, TEST_TAGS } from '@my-health/domain';
 import { computed, inject } from '@angular/core';
-import { TestCatalog, TestTag, TEST_TAGS } from '@my-health/domain';
 import { EMPTY, catchError, switchMap, tap } from 'rxjs';
 import { CatalogDataService } from '../services/catalog-data.service';
 import { signalStore, withState, withComputed, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 
 export interface CatalogState {
-  allTests: TestCatalog[];
+  allTests: Test[];
   searchTerm: string;
   selectedTags: TestTag[];
   isLoading: boolean;
@@ -26,7 +26,7 @@ const initialState: CatalogState = {
 };
 
 export const CatalogStore = signalStore(
-  { providedIn: 'root' }, 
+  { providedIn: 'root' },
   withState(initialState),
   withComputed(({ allTests, searchTerm, selectedTags }) => ({
     filteredTests: computed(() => {
@@ -51,7 +51,7 @@ export const CatalogStore = signalStore(
         patchState(store, { isLoading: true, error: null });
         return catalogDataService.getTestsCatalog().pipe(
           tap({
-            next: (tests: TestCatalog[]) => patchState(store, { allTests: tests, isLoading: false }),
+            next: (tests: Test[]) => patchState(store, { allTests: tests, isLoading: false }),
             error: (err: Error) => {
               console.error('Error loading tests catalog:', err);
               patchState(store, { error: 'Failed to load tests catalog.', isLoading: false });

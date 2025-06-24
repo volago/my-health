@@ -1,8 +1,10 @@
 @if (store.filteredTests().length > 0) {
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-    @for (test of store.filteredTests(); track test.testId) {
-      <my-health-test-list-item [testItem]="test" />
-    }
+    <div class="test-list-container">
+      @for (test of store.filteredTests(); track test.id) {
+        <my-health-test-list-item [testItem]="test" />
+      }
+    </div>
   </div>
 } @else if (!store.isLoading() && !store.error()) {
   <p class="text-center text-gray-500 py-8">Brak wyników do wyświetlenia.</p>

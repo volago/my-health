@@ -3,7 +3,7 @@ import { of, throwError } from 'rxjs';
 import { vi } from 'vitest';
 import { CatalogStore } from './catalog.store';
 import { CatalogDataService } from '../services/catalog-data.service';
-import { TestCatalog, TestTag, TEST_TAGS } from '@my-health/domain';
+import { Test, TestTag, TEST_TAGS } from '@my-health/domain';
 
 // Mock Angular Fire modules
 vi.mock('@angular/fire/firestore', () => ({
@@ -17,30 +17,30 @@ describe('CatalogStore', () => {
   let catalogDataService: any;
 
   // Test fixtures
-  const mockTestCatalog: TestCatalog[] = [
+  const mockTestCatalog: Test[] = [
     {
-      testId: '1',
+      id: '1',
       icdCode: 'E10',
       name: 'Morfologia krwi',
       description: 'Podstawowe badanie krwi',
       tags: ['hematologia', 'biochemia'],
-      parametersTemplate: []
+      parameters: []
     },
     {
-      testId: '2',
+      id: '2',
       icdCode: 'E11',
       name: 'Cholesterol całkowity',
       description: 'Badanie poziomu cholesterolu',
       tags: ['biochemia', 'kardiologiczne'],
-      parametersTemplate: []
+      parameters: []
     },
     {
-      testId: '3',
+      id: '3',
       icdCode: 'E12',
       name: 'TSH',
       description: 'Hormon tyreotropowy',
       tags: ['hormonalne'],
-      parametersTemplate: []
+      parameters: []
     }
   ];
 

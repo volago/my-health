@@ -1,14 +1,16 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
-import { TestCatalog } from '@my-health/domain';
+import { Test } from '@my-health/domain';
 
 @Component({
     selector: 'my-health-test-list-item',
     standalone: true,
     imports: [
+        CommonModule,
         MatCardModule,
         MatChipsModule,
         MatIconModule,
@@ -19,5 +21,12 @@ import { TestCatalog } from '@my-health/domain';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestListItemComponent {
-    testItem = input.required<TestCatalog>();
+    /**
+     * Test item to display
+     */
+    testItem = input.required<Test>();
+
+    constructor() {
+        // Component initialization
+    }
 } 

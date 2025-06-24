@@ -1,4 +1,4 @@
-import { ParameterTemplate } from './parameter-template.model';
+import { TestParameter } from './test-parameter.model';
 
 export const TEST_TAGS = [
   'hematologia',
@@ -15,11 +15,11 @@ export const TEST_TAGS = [
 
 export type TestTag = typeof TEST_TAGS[number];
 
-export interface TestCatalog {
-  testId: string;
+export interface Test {
+  id: string;
   icdCode: string;
   name: string;
   description: string;
   tags: TestTag[];
-  parametersTemplate: ParameterTemplate[];
+  parameters: TestParameter[];
 } 
