@@ -1,1 +1,1 @@
-export * from '@my-health/features/auth';
+export { AuthService } from '@my-health/features/auth';
