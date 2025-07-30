@@ -6,18 +6,20 @@ Jako **użytkownik aplikacji**, chcę **dodać jednorazowo jeden lub więcej wyn
 
 ## Kryteria akceptacji
 
-1. Na dashboardzie widoczny jest pływający przycisk akcji (FAB) „Dodaj wynik” (ikona ➕) w prawym dolnym rogu.
-2. Po kliknięciu przycisku użytkownik przechodzi do nowego widoku z formularzem dodawania wyników.
-3. Użytkownik może wyszukać badanie z katalogu poprzez nazwę lub tag i dodać je do listy „Wyniki do wprowadzenia”.
-4. Formularz obsługuje:
+1. Dodanie jednego lub kilku wyników badań tworzy automatycznie sesję badań.
+2. Domyślna data sesji badań ustawiana jest na bieżący dzień; użytkownik może ją zmienić.
+3. Na dashboardzie widoczny jest pływający przycisk akcji (FAB) „Dodaj wynik” (ikona ➕) w prawym dolnym rogu.
+4. Po kliknięciu przycisku użytkownik przechodzi do nowego widoku z formularzem dodawania wyników.
+5. Użytkownik może wyszukać badanie z katalogu poprzez nazwę lub tag i dodać je do listy „Wyniki do wprowadzenia”.
+6. Formularz obsługuje:
    - badania jednoparametrowe (np. Glukoza) – pojedyncze pole wartości,
    - badania wieloparametrowe (np. Morfologia) – pola dla każdego parametru.
-5. Jednostki (np. mg/dL, %), zakresy norm oraz typy pól (liczba, tekst, lista) są podpowiadane na podstawie definicji badania.
-6. Domyślna data badania ustawiana jest na bieżący dzień; użytkownik może ją zmienić.
-7. Użytkownik może dodać wiele badań do listy przed wysłaniem formularza.
-8. Walidacja formularza blokuje zapis przy brakujących wymaganych polach lub wartościach poza dopuszczalnym typem.
-9. Po zatwierdzeniu wszystkie podane wyniki zapisują się w Firestore wraz z datą badania, a użytkownik otrzymuje potwierdzenie (toast).
-10. W przypadku błędu zapisu użytkownik otrzymuje czytelny komunikat i może ponowić próbę.
+7. Jednostki (np. mg/dL, %), zakresy norm oraz typy pól (liczba, tekst, lista) są podpowiadane na podstawie definicji badania.
+8. Użytkownik może dodać wiele badań do sesji przed wysłaniem formularza.
+9. Walidacja formularza blokuje zapis przy brakujących wymaganych polach lub wartościach poza dopuszczalnym typem.
+10. Po zatwierdzeniu wszystkie podane wyniki zapisują się w Firestore wraz z datą badania, a użytkownik otrzymuje potwierdzenie (toast).
+11. W przypadku błędu zapisu użytkownik otrzymuje czytelny komunikat i może ponowić próbę.
+12. Użytkownik może dodać do sesji badań notatkę oraz link do wyników badań.
 
 ## Główny scenariusz
 
@@ -29,9 +31,10 @@ Jako **użytkownik aplikacji**, chcę **dodać jednorazowo jeden lub więcej wyn
 6. Użytkownik wypełnia wartości, opcjonalnie zmienia datę wykonania badania.
 7. Kliknie „Dodaj kolejne badanie”, szuka „Glukoza” i dodaje.
 8. Formularz dodaje pole wartości dla glukozy (mg/dL).
-9. Po uzupełnieniu danych użytkownik klika „Zapisz wszystkie wyniki”.
-10. System waliduje dane i zapisuje dwa nowe dokumenty wyników w Firestore.
-11. Użytkownik widzi toast „Wyniki zapisane pomyślnie” i wraca do dashboardu z odświeżonymi danymi.
+9. Użytkownik może dodać do sesji badań notatkę, link do wyników badań, zmienić datę badania.
+10. Po uzupełnieniu danych użytkownik klika „Zapisz wszystkie wyniki”.
+11. System waliduje dane i zapisuje dwa nowe dokumenty wyników w Firestore.
+12. Użytkownik widzi toast „Wyniki zapisane pomyślnie” i wraca do dashboardu z odświeżonymi danymi.
 
 ## Scenariusze alternatywne
 

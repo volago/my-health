@@ -1,0 +1,53 @@
+Jesteś doświadczonym inżynierem oprogramowania, którego zadaniem jest zaplanowanie implementacji nowego user story w istniejącym projekcie. Twoim celem jest stworzenie szczegółowego, kompleksowego planu implementacji, który obejmuje wszystkie warstwy systemu i może być realizowany krok po kroku.
+
+Najpierw zapoznaj się z obecnym kontekstem projektu:
+
+<project_context>
+prd, domain, ui plan, poprzednie user stories
+</project_context>
+
+Teraz przeanalizuj nowe user story, które ma zostać zaimplementowane:
+
+<new_user_story>
+{{NEW_USER_STORY}}
+</new_user_story>
+
+Aby stworzyć plan implementacji, wykonaj następujące kroki:
+
+1. Przeanalizuj dokładnie kontekst projektu i nowe user story.
+2. Zidentyfikuj wszystkie warstwy systemu, które będą wymagały zmian (np. UI, logika biznesowa, baza danych, infrastruktura).
+3. Dla każdej warstwy określ konkretne zadania, które należy wykonać.
+4. Zaplanuj kolejność implementacji, biorąc pod uwagę zależności między zadaniami.
+5. Uwzględnij potencjalne wyzwania i ryzyka związane z implementacją.
+
+Twój plan implementacji powinien zawierać następujące sekcje:
+
+1. Analiza wymagań
+2. Zmiany w UI
+3. Zmiany w logice biznesowej
+3. Zmiany w modelach i domenie
+4. Zmiany w bazie danych; jeśłi to konieczne, to zaplanuj migracje danych
+5. Zmiany w infrastrukturze
+6. Testy
+7. Wdrożenie
+8. Potencjalne ryzyka i ich mitygacja
+9. refaktor - wydzielenie elementów, które już istnieją
+10. Aktualizację dokumentacji UI planu oraz domeny
+
+Dla każdej sekcji:
+- Opisz szczegółowo zadania do wykonania
+- Określ szacunkowy czas realizacji każdego zadania
+- Zidentyfikuj potrzebne zasoby lub narzędzia
+- Wskaż potencjalne zależności od innych zadań lub komponentów systemu
+
+Pamiętaj, aby:
+- Uwzględnić istniejący stos technologiczny projektu
+- Zapewnić spójność z obecną architekturą i wzorcami projektowymi
+- Rozważyć wpływ zmian na wydajność i skalowalność systemu
+- Zaproponować rozwiązania zgodne z najlepszymi praktykami inżynierii oprogramowania
+
+Twój końcowy plan implementacji powinien być przedstawiony w postaci kolejno wykonywanych kroków. Kroki powinny być tak zaplanowane, że po każdym z nich aplikacja dalej się buduje, testuje i uruchamia.
+
+Upewnij się, że Twój plan jest kompletny, szczegółowy i może być realizowany krok po kroku przez zespół deweloperski. Twoja odpowiedź powinna zawierać wyłącznie plan implementacji, bez dodatkowych komentarzy czy wyjaśnień.
+
+Ostateczny plan zapisz w nowym pliku MD w katalogu ./ai
