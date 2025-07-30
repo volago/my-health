@@ -31,7 +31,7 @@ Twój plan implementacji powinien zawierać następujące sekcje:
 6. Testy
 7. Wdrożenie
 8. Potencjalne ryzyka i ich mitygacja
-9. refaktor - wydzielenie elementów, które już istnieją
+9. Refaktoryzację - wydzielenie wspólnych elementów elementów, które już istnieją, a mogą być uzyte implementacji nowego use case.
 10. Aktualizację dokumentacji UI planu oraz domeny
 
 Dla każdej sekcji:
