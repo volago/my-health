@@ -27,11 +27,22 @@ Konieczne jest wprowadzenie nowego modelu dla "sesji badań" oraz rozszerzenie i
 Zmiany obejmują zdefiniowanie nowej kolekcji w Firestore oraz aktualizację reguł bezpieczeństwa w celu ochrony danych.
 
 - **Zadania:**
-    1.  **Definicja nowej kolekcji `testSessions`**: W Firestore zostanie utworzona nowa kolekcja przechowująca dokumenty sesji badań, których struktura będzie zgodna z modelem `TestSession`.
+    1.  **Definicja nowej kolekcji `tests-essions`**: W Firestore zostanie utworzona nowa kolekcja przechowująca dokumenty sesji badań, których struktura będzie zgodna z modelem `TestSession`.
     2.  **Aktualizacja reguł bezpieczeństwa**: W pliku `firestore.rules` zostaną dodane reguły dla kolekcji `testSessions`, zapewniające, że użytkownicy mogą tworzyć i odczytywać wyłącznie własne dane (`allow read, write: if request.auth.uid == resource.data.userId;`).
-    3.  **Struktura `testResults`**: Nowo tworzone dokumenty w kolekcji `testResults` będą zawierać pole `sessionId`. Nie przewiduje się migracji istniejących danych.
+    3.  **Struktura `testResults`**: Nowo tworzone dokumenty w kolekcji `tests-results` będą zawierać pole `sessionId`. Nie przewiduje się migracji istniejących danych.
 
-## 4. Zmiany w UI
+## 4. Refaktoryzacja i reużycie kodu
+
+Zgodnie z przyjętymi w projekcie wzorcami (`auth`/`auth-api`), zamiast przenosić kod do ogólnej biblioteki `shared`, stworzymy dedykowaną bibliotekę `catalog-api`, która będzie eksportować publiczne elementy `catalog`. Dodatkowo, rozbudujemy istniejące komponenty o nowe, parametryzowane funkcjonalności.
+
+- **Zadania:**
+    1.  **Stworzenie biblioteki `catalog-api`**: Za pomocą schematów Nx zostanie utworzona nowa, budowalna (buildable) biblioteka `libs/features/catalog-api` (`nx g @nx/angular:library --name=catalog-api --directory=libs/features --buildable`).
+    2.  **Eksport `CatalogDataService`**: Serwis zostanie wyeksportowany z `catalog-api`, a biblioteka `results` będzie zależeć od `catalog-api`, a nie od `catalog`.
+    3.  **Stworzenie komponentu do wyboru badań**: W bibliotece `results` zostanie utworzony nowy komponent `test-selection-list.component.ts`. Będzie on odpowiedzialny za wyświetlanie prostej listy badań (nazwa i parametry) z opcją wielokrotnego wyboru. Komponent nie będzie reużywał `test-list` z biblioteki `catalog`, aby uniknąć zbędnej złożoności i przyszłych konfliktów w funkcjonalnościach.
+    4.  **Eksport reużywalnych komponentów z `catalog-api`**: Komponent `search-filter-bar` zostanie wyeksportowany z `catalog-api`. Komponent `test-list` nie zostanie wyeksportowany, ponieważ widok dodawania wyników będzie korzystał z dedykowanej implementacji.
+    5.  **Użycie komponentów w `results`**: Widok dodawania wyników użyje reużywanego komponentu `search-filter-bar` z `catalog-api` oraz nowego komponentu `test-selection-list` do wyboru badań.
+
+## 5. Zmiany w UI
 
 Wprowadzenie nowej, kompleksowej i leniwie ładowanej biblioteki `results` do zarządzania wszystkimi aspektami wyników badań.
 
@@ -49,27 +60,13 @@ Wprowadzenie nowej, kompleksowej i leniwie ładowanej biblioteki `results` do za
         - **Wyszukiwarka badań (`test-search.component.ts`)**: Do wyszukiwania i dodawania badań do sesji.
         - **Formularz wyniku (`test-result-form.component.ts`)**: Do dynamicznego renderowania pól dla parametrów badania.
 
-## 5. Zmiany w logice biznesowej
+## 6. Zmiany w logice biznesowej
 
 Centralizacja logiki biznesowej w nowej, współdzielonej bibliotece `results`.
 
 - **Zadania:**
     1.  **Stworzenie `ResultsDataService`**: Serwis, umieszczony w `libs/features/results/src/lib/services/`, będzie zarządzał wszystkimi operacjami CRUD na sesjach i wynikach badań. Na potrzeby tego user story, będzie zawierał metodę `addTestSession(session, results)`. W przyszłości zostanie rozbudowany o metody `getResults`, `updateResult`, `deleteResult`.
     2.  **Zarządzanie stanem za pomocą `ResultsStore`**: Stworzenie komponentowego, sygnałowego store'a (`results.store.ts`) w `libs/features/results/src/lib/state/`, który będzie zarządzał stanem dla całej funkcjonalności – listą sesji, formularzem dodawania, edytowanym wynikiem itp.
-
-## 6. Refaktoryzacja i reużycie kodu
-
-Zgodnie z przyjętymi w projekcie wzorcami (`auth`/`auth-api`), zamiast przenosić kod do ogólnej biblioteki `shared`, stworzymy dedykowaną bibliotekę `catalog-api`, która będzie eksportować publiczne elementy `catalog`. Dodatkowo, rozbudujemy istniejące komponenty o nowe, parametryzowane funkcjonalności.
-
-- **Zadania:**
-    1.  **Stworzenie biblioteki `catalog-api`**: Za pomocą schematów Nx zostanie utworzona nowa, budowalna (buildable) biblioteka `libs/features/catalog-api` (`nx g @nx/angular:library --name=catalog-api --directory=libs/features --buildable`).
-    2.  **Eksport `CatalogDataService`**: Serwis zostanie wyeksportowany z `catalog-api`, a biblioteka `results` będzie zależeć od `catalog-api`, a nie od `catalog`.
-    3.  **Rozbudowa komponentu `test-list`**:
-        - W komponencie `libs/features/catalog/src/lib/test-list/test-list.component.ts` zostanie dodane nowe wejście oparte na sygnale: `selectable = input('none');`. Pole mówi o tym czy można zaznaczać badania. Możliwe wartości to: `none`, `single` i `multi`.
-        - Do szablonu `test-list-item` zostanie dodany `mat-checkbox`, widoczny tylko, gdy `selectable()` jest `single` lub `multi` (zwróć uwagę na odczyt wartości z sygnału).
-        - Komponent `test-list` otrzyma nowe, sygnałowe wyjście `selectionChange = output<Test[]>()`, które będzie emitować listę zaznaczonych badań.
-    4.  **Eksport reużywalnych komponentów**: Komponenty `search-filter-bar` i `test-list` zostaną wyeksportowane z `catalog-api`.
-    5.  **Użycie rozbudowanych komponentów w `results`**: Widok dodawania wyników użyje gotowych komponentów `search-filter-bar` oraz `test-list` (z włączoną opcją `multiSelect`), zamiast tworzyć własne implementacje.
 
 ## 7. Infrastruktura
 
