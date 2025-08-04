@@ -19,13 +19,12 @@ Zapoznaj się z wygenerowanym planem implementacji
 </implementation_plan>
 
 
-Zaimplementuj nowe user story, wykonując powyższy plan.
+Zaimplementuj nowe user story, wykonując powyższy plan zadanie po zadaniu. Po każdym zadaniu zatrzymaj się, podsumuj swoją pracę i poczekaj na mój feedback czy możemy iść dalej.
 
 Plan jest podzielony na sekcje, a każda z nich składa się z zadań.
+Zatrzymuj się po każdym zadaniu.
 
 Po wykonaniu każdego zadania upewnij się, że:
 * nowy kod nie dodaje błedów i warningów lintera
 * że cały projekt się buduje
 * że wszystkie dotyczasowe testy działają
-
-Wykonuj plan zadanie po zadaniu. Po każdym zadaniu zatrzymaj się i poczekaj na mój feedback czy możemy iść dalej.

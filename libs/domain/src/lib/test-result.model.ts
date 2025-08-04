@@ -6,6 +6,7 @@ export interface TestResultParameter {
 export interface TestResult {
   resultId: string;
   testId: string;
+  sessionId: string;
   createdAt: Date;
   parameters: TestResultParameter[];
 } 

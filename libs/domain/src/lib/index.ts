@@ -2,6 +2,7 @@ export * from './test-parameter.model';
 export * from './test.model';
 export * from './user-profile.model';
 export * from './test-result.model';
+export * from './test-session.model';
 export * from './test-schedule.model';
 export * from './ai-report.model';
 export * from './schedule-recommendation.model';
