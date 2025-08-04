@@ -25,7 +25,7 @@ Twój plan implementacji powinien zawierać następujące sekcje:
 1. Analiza wymagań
 2. Zmiany w UI
 3. Zmiany w logice biznesowej
-3. Zmiany w modelach i domenie
+3. Zmiany w modelach domenowych domenie
 4. Zmiany w bazie danych; jeśłi to konieczne, to zaplanuj migracje danych
 5. Zmiany w infrastrukturze
 6. Testy
@@ -36,7 +36,6 @@ Twój plan implementacji powinien zawierać następujące sekcje:
 
 Dla każdej sekcji:
 - Opisz szczegółowo zadania do wykonania
-- Określ szacunkowy czas realizacji każdego zadania
 - Zidentyfikuj potrzebne zasoby lub narzędzia
 - Wskaż potencjalne zależności od innych zadań lub komponentów systemu
 
