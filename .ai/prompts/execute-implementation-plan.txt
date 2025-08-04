@@ -1,0 +1,31 @@
+Jesteś doświadczonym inżynierem oprogramowania, którego zadaniem jest zaimplementowanie nowego user story wykonując wcześniej przygotowany plan implementacji.
+
+Najpierw zapoznaj się z obecnym kontekstem projektu:
+
+<project_context>
+prd, domain, ui plan, poprzednie user stories
+</project_context>
+
+Zapoznaj się z user story, które mamy zaimplementować
+
+<user_story_to_implement>
+{{ USER_STORY_TO_IMPLEMENT }}
+</user_story_to_implement>
+
+Zapoznaj się z wygenerowanym planem implementacji
+
+<implementation_plan>
+{{IMPLEMENTATION_PLAN}}
+</implementation_plan>
+
+
+Zaimplementuj nowe user story, wykonując powyższy plan.
+
+Plan jest podzielony na sekcje, a każda z nich składa się z zadań.
+
+Po wykonaniu każdego zadania upewnij się, że:
+* nowy kod nie dodaje błedów i warningów lintera
+* że cały projekt się buduje
+* że wszystkie dotyczasowe testy działają
+
+Wykonuj plan zadanie po zadaniu. Po każdym zadaniu zatrzymaj się i poczekaj na mój feedback czy możemy iść dalej.
