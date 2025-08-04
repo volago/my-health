@@ -65,9 +65,9 @@ Zgodnie z przyjętymi w projekcie wzorcami (`auth`/`auth-api`), zamiast przenosi
     1.  **Stworzenie biblioteki `catalog-api`**: Za pomocą schematów Nx zostanie utworzona nowa, budowalna (buildable) biblioteka `libs/features/catalog-api` (`nx g @nx/angular:library --name=catalog-api --directory=libs/features --buildable`).
     2.  **Eksport `CatalogDataService`**: Serwis zostanie wyeksportowany z `catalog-api`, a biblioteka `results` będzie zależeć od `catalog-api`, a nie od `catalog`.
     3.  **Rozbudowa komponentu `test-list`**:
-        - W komponencie `libs/features/catalog/src/lib/test-list/test-list.component.ts` zostanie dodane nowe wejście oparte na sygnale: `multiSelect = input(false);`.
-        - Do szablonu `test-list-item` zostanie dodany `mat-checkbox`, widoczny tylko, gdy `multiSelect()` jest `true` (zwróć uwagę na odczyt wartości z sygnału).
-        - Komponent `test-list` otrzyma nowe wyjście `@Output() selectionChange`, które będzie emitować listę zaznaczonych badań.
+        - W komponencie `libs/features/catalog/src/lib/test-list/test-list.component.ts` zostanie dodane nowe wejście oparte na sygnale: `selectable = input('none');`. Pole mówi o tym czy można zaznaczać badania. Możliwe wartości to: `none`, `single` i `multi`.
+        - Do szablonu `test-list-item` zostanie dodany `mat-checkbox`, widoczny tylko, gdy `selectable()` jest `single` lub `multi` (zwróć uwagę na odczyt wartości z sygnału).
+        - Komponent `test-list` otrzyma nowe, sygnałowe wyjście `selectionChange = output<Test[]>()`, które będzie emitować listę zaznaczonych badań.
     4.  **Eksport reużywalnych komponentów**: Komponenty `search-filter-bar` i `test-list` zostaną wyeksportowane z `catalog-api`.
     5.  **Użycie rozbudowanych komponentów w `results`**: Widok dodawania wyników użyje gotowych komponentów `search-filter-bar` oraz `test-list` (z włączoną opcją `multiSelect`), zamiast tworzyć własne implementacje.
 
