@@ -27,7 +27,7 @@ Konieczne jest wprowadzenie nowego modelu dla "sesji badań" oraz rozszerzenie i
 Zmiany obejmują zdefiniowanie nowej kolekcji w Firestore oraz aktualizację reguł bezpieczeństwa w celu ochrony danych.
 
 - **Zadania:**
-    1.  **Definicja nowej kolekcji `tests-essions`**: W Firestore zostanie utworzona nowa kolekcja przechowująca dokumenty sesji badań, których struktura będzie zgodna z modelem `TestSession`.
+    1.  **Definicja nowej kolekcji `tests-sessions`**: W Firestore zostanie utworzona nowa kolekcja przechowująca dokumenty sesji badań, których struktura będzie zgodna z modelem `TestSession`.
     2.  **Aktualizacja reguł bezpieczeństwa**: W pliku `firestore.rules` zostaną dodane reguły dla kolekcji `testSessions`, zapewniające, że użytkownicy mogą tworzyć i odczytywać wyłącznie własne dane (`allow read, write: if request.auth.uid == resource.data.userId;`).
     3.  **Struktura `testResults`**: Nowo tworzone dokumenty w kolekcji `tests-results` będą zawierać pole `sessionId`. Nie przewiduje się migracji istniejących danych.
 
