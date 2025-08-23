@@ -1,0 +1,48 @@
+<mat-selection-list class="w-full" (selectionChange)="onSelectionChange($event)">
+  @for (test of tests(); track test.id) {
+    <mat-list-option 
+      [value]="test.id"
+      [selected]="isTestSelected(test.id)"
+      class="border-b border-gray-100 last:border-b-0 hover:bg-gray-50 min-h-0 p-4">
+      
+      <div class="flex flex-col w-full py-2">
+        <!-- Test name and parameters count -->
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-lg font-semibold text-gray-900 flex-1">{{ test.name }}</h3>
+          <div class="flex items-center text-sm text-gray-500 ml-2">
+            <mat-icon class="text-base mr-1">science</mat-icon>
+            <span>{{ test.parameters.length }} {{ test.parameters.length === 1 ? 'parametr' : 'parametry' }}</span>
+          </div>
+        </div>
+
+        <!-- Test tags -->
+        @if (test.tags && test.tags.length > 0) {
+          <div class="flex flex-wrap gap-1 mb-2">
+            @for (tag of test.tags; track tag) {
+              <mat-chip class="text-xs h-6 px-2 bg-blue-50 text-blue-700">{{ tag }}</mat-chip>
+            }
+          </div>
+        }
+
+        <!-- Test description (truncated) -->
+        <p class="text-sm text-gray-600 overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ test.description }}</p>
+
+        <!-- Parameters preview -->
+        @if (test.parameters.length > 0) {
+          <div class="mt-2 text-xs text-gray-500">
+            <span class="font-medium">Parametry: </span>
+            <span>{{ getParametersPreview(test) }}</span>
+          </div>
+        }
+      </div>
+    </mat-list-option>
+  }
+</mat-selection-list>
+
+@if (tests().length === 0) {
+  <div class="flex flex-col items-center justify-center py-8 text-gray-500">
+    <mat-icon class="text-4xl mb-2">search_off</mat-icon>
+    <p class="text-lg">Brak badań do wyświetlenia</p>
+    <p class="text-sm">Spróbuj zmienić kryteria wyszukiwania</p>
+  </div>
+}

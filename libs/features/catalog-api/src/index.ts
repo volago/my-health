@@ -3,3 +3,6 @@ export { CatalogDataService } from '@my-health/features/catalog';
 
 // Re-export SearchFilterBarComponent from catalog library  
 export { SearchFilterBarComponent } from '@my-health/features/catalog';
+
+// Re-export TestSelectionListComponent from catalog library
+export { TestSelectionListComponent } from '@my-health/features/catalog';
