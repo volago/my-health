@@ -24,7 +24,13 @@ export const appRoutes: Route[] = [
     loadChildren: () => import('@my-health/features/reports').then(m => m.REPORTS_ROUTES),
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin }
-  },  
+  },
+  {
+    path: 'results',
+    loadChildren: () => import('@my-health/features/results').then(m => m.RESULTS_ROUTES),
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
   {
     path: 'auth',
     loadChildren: () => import('@my-health/features/auth').then(m => m.AUTH_ROUTES),

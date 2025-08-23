@@ -1,0 +1,52 @@
+<!-- Header with back button -->
+<mat-toolbar class="bg-white shadow-sm border-b border-gray-200">
+  <button 
+    mat-icon-button 
+    (click)="goBack()" 
+    aria-label="Wróć do dashboardu"
+    class="mr-2">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="text-lg font-semibold text-gray-900">Sesje badań</span>
+  
+  <!-- Add button in toolbar -->
+  <span class="flex-1"></span>
+  <button 
+    mat-icon-button 
+    (click)="navigateToAdd()" 
+    aria-label="Dodaj nową sesję badań"
+    color="primary">
+    <mat-icon>add</mat-icon>
+  </button>
+</mat-toolbar>
+
+<!-- Main content container -->
+<div class="container mx-auto p-4 max-w-4xl">
+  
+  <!-- Page title and description -->
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold text-gray-900 mb-2">Historia sesji badań</h1>
+    <p class="text-gray-600">
+      Przeglądaj wszystkie zapisane sesje badań i ich wyniki.
+    </p>
+  </div>
+
+  <!-- Placeholder for future implementation -->
+  <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
+    <mat-icon class="text-6xl text-gray-400 mb-4">history</mat-icon>
+    <h2 class="text-xl font-semibold text-gray-700 mb-2">Lista sesji zostanie zaimplementowana w przyszłości</h2>
+    <p class="text-gray-500 mb-6">
+      Ta funkcjonalność będzie dostępna po implementacji US-011 i kolejnych user stories.
+    </p>
+    
+    <button 
+      mat-raised-button 
+      color="primary" 
+      (click)="navigateToAdd()"
+      class="px-8">
+      <mat-icon class="mr-2">add</mat-icon>
+      Dodaj pierwszą sesję
+    </button>
+  </div>
+
+</div>

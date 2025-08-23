@@ -1,5 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Dla @if, @for, async pipe etc.
+import { Router } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { DashboardStore } from './dashboard.store';
 import { ScoreCardComponent } from './components/score-card/score-card.component';
 import { RecentTestResultsListComponent } from './components/recent-test-results-list/recent-test-results-list.component';
@@ -14,6 +17,8 @@ import { UpcomingTestsSummaryComponent } from './components/upcoming-tests-summa
   standalone: true,
   imports: [
     CommonModule,
+    MatButtonModule,
+    MatIconModule,
     ScoreCardComponent,
     RecentTestResultsListComponent,
     UpcomingTestsSummaryComponent
@@ -23,10 +28,18 @@ import { UpcomingTestsSummaryComponent } from './components/upcoming-tests-summa
 })
 export class DashboardViewComponent {
   readonly store = inject(DashboardStore);
+  private readonly router = inject(Router);
 
   constructor() {
     // Logika inicjalizacyjna, jeśli potrzebna, chociaż store.onInit() już działa
     // console.log('DashboardViewComponent initialized');
     // console.log('Initial Health Score:', this.store.healthScoreMockComputed());
+  }
+
+  /**
+   * Navigates to the add results page
+   */
+  navigateToAddResults(): void {
+    this.router.navigate(['/results/add']);
   }
 } 

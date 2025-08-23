@@ -1,0 +1,71 @@
+<!-- Header with back button -->
+<mat-toolbar class="bg-white shadow-sm border-b border-gray-200">
+  <button 
+    mat-icon-button 
+    (click)="goBack()" 
+    aria-label="Wróć do dashboardu"
+    class="mr-2">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="text-lg font-semibold text-gray-900">Dodaj wyniki badań</span>
+</mat-toolbar>
+
+<!-- Main content container -->
+<div class="container mx-auto p-4 max-w-4xl">
+  
+  <!-- Page title and description -->
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold text-gray-900 mb-2">Nowa sesja badań</h1>
+    <p class="text-gray-600">
+      Dodaj wyniki wielu badań wykonanych w tym samym dniu. Możesz ustawić wspólną datę, 
+      dodać notatkę i link do dokumentacji.
+    </p>
+  </div>
+
+  <!-- Placeholder for session details form -->
+  <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+    <h2 class="text-lg font-semibold text-gray-900 mb-4">Szczegóły sesji</h2>
+    <div class="text-gray-500 text-center py-8">
+      <mat-icon class="text-4xl mb-2">event_note</mat-icon>
+      <p>Formularz szczegółów sesji zostanie zaimplementowany w następnym kroku</p>
+    </div>
+  </div>
+
+  <!-- Placeholder for test search -->
+  <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+    <h2 class="text-lg font-semibold text-gray-900 mb-4">Wyszukaj i dodaj badania</h2>
+    <div class="text-gray-500 text-center py-8">
+      <mat-icon class="text-4xl mb-2">search</mat-icon>
+      <p>Wyszukiwarka badań zostanie zaimplementowana w następnym kroku</p>
+    </div>
+  </div>
+
+  <!-- Placeholder for selected tests and results forms -->
+  <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+    <h2 class="text-lg font-semibold text-gray-900 mb-4">Wybrane badania i wyniki</h2>
+    <div class="text-gray-500 text-center py-8">
+      <mat-icon class="text-4xl mb-2">assignment</mat-icon>
+      <p>Formularze wyników badań zostaną zaimplementowane w następnym kroku</p>
+    </div>
+  </div>
+
+  <!-- Action buttons -->
+  <div class="flex justify-between items-center pt-6 border-t border-gray-200">
+    <button 
+      mat-stroked-button 
+      color="primary" 
+      (click)="goBack()"
+      class="px-6">
+      Anuluj
+    </button>
+    
+    <button 
+      mat-raised-button 
+      color="primary" 
+      disabled
+      class="px-8">
+      Zapisz sesję
+    </button>
+  </div>
+
+</div>
