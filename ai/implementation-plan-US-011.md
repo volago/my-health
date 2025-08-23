@@ -39,8 +39,7 @@ Zgodnie z przyjętymi w projekcie wzorcami (`auth`/`auth-api`), zamiast przenosi
     1.  **Stworzenie biblioteki `catalog-api`**: Za pomocą schematów Nx zostanie utworzona nowa, budowalna (buildable) biblioteka `libs/features/catalog-api` (`nx g @nx/angular:library --name=catalog-api --directory=libs/features --buildable`).
     2.  **Eksport `CatalogDataService`**: Serwis zostanie wyeksportowany z `catalog-api`, a biblioteka `results` będzie zależeć od `catalog-api`, a nie od `catalog`.
     3.  **Stworzenie komponentu do wyboru badań**: W bibliotece `results` zostanie utworzony nowy komponent `test-selection-list.component.ts`. Będzie on odpowiedzialny za wyświetlanie prostej listy badań (nazwa i parametry) z opcją wielokrotnego wyboru. Komponent nie będzie reużywał `test-list` z biblioteki `catalog`, aby uniknąć zbędnej złożoności i przyszłych konfliktów w funkcjonalnościach.
-    4.  **Eksport reużywalnych komponentów z `catalog-api`**: Komponent `search-filter-bar` zostanie wyeksportowany z `catalog-api`. Komponent `test-list` nie zostanie wyeksportowany, ponieważ widok dodawania wyników będzie korzystał z dedykowanej implementacji.
-    5.  **Użycie komponentów w `results`**: Widok dodawania wyników użyje reużywanego komponentu `search-filter-bar` z `catalog-api` oraz nowego komponentu `test-selection-list` do wyboru badań.
+    4.  **Eksport reużywalnych komponentów z `catalog-api`**: Komponent `search-filter-bar` zostanie wyeksportowany z `catalog-api`. Komponent `test-list` nie zostanie wyeksportowany, ponieważ widok dodawania wyników będzie korzystał z dedykowanej implementacji.    
 
 ## 5. Zmiany w UI
 
